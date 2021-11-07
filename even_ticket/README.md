@@ -1,14 +1,16 @@
-# even_ticket
+![GitHub Project Logo](https://github.com/OwenKe11y/APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/blob/main/Images/Detailed%20Concepts/EvenTicket%20Logo.JPG?raw=true)
 
 A new Flutter project. Here, any new developments or important snippets of information relating to the project will be 
 documented.
+
+***
 
 ## File Structure
 
 The file structure for the project follows a <b>Folder-by-Layer</b> approach.
 A small description of each folder in the main lib folder is described below.
 
-- [Article used to create the file structure](https://www.section.io/engineering-education/flutter-folder-organization/)
+[Article used to create the file structure](https://www.section.io/engineering-education/flutter-folder-organization/)
 
 ### Data Folder
 The data folder contains data collections that are fetched from services or databases. 
