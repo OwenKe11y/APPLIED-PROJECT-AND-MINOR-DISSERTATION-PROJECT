@@ -12,7 +12,7 @@ class MediumScreen extends StatelessWidget {
             color: Colors.green[500],
           )),
           Expanded(
-              flex: 4,
+              flex: 5,
               child: Container(
                 color: Colors.yellow[400],
               ))
