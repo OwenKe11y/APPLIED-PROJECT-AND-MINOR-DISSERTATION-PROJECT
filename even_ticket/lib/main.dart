@@ -1,4 +1,5 @@
 import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -17,14 +18,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Dash",
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.blueGrey[200],
+        scaffoldBackgroundColor: darkGrey,
         textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.black),
         pageTransitionsTheme: PageTransitionsTheme(builders: {
           TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
           TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
         }),
-        primaryColor: Colors.lightGreen[300],
+        primaryColor: Color(0xFF64ff38),
       ),
       home: SiteLayout(),
     );
