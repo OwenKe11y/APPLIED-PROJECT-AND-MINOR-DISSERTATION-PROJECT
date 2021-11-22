@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { pool } = require("./dbConfig");
 const db = require('./Queries');
 const session = require('express-session');
 const flash = require('express-flash');
@@ -14,8 +13,6 @@ initializePassport(passport);
 app.use(cors());
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
-app.use(passport.session);
-app.use(passport.initialize);
 
 app.use(session({
     secret: 'secret',
@@ -25,10 +22,8 @@ app.use(session({
     saveUninitialized: false
 })
 );
-
-app.use(flash());
-
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 // app.get('/users', db.getAllUsers)
 // app.post('/users', db.createUser)
@@ -39,22 +34,21 @@ app.use(flash());
 // app.put('/organisers', db.updateOrganisers)
 // app.delete('/organisers', db.deleteOrganisers)
 app.get('/login', db.getAllLogins)
-app.post('/login', db.createLogin)
+app.post('/logins', db.createLogin)
 app.put('/login', db.updateLogin)
 app.delete('/login', db.deleteLogin)
 app.post('/register', db.registerUser)
 app.get('/register', db.checkAuthenticated)
 app.get('/register', db.checkNotAuthenticated)
-// Port
-const port = process.env.PORT || 3000;
-
 app.post('/users/login',
     passport.authenticate('local', {
-        successRedirect: '/users/dashboard', // Successfully logged in
-        failureRedirect: '/users/login', // If failed redirect to login page
-        failureFlash: true // Displays flash messages 
+        // successRedirect: '/users/dashboard', // Successfully logged in
+        // failureRedirect: '/users/login', // If failed redirect to login page
+        // failureFlash: true // Displays flash messages 
     })
 );
+// Port
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
