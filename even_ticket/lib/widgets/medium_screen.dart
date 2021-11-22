@@ -1,22 +1,17 @@
+import 'package:even_ticket/utils/local_navigator.dart';
+import 'package:even_ticket/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 
 class MediumScreen extends StatelessWidget {
-  const MediumScreen({ Key? key }) : super(key: key);
+  const MediumScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: [
-          Expanded(
-              child: Container(
-            color: Colors.green[500],
-          )),
-          Expanded(
-              flex: 5,
-              child: Container(
-                color: Colors.yellow[400],
-              ))
-        ],
-      );
+      children: [
+        Expanded(child: SideMenu()),
+        Expanded(flex: 5, child: localNavigator()),
+      ],
+    );
   }
 }

@@ -1,27 +1,15 @@
-import 'package:even_ticket/controllers/counter_controller.dart';
+import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-  final CounterController _counterController = Get.find();
+class LoginViewPage extends StatelessWidget {
+  const LoginViewPage({ Key? key }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Screen was clicked: ${_counterController.counter.value} times"),
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text("Open Other Screen"))
-        ],
-      ),
+    return Container(
+      color: lightGrey,
+      child: CustomText(text: "Login", size: 40, color: darkGrey, fontWeight: FontWeight.bold),
     );
   }
 }

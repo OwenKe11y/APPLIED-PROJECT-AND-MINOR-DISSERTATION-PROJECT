@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:even_ticket/style.dart';
+import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
