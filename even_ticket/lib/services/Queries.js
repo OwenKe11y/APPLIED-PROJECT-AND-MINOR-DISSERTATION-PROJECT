@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const { pool } = require("./dbConfig");
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const flash = require('express-flash');
+const passport = require('passport');
+const { func } = require('joi');
 
 app.use(express.json());
 
@@ -174,6 +178,20 @@ if (password != password2) {
 }
 }
 
+function checkAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {
+      return res.redirect('/users/dashboard');
+  }
+  next();
+}
+
+function checkNotAuthenticated (req, res, next) {
+  if (req.isAuthenticated()) {
+      return next()
+  }
+  res.redirect('/users/login');
+}
+
 
 
 
@@ -191,5 +209,7 @@ module.exports = {
     createLogin,
     updateLogin,
     deleteLogin,
-    registerUser
+    registerUser,
+    checkAuthenticated,
+    checkNotAuthenticated
 }
