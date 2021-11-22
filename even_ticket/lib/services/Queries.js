@@ -1,17 +1,9 @@
 const express = require('express');
 const app = express();
-const Pool = require('pg').Pool
+const { pool } = require("./dbConfig");
 const bcrypt = require('bcrypt');
 
 app.use(express.json());
-
-const pool = new Pool({
-    user: 'etadmin',
-    host: 'eventicket.cbrwauajlwxb.eu-west-1.rds.amazonaws.com',
-    database: 'eventicketdb',
-    password: 'databasepw',
-    port: 5432,
-  })
 
 // // Users
 // const getAllUsers = (req, res) => {
@@ -112,9 +104,9 @@ const deleteLogin = (req, res) => {
   })
 }
 
-const registerUser = (req, res) => {
+const registerUser = async (req, res) => {
   let { name, email, password, password2} = req.body;
-
+  
   console.log({
     name,
     email,
