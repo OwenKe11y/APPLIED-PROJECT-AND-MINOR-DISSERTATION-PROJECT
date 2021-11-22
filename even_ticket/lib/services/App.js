@@ -19,6 +19,7 @@ app.get('/login', db.getAllLogins)
 app.post('/login', db.createLogin)
 app.put('/login', db.updateLogin)
 app.delete('/login', db.deleteLogin)
+app.post('/register', db.registerUser)
 // Port
 const port = process.env.PORT || 3000;
 
