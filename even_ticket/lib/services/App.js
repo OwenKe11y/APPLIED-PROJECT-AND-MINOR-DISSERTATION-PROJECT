@@ -1,50 +1,27 @@
-const Joi = require('joi');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const db = require('./Queries');
 
+app.use(cors());
+app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 
-const tests = [
-    {id: 1, name: 'test 1'},
-    {id: 2, name: 'test 2'},
-    {id: 3, name: 'test 3'},
-];
-
-app.get('/', (req, res) => {
-    res.send('Hello World!!');
-});
-
-app.get('/api/tests', (req, res) => {
-    res.send(courses);
-});
-
-app.get('/api/test/:id', (req, res) => {
-    const test = courses.find(c => c.id === parseInt(req.params.id));
-    if(!test) res.status(404).send('Not found!')
-    res.send(test);
-});
-
-app.post('/api/test', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-
-    const result = schema.validate(req.body);
-    
-    if(result.error) {
-        // 400 Bad Request
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
-    
-    const test = {
-        id: courses.length + 1, 
-        name: req.body.name
-    };
-    courses.push(course);
-    res.send(course);
-});
-
+// app.get('/users', db.getAllUsers)
+// app.post('/users', db.createUser)
+// app.put('/users', db.updateUser)
+// app.delete('/users', db.deleteUser)
+// app.get('/organisers', db.getAllOrganisers)
+// app.post('/organisers', db.createOrganisers)
+// app.put('/organisers', db.updateOrganisers)
+// app.delete('/organisers', db.deleteOrganisers)
+app.get('/login', db.getAllLogins)
+app.post('/login', db.createLogin)
+app.put('/login', db.updateLogin)
+app.delete('/login', db.deleteLogin)
 // Port
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('Listening on port ${port}...'));
+
+app.listen(port, () => {
+    console.log(`App running on port ${port}.`)
+});
