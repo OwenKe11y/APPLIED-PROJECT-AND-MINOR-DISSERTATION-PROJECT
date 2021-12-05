@@ -43,8 +43,8 @@ class MenuController extends GetxController {
   // ignore: unused_element
   Widget _customIcon(IconData icon, String itemName) {
     if (isActive(itemName)) {
-      return Icon(icon, size: 22, color: dark);
+      return Icon(icon, size: 22, color: darkgreen);
     }
-    return Icon(icon, color: isHovering(itemName) ? dark : lightGrey);
+    return Icon(icon, color: isHovering(itemName) ? darkgreen : darkGrey);
   }
 }

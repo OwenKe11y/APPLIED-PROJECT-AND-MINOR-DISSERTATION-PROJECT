@@ -3,10 +3,14 @@
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_text_with_shadow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// Component that renders the Top navbar
 AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
+
+      // Render image logo if it is not small screen, if it is render a burger menu that can open the drawer
       leading: !ResponsiveWidget.isSmallScreen(context)
           ? Row(
               children: [
@@ -15,44 +19,62 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                   child: Image.asset(
                     "assets/icons/logo.png",
                     width: 28,
+                    color: lightgreen,
                   ),
                 )
               ],
             )
           : IconButton(
               icon: Icon(Icons.menu),
+              color: light,
+              splashRadius: 20,
               onPressed: () {
                 key.currentState!.openDrawer();
               },
             ),
+
+      // Put the tab bar on the same z coordinate as the rest of the page so it doesn't pop out
       elevation: 0,
+
+      // Render the title of the webpage
       title: Row(
         children: [
           Visibility(
-              child: CustomText(
-            text: "EvenTicket",
-            color: lightGrey,
-            size: 20,
-            fontWeight: FontWeight.bold,
-          )),
+            
+              child: Text(
+              'EvenTicket',
+            style: TextStyle(fontFamily: 'Roboto',
+            color: darkGrey,
+            fontWeight: FontWeight.bold),
+            
+           )
+         ),
+
+          // Render the two icons for notifications and settings
+          // Settings Icon
           Expanded(child: Container()),
           IconButton(
-            splashRadius: 22,
+            splashRadius: 20,
             icon: Icon(
               Icons.settings,
-              color: dark.withOpacity(.7),
+              color: light,
             ),
             onPressed: () {},
           ),
+
+          // Notifications Icon
           Stack(
             children: [
+              // Actual Icon
               IconButton(
-                  splashRadius: 22,
+                  splashRadius: 20,
                   onPressed: () {},
                   icon: Icon(
                     Icons.notifications,
-                    color: dark.withOpacity(.7),
+                    color: light,
                   )),
+
+              // Red Blurb on top of Notification Icon
               Positioned(
                   top: 7,
                   right: 7,
@@ -76,9 +98,9 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
           SizedBox(
             width: 24,
           ),
-          CustomText(
+          CustomTextWithShadows(
               text: "Owen Kelly",
-              color: lightGrey,
+              color: light,
               size: 15,
               fontWeight: FontWeight.bold),
           SizedBox(
@@ -88,7 +110,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(30)),
             child: Container(
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(2),
               margin: EdgeInsets.all(2),
               child: CircleAvatar(
                 backgroundColor: lightGrey,
@@ -101,6 +123,6 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
           ),
         ],
       ),
-      iconTheme: IconThemeData(color: dark),
-      backgroundColor: darkGrey,
+      iconTheme: IconThemeData(color: darkgreen),
+      backgroundColor: Colors.transparent,
     );

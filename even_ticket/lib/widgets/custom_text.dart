@@ -19,7 +19,10 @@ class CustomText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontSize: size, color: Colors.white, fontWeight: FontWeight.normal),
+          fontSize: size, 
+          color: color, 
+          fontWeight: fontWeight
+          ),
     );
   }
 }

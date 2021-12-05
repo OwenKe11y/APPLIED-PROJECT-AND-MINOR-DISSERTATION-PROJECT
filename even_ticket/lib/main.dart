@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'pages/authentication/authentication.dart';
+
 // Main method, use GetX for the Controllers and run the App
 void main() {
   Get.put(MenuController());
@@ -26,8 +28,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "EvenTicket",
       theme: ThemeData(
-        scaffoldBackgroundColor: darkGrey,
-        textTheme: GoogleFonts.ubuntuTextTheme(Theme.of(context).textTheme)
+        scaffoldBackgroundColor: Colors.transparent,
+        
+        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.black),
         pageTransitionsTheme: PageTransitionsTheme(builders: {
           TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
@@ -36,7 +39,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF64ff38),
       ),
       // Gets the responsive layout from layout.dart depending on the screen size
-      home: SiteLayout(),
+      home: LoginViewPage(),
     );
   }
 }

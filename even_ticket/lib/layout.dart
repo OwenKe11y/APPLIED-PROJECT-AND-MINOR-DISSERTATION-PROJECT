@@ -19,6 +19,7 @@ class SiteLayout extends StatelessWidget {
     // Always render the top bar regardless of page size
     return Scaffold(
         key: scaffoldKey,
+        extendBodyBehindAppBar: true,
         appBar: topNavBar(context, scaffoldKey),
         drawer: Drawer(
           child: SideMenu(),
@@ -31,7 +32,11 @@ class SiteLayout extends StatelessWidget {
             // This container renders page background colour, !!DO NOT FORGET THIS!!
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              color: lightGrey,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Colors.green.shade900, Colors.green, Colors.green.shade200])),
               child: localNavigator(),
             )));
   }
