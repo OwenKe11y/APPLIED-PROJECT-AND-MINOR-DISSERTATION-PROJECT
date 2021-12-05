@@ -9,12 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// Main method, use GetX for the Controllers and run the App
 void main() {
   Get.put(MenuController());
   Get.put(NavigationController());
   runApp(MyApp());
 }
 
+// Class for top of hierarchy settings such as theme colour and Webpage name
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
         }),
         primaryColor: Color(0xFF64ff38),
       ),
+      // Gets the responsive layout from layout.dart depending on the screen size
       home: SiteLayout(),
     );
   }

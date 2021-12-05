@@ -1,11 +1,11 @@
 import 'dart:js';
 
 import 'package:even_ticket/routing/routes.dart';
-import 'package:even_ticket/screens/calender.dart';
-import 'package:even_ticket/screens/home.dart';
-import 'package:even_ticket/screens/maps.dart';
-import 'package:even_ticket/screens/settings.dart';
-import 'package:even_ticket/screens/tickets.dart';
+import 'package:even_ticket/pages/calender/calender.dart';
+import 'package:even_ticket/pages/home/home.dart';
+import 'package:even_ticket/pages/maps/maps.dart';
+import 'package:even_ticket/pages/settings/settings.dart';
+import 'package:even_ticket/pages/tickets/tickets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

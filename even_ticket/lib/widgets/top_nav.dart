@@ -88,7 +88,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(30)),
             child: Container(
-              padding: EdgeInsets.all(2),
+              padding: EdgeInsets.all(4),
               margin: EdgeInsets.all(2),
               child: CircleAvatar(
                 backgroundColor: lightGrey,
@@ -102,5 +102,5 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
         ],
       ),
       iconTheme: IconThemeData(color: dark),
-      backgroundColor: Colors.transparent,
+      backgroundColor: darkGrey,
     );
