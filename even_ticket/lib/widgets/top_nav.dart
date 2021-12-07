@@ -43,7 +43,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
             
               child: Text(
               'EvenTicket',
-            style: TextStyle(fontFamily: 'Roboto',
+            style: TextStyle(
             color: darkGrey,
             fontWeight: FontWeight.bold),
             
