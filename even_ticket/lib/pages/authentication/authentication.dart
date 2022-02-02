@@ -1,187 +1,71 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/login_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
 
 class LoginViewPage extends StatelessWidget {
+  static final nameController = TextEditingController();
+  static final emailController = TextEditingController();
+  static final pass1Controller = TextEditingController();
+  static final pass2Controller = TextEditingController();
+
   const LoginViewPage({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
-    // Background Colour
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-            Colors.green.shade900,
-            Colors.green,
-            Colors.green.shade200
-          ])),
-
-      // Body of Login Form
-      child: Scaffold(
-        body: Center(
-          // Logo Image
-          child: Container(
-            constraints: BoxConstraints(maxWidth: 800, maxHeight: 850),
-            padding: EdgeInsets.all(30),
-            decoration: BoxDecoration(
-              color: light,
-              boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.7),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(3, 3),
-              )
-            ]),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: Image.asset('assets/icons/biglogo.png'),
-                    ),
-                  ),
-                ]),
-
-                // Divider
-                SizedBox(
-                  height: 30,
-                ),
-
-                // Title of Container being Login
-                Row(
-                  children: [
-                    Text(
-                      "Login",
-                      style: GoogleFonts.roboto(
-                          fontSize: 30, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-
-                // Divider
-                SizedBox(
-                  height: 30,
-                ),
-
-                // Subtitle of Container
-                Row(
-                  children: [
-                    CustomText(
-                        text: "Welcome Back to the admin panel",
-                        size: 16,
-                        color: darkGrey,
-                        fontWeight: FontWeight.normal)
-                  ],
-                ),
-
-                // Divider
-                SizedBox(
-                  height: 15,
-                ),
-
-                // Email Text Field
-                TextField(
-                    decoration: InputDecoration(
-                  labelText: "Email",
-                  hintText: "example@email.com",
-                )),
-
-                // Divider
-                SizedBox(
-                  height: 15,
-                ),
-
-                // Password Text Field
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                  ),
-                ),
-
-                // Divider
-                SizedBox(
-                  height: 15,
-                ),
-
-                // "Remember me" check box and text
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Checkbox(value: true, onChanged: (value) {}),
-                    CustomText(
-                        text: "Remember me",
-                        size: 16,
-                        color: darkGrey,
-                        fontWeight: FontWeight.bold)
-                  ],
-                ),
-
-                // Forget Password Text
-                CustomText(
-                    text: "Forget Password?",
-                    size: 16,
-                    color: darkgreen,
-                    fontWeight: FontWeight.bold),
-
-                //Divider
-                SizedBox(
-                  height: 15,
-                ),
-
-                // Login Button - Global navigation to the main page
-                InkWell(
-                  onTap: () {
-                   Get.offAll( SiteLayout()); 
-                  },
-                  child: Container(
+    return Scaffold(
+      body: Center(
+        
+        child: Stack(
+          
+          children:[ 
+          
+           ClipPath(
+                clipper: LoginClipper(),
+                child: Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     decoration: BoxDecoration(
-                      color: darkgreen,
-                    ),
-                    alignment: Alignment.center,
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    child: CustomText(
-                        text: "Login",
-                        size: 16,
-                        color: light,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-
-                // Divider
-                SizedBox(
-                  height: 15,
-                ),
-
-                // Admin Credentials text, right now this is just to fill up space
-                RichText(
-                    text: TextSpan(children: [
-                  TextSpan(text: "Don't have admin credentials? "),
-                  TextSpan(
-                      text: "Request credentials here! ",
-                      style: TextStyle(color: darkgreen)),
-                ]))
-              ],
-            ),
-          ),
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                          Colors.green.shade900,
+                          Colors.green,
+                          Colors.green.shade200
+                        ])))),
+          Padding(padding: EdgeInsets.all(22.0),
+          child: LoginCard(),)              
+          
+          ]
         ),
       ),
     );
+  }
+}
+
+class LoginClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    Offset curveStartPoint = new Offset(0, 0);
+    Offset curveEndPoint = new Offset(size.width, size.height * 0.95);
+    path.quadraticBezierTo(size.width * 0.2, size.height * 0.95,
+        curveEndPoint.dx, curveEndPoint.dy);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
   }
 }

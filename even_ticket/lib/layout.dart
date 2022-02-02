@@ -17,6 +17,7 @@ class SiteLayout extends StatelessWidget {
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     // Always render the top bar regardless of page size
     return Scaffold(
+      
         key: scaffoldKey,
         extendBodyBehindAppBar: true,
         appBar: topNavBar(context, scaffoldKey),
