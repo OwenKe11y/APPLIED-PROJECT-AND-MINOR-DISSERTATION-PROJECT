@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/pages/calender/calender.dart';
 import 'package:even_ticket/pages/home/home.dart';

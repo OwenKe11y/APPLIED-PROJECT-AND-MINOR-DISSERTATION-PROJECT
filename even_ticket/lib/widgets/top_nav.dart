@@ -39,16 +39,8 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
       // Render the title of the webpage
       title: Row(
         children: [
-          Visibility(
-            
-              child: Text(
-              'EvenTicket',
-            style: TextStyle(
-            color: darkGrey,
-            fontWeight: FontWeight.bold),
-            
-           )
-         ),
+          
+  
 
           // Render the two icons for notifications and settings
           // Settings Icon
@@ -96,16 +88,9 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
             color: lightGrey,
           ),
           SizedBox(
-            width: 24,
+            width: 5,
           ),
-          CustomTextWithShadows(
-              text: "Owen Kelly",
-              color: light,
-              size: 15,
-              fontWeight: FontWeight.bold),
-          SizedBox(
-            width: 16,
-          ),
+         
           Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(30)),

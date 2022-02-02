@@ -77,10 +77,11 @@ app.use(express.json());
 
 // Login
 const getAllLogins = (req, res) => {
-  pool.query('SELECT * FROM logins'), (error, result) => {
+  pool.query('SELECT * FROM users'), (error, result) => {
       if(error) {
           console.log(error);
       }
+      console.log(result);
   }
 }
 

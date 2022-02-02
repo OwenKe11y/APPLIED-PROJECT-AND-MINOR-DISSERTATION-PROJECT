@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/utils/local_navigator.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +20,28 @@ class MediumScreen extends StatelessWidget {
         Expanded(child: SideMenu()),
         // The Page with the content
        Expanded(
+         
             flex: 5,
             // This container renders page background colour, !!DO NOT FORGET THIS!!
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.green.shade900, Colors.green, Colors.green.shade200])),
-             
-              child: localNavigator(),
+            child: ClipPath(
+              clipper: BottomShapeClipper(),
+              child: 
+                Container(
+                   height: MediaQuery.of(context).size.height * 0.4,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Colors.green.shade900, Colors.green, Colors.green.shade200])),
+                 
+                  child: localNavigator(),
+                ),
+              
             ))
       ],
     );
   }
 }
+
+
 

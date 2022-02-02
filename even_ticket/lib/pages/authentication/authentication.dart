@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 class LoginViewPage extends StatelessWidget {
   const LoginViewPage({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +30,20 @@ class LoginViewPage extends StatelessWidget {
       // Body of Login Form
       child: Scaffold(
         body: Center(
-
           // Logo Image
           child: Container(
             constraints: BoxConstraints(maxWidth: 800, maxHeight: 850),
             padding: EdgeInsets.all(30),
-            color: light,
+            decoration: BoxDecoration(
+              color: light,
+              boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.7),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(3, 3),
+              )
+            ]),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -136,7 +147,7 @@ class LoginViewPage extends StatelessWidget {
                 // Login Button - Global navigation to the main page
                 InkWell(
                   onTap: () {
-                    Get.offAll(() => SiteLayout());
+                   Get.offAll( SiteLayout()); 
                   },
                   child: Container(
                     decoration: BoxDecoration(

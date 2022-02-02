@@ -1,13 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
 import 'package:even_ticket/layout.dart';
-import 'package:even_ticket/constants/style.dart';
+import 'package:postgres/postgres.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 
 import 'pages/authentication/authentication.dart';
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "EvenTicket",
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.transparent,
+        scaffoldBackgroundColor: light,
         
         textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.black),
