@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const db = require('./Queries');
 const session = require('express-session');
+const flash = require('express-flash');
 const passport = require('passport');
 
 const initializePassport = require('./passportConfig');
@@ -24,25 +25,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login', async (req, res) => {  
-    try{
-        const response = await db.getAllLogins()
-        return res.send(response);
-    } catch (err) {
-        res.send(err)
-    }
-});
-
-app.post('/register', async (req, res) => {      
-    try{
-        const response = await db.registerUsers(req);
-        return res.send(response);
-    } catch (err) {
-        res.send(err)
-    }
-});
-
-//app.post('/register', db.registerUser)
+// app.get('/users', db.getAllUsers)
+// app.post('/users', db.createUser)
+// app.put('/users', db.updateUser)
+// app.delete('/users', db.deleteUser)
+// app.get('/organisers', db.getAllOrganisers)
+// app.post('/organisers', db.createOrganisers)
+// app.put('/organisers', db.updateOrganisers)
+// app.delete('/organisers', db.deleteOrganisers)
+app.get('/login', db.getAllLogins)
+app.post('/logins', db.createLogin)
+app.put('/login', db.updateLogin)
+app.delete('/login', db.deleteLogin)
+app.post('/register', db.registerUser)
 app.get('/register', db.checkAuthenticated)
 app.get('/register', db.checkNotAuthenticated)
 app.post('/users/login',
