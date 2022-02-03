@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/services/google_signin_api.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,9 +34,6 @@ class WelcomeCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-
-               
                   //Divider
                   SizedBox(
                     height: 15,
@@ -68,8 +66,17 @@ class WelcomeCard extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-
-                
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    icon: Icon(const IconData(0x41, fontFamily: 'Roboto'),
+                        size: 48.0, color: Colors.red),
+                    label: Text('Sign Up with Google'),
+                    onPressed: signIn,
+                  ),
                 ],
               ),
             ),
@@ -77,5 +84,9 @@ class WelcomeCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future signIn() async {
+    await GoogleSignInApi.login();
   }
 }
