@@ -41,7 +41,7 @@ class SideMenu extends StatelessWidget {
                             : itemName,
                         onTap: () {
                           if (itemName == authenticationPageRoute) {
-                            Get.offAll(() => LoginViewPage());
+                            Get.offAll(() => RegisterPage());
                           }
 
                           if (!menuController.isActive(itemName)) {

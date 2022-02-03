@@ -3,6 +3,7 @@
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/widgets/auth_widgets/login_card.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:even_ticket/widgets/auth_widgets/register_card.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +11,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-class RegisterPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
   static final pass1Controller = TextEditingController();
   static final pass2Controller = TextEditingController();
 
-  const RegisterPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class RegisterPage extends StatelessWidget {
                       ])))),
           Padding(
             padding: EdgeInsets.only(top: 80, bottom: 80, left: 30, right: 30),
-            child: RegisterCard(),
+            child: LoginCard(),
           )
         ]),
       ),
