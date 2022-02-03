@@ -3,15 +3,13 @@
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
-import 'package:even_ticket/layout.dart';
-import 'package:postgres/postgres.dart';
+
+import 'package:even_ticket/pages/authentication/welcome_page.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
-import 'pages/authentication/authentication.dart';
 
 // Main method, use GetX for the Controllers and run the App
 void main() {
@@ -31,7 +29,6 @@ class MyApp extends StatelessWidget {
       title: "EvenTicket",
       theme: ThemeData(
         scaffoldBackgroundColor: light,
-        
         textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)
             .apply(bodyColor: Colors.black),
         pageTransitionsTheme: PageTransitionsTheme(builders: {
@@ -41,7 +38,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF64ff38),
       ),
       // Gets the responsive layout from layout.dart depending on the screen size
-      home: LoginViewPage(),
+      home: WelcomePage(),
     );
   }
 }

@@ -7,15 +7,15 @@ import 'package:even_ticket/services/http_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'custom_text.dart';
+import '../custom_text.dart';
 
-class LoginCard extends StatelessWidget {
+class RegisterCard extends StatelessWidget {
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
   static final pass1Controller = TextEditingController();
   static final pass2Controller = TextEditingController();
 
-  const LoginCard({
+  const RegisterCard({
     Key? key,
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class LoginCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
             ClipRRect(
@@ -156,7 +156,6 @@ class LoginCard extends StatelessWidget {
                     onTap: () {
                       //Get.offAll(SiteLayout());
 
-                      
                       createUser(nameController.text, emailController.text,
                           pass1Controller.text, pass2Controller.text);
                     },

@@ -4,7 +4,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
-import 'package:even_ticket/widgets/login_card.dart';
+import 'package:even_ticket/widgets/auth_widgets/register_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,30 +22,26 @@ class LoginViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        
-        child: Stack(
-          
-          children:[ 
-          
-           ClipPath(
-                clipper: LoginClipper(),
-                child: Container(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                          Colors.green.shade900,
-                          Colors.green,
-                          Colors.green.shade200
-                        ])))),
-          Padding(padding: EdgeInsets.all(22.0),
-          child: LoginCard(),)              
-          
-          ]
-        ),
+        child: Stack(children: [
+          ClipPath(
+              clipper: LoginClipper(),
+              child: Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                        Colors.green.shade900,
+                        Colors.green,
+                        Colors.green.shade200
+                      ])))),
+          Padding(
+            padding: EdgeInsets.all(22.0),
+            child: RegisterCard(),
+          )
+        ]),
       ),
     );
   }
