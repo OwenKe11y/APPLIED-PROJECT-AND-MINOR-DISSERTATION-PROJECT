@@ -8,9 +8,16 @@ import 'package:even_ticket/widgets/catagory_widget.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeViewPage extends StatelessWidget {
-  const HomeViewPage({Key? key}) : super(key: key);
+  //const HomeViewPage({Key? key}) : super(key: key);
+  final GoogleSignInAccount user;
+
+  HomeViewPage({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +47,20 @@ class HomeViewPage extends StatelessWidget {
               ],
             ),
           ),
+          CircleAvatar(
+            radius: 40,
+            backgroundImage: NetworkImage(user.photoUrl!),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Name: ' + user.displayName!,
+            style: TextStyle(color: Colors.black, fontSize: 12),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Email: ' + user.email,
+            style: TextStyle(color: Colors.black, fontSize: 12),
+          )
         ],
       ),
     );

@@ -4,13 +4,13 @@ import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
+import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
 import 'package:even_ticket/utils/local_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 
 import '../custom_text.dart';
 
@@ -28,11 +28,9 @@ class WelcomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.7,
         ),
-
         Card(
           elevation: 10,
           color: light,
@@ -56,7 +54,8 @@ class WelcomeCard extends StatelessWidget {
                           onPrimary: Colors.black,
                           minimumSize: Size(double.infinity, 50),
                         ),
-                        onPressed: () => navigationController.navigateTo(registerRoute),
+                        onPressed: () =>
+                            navigationController.navigateTo(registerRoute),
                         icon: FaIcon(FontAwesomeIcons.mailBulk, color: light),
                         label: CustomText(
                           text: ' Sign Up using email',
@@ -64,7 +63,6 @@ class WelcomeCard extends StatelessWidget {
                           color: light,
                           fontWeight: FontWeight.bold,
                         ),
-                      
                       ),
 
                       // Divider
@@ -77,16 +75,19 @@ class WelcomeCard extends StatelessWidget {
                           onPrimary: Colors.black,
                           minimumSize: Size(double.infinity, 50),
                         ),
-                        
-                        icon: FaIcon(FontAwesomeIcons.google, color: active,),
+                        icon: FaIcon(
+                          FontAwesomeIcons.google,
+                          color: active,
+                        ),
                         label: CustomText(
                           text: ' Sign Up using Google',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold,),
-                        onPressed: signIn,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        onPressed: () => signIn(context),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 15,
                       ),
                     ],
@@ -100,7 +101,16 @@ class WelcomeCard extends StatelessWidget {
     );
   }
 
-  Future signIn() async {
-    await GoogleSignInApi.login();
+  Future signIn(BuildContext context) async {
+    final user = await GoogleSignInApi.login();
+
+    if (user == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Sign in Failed')));
+    } else {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => HomeViewPage(user: user),
+      ));
+    }
   }
 }
