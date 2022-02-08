@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/pages/authentication/register_page.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 class LoginCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -31,8 +34,6 @@ class LoginCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-
                   // Divider
                   SizedBox(
                     height: 30,
@@ -72,20 +73,7 @@ class LoginCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    decoration: InputDecoration(
-                      labelText: "Name",
-                      hintText: "Full Name",
-                    ),
-                    controller: nameController,
-                  ),
-
-                  // Divider
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // Email Text Field
-                  TextField(
+                    textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "example@email.com",
@@ -99,6 +87,7 @@ class LoginCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
+                    textAlign: TextAlign.center,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -108,15 +97,6 @@ class LoginCard extends StatelessWidget {
 
                   SizedBox(
                     height: 15,
-                  ),
-
-                  // Email Text Field
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Repeat Password",
-                    ),
-                    controller: pass2Controller,
                   ),
 
                   // Divider
@@ -137,14 +117,20 @@ class LoginCard extends StatelessWidget {
                     ],
                   ),
 
+                  // Divider
+                  SizedBox(
+                    height: 15,
+                  ),
                   // Forget Password Text
-                  CustomText(
-                      text: "Forget Password?",
-                      size: 16,
-                      color: darkgreen,
-                      fontWeight: FontWeight.bold),
+                  // Admin Credentials text, right now this is just to fill up space
+                  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(children: [
+                        TextSpan(
+                            text: "Forget password?",
+                            style: TextStyle(color: darkgreen)),
+                      ])),
 
-                  //Divider
                   SizedBox(
                     height: 15,
                   ),
@@ -160,12 +146,13 @@ class LoginCard extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: darkgreen,
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
                       ),
                       alignment: Alignment.center,
                       width: double.maxFinite,
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: CustomText(
-                          text: "Sign Up!",
+                          text: "Log in",
                           size: 16,
                           color: light,
                           fontWeight: FontWeight.bold),
@@ -179,12 +166,38 @@ class LoginCard extends StatelessWidget {
 
                   // Admin Credentials text, right now this is just to fill up space
                   RichText(
+                      textAlign: TextAlign.center,
                       text: TextSpan(children: [
-                    TextSpan(text: "Don't have admin credentials? "),
-                    TextSpan(
-                        text: "Request credentials here! ",
-                        style: TextStyle(color: darkgreen)),
-                  ]))
+                        TextSpan(
+                            text: "Don't have an account? ",
+                            style: TextStyle(color: darkgreen)),
+                      ])),
+
+                  SizedBox(
+                    height: 15,
+                  ),
+
+                  // Login Button - Global navigation to the main page
+                  InkWell(
+                    onTap: () {
+                      navigationController.goBack();
+                      navigationController.navigateTo(registerRoute);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: darkgreen,
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                      ),
+                      alignment: Alignment.center,
+                      width: double.maxFinite,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: CustomText(
+                          text: "Register",
+                          size: 16,
+                          color: light,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ],
               ),
             ),

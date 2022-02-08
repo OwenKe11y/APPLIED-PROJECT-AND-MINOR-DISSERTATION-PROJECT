@@ -3,9 +3,9 @@ import 'package:even_ticket/routing/router.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:flutter/cupertino.dart';
 
-Navigator localNavigator() => Navigator(
+Navigator splashNavigator() => Navigator(
   key: navigationController.navigationKey,
   initialRoute: homePageRoute,
-  onGenerateRoute: dashRoutes, 
+  onGenerateRoute: splashRoutes, 
   
   );

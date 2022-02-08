@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/widgets/auth_widgets/welcome_card.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +18,9 @@ class WelcomePage extends StatelessWidget {
           
           children: [
           ClipPath(
-              clipper: LoginClipper(),
+              clipper: BottomShapeClipper(),
               child: Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(

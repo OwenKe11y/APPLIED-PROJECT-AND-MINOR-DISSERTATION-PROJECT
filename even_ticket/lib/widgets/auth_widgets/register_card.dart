@@ -2,8 +2,10 @@
 
 import 'dart:developer';
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/pages/authentication/login_page.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +29,7 @@ class RegisterCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15,),
         child: Column(
           children: [
             ClipRRect(
@@ -76,6 +78,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       labelText: "Name",
                       hintText: "Full Name",
@@ -103,7 +106,9 @@ class RegisterCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
+                    textAlign: TextAlign.center,
                     obscureText: true,
+                    
                     decoration: InputDecoration(
                       labelText: "Password",
                     ),
@@ -116,6 +121,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    textAlign: TextAlign.center,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Repeat Password",
@@ -192,7 +198,8 @@ class RegisterCard extends StatelessWidget {
                   // Login Button - Global navigation to the main page
                   InkWell(
                     onTap: () {
-                      Get.offAll(LoginPage());
+                      navigationController.goBack();
+                      navigationController.navigateTo(loginRoute);
 
                       
                     },
@@ -210,6 +217,9 @@ class RegisterCard extends StatelessWidget {
                           color: light,
                           fontWeight: FontWeight.bold),
                     ),
+                  ),
+                    SizedBox(
+                    height: 15,
                   ),
                 ],
               ),

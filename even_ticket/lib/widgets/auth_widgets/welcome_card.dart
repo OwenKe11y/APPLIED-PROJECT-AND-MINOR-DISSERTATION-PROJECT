@@ -1,12 +1,16 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:developer';
-
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/controllers/navigation_controller.dart';
+import 'package:even_ticket/pages/authentication/register_page.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
-import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/utils/local_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 import '../custom_text.dart';
 
@@ -22,67 +26,77 @@ class WelcomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
-      color: light,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //Divider
-                  SizedBox(
-                    height: 15,
-                  ),
+    return Column(
+      children: [
+        
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+        ),
 
-                  // Login Button - Global navigation to the main page
-                  InkWell(
-                    onTap: () {
-                      //Get.offAll(SiteLayout());
-
-                      createUser(nameController.text, emailController.text,
-                          pass1Controller.text, pass2Controller.text);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: darkgreen,
+        Card(
+          elevation: 10,
+          color: light,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //Divider
+                      SizedBox(
+                        height: 15,
                       ),
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: CustomText(
-                          text: "Sign up with Email",
+                      // Login Button - Global navigation to the main page
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: darkgreen,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50),
+                        ),
+                        onPressed: () => navigationController.navigateTo(registerRoute),
+                        icon: FaIcon(FontAwesomeIcons.mailBulk, color: light),
+                        label: CustomText(
+                          text: ' Sign Up using email',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      
+                      ),
 
-                  // Divider
-                  SizedBox(
-                    height: 15,
+                      // Divider
+                      SizedBox(
+                        height: 15,
+                      ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: lightGrey,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50),
+                        ),
+                        
+                        icon: FaIcon(FontAwesomeIcons.google, color: active,),
+                        label: CustomText(
+                          text: ' Sign Up using Google',
+                          size: 16,
+                          color: light,
+                          fontWeight: FontWeight.bold,),
+                        onPressed: signIn,
+                      ),
+                       SizedBox(
+                        height: 15,
+                      ),
+                    ],
                   ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    icon: Icon(const IconData(0x41, fontFamily: 'Roboto'),
-                        size: 48.0, color: Colors.red),
-                    label: Text('Sign Up with Google'),
-                    onPressed: signIn,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 

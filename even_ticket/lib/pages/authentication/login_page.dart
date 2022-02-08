@@ -22,6 +22,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+         backgroundColor: darkgreen,
+      ),
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Stack(children: [
@@ -40,7 +43,7 @@ class LoginPage extends StatelessWidget {
                         Colors.green.shade200
                       ])))),
           Padding(
-            padding: EdgeInsets.only(top: 80, bottom: 80, left: 30, right: 30),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 70),
             child: LoginCard(),
           )
         ]),
