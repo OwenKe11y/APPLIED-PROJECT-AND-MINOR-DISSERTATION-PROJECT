@@ -1,62 +1,31 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
-const cors = require('cors');
-const db = require('./Queries');
-const session = require('express-session');
-const passport = require('passport');
 
-const initializePassport = require('./passportConfig');
+var corsOptions = {
+    origin: "http://localhost:3000"
+};
 
-initializePassport(passport);
-
-app.use(cors());
-app.use(express.urlencoded({extended: true})); 
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-    secret: 'secret',
+const db = require("./models");
+db.sequelize.sync()
 
-    resave: false,
-
-    saveUninitialized: false
-})
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/login', async (req, res) => {  
-    try{
-        const response = await db.getAllLogins()
-        return res.send(response);
-    } catch (err) {
-        res.send(err)
-    }
+app.get("/", (req, res) => {
+  res.json({ message: "Server Online" });
 });
 
-app.post('/register', async (req, res) => {      
-    try{
-        const response = await db.registerUsers(req);
-        return res.send(response);
-    } catch (err) {
-        res.send(err)
-    }
+// Get Routes
+require("./routes/users.routes")(app);
+require("./routes/tickets.routes")(app);
+require("./routes/events.routes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3000 ;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
-
-//app.post('/register', db.registerUser)
-app.get('/register', db.checkAuthenticated)
-app.get('/register', db.checkNotAuthenticated)
-app.post('/users/login',
-    passport.authenticate('local', {
-        // successRedirect: '/users/dashboard', // Successfully logged in
-        // failureRedirect: '/users/login', // If failed redirect to login page
-        // failureFlash: true // Displays flash messages 
-    })
-);
-// Port
-const port = process.env.PORT || 3000;
-
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
-});
-
-
