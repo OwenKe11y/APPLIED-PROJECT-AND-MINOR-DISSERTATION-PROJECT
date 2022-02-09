@@ -3,8 +3,10 @@
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
+import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
+import 'package:even_ticket/utils/splash_navigator.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu_items.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,7 +43,7 @@ class SideMenu extends StatelessWidget {
                             : itemName,
                         onTap: () {
                           if (itemName == authenticationPageRoute) {
-                            Get.offAll(() => RegisterPage());
+                            Get.offAll(() => WelcomePage());
                           }
 
                           if (!menuController.isActive(itemName)) {

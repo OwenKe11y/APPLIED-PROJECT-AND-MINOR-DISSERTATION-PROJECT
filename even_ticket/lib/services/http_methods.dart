@@ -10,9 +10,9 @@ import 'package:http/http.dart' as http;
 
 import '../layout.dart';
 
-Future<User> createUser(String name, String email, String password, String password2) async {
+Future<User> createUser(String name, String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3000/register'),
+    Uri.parse('http://localhost:3000/api/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -23,8 +23,7 @@ Future<User> createUser(String name, String email, String password, String passw
     body: jsonEncode(<String, String>{
       'name': name,
       'email': email,
-      'password': password,
-      'password2': password2,
+      'password': password
     }),
   );
   

@@ -30,7 +30,7 @@ class WelcomeCard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.2,
         ),
         Card(
           elevation: 10,
@@ -114,7 +114,7 @@ class WelcomeCard extends StatelessWidget {
     } else {
       debugPrint(user.email);
       debugPrint(user.displayName);
-      Get.offAll(() => SiteLayout());
+      Get.offAll(() => HomeViewPage());
     }
   }
 }
