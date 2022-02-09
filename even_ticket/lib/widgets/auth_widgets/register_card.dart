@@ -29,7 +29,9 @@ class RegisterCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 15,
+        ),
         child: Column(
           children: [
             ClipRRect(
@@ -37,8 +39,6 @@ class RegisterCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-
                   // Divider
                   SizedBox(
                     height: 30,
@@ -78,6 +78,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    key: Key('Name'),
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       labelText: "Name",
@@ -93,6 +94,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    key: Key('Email'),
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "example@email.com",
@@ -106,9 +108,9 @@ class RegisterCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
+                    key: Key('Password'),
                     textAlign: TextAlign.center,
                     obscureText: true,
-                    
                     decoration: InputDecoration(
                       labelText: "Password",
                     ),
@@ -121,6 +123,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    key: Key('RepeatPassword'),
                     textAlign: TextAlign.center,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -163,11 +166,10 @@ class RegisterCard extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: darkgreen,
-                         borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
                       ),
                       alignment: Alignment.center,
                       width: double.maxFinite,
-                      
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: CustomText(
                           text: "Sign Up!",
@@ -184,15 +186,14 @@ class RegisterCard extends StatelessWidget {
 
                   // Admin Credentials text, right now this is just to fill up space
                   RichText(
-                    textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,
                       text: TextSpan(children: [
+                        TextSpan(
+                            text: "Already have an account? ",
+                            style: TextStyle(color: darkgreen)),
+                      ])),
 
-                    TextSpan(
-                        text: "Already have an account? ",
-                        style: TextStyle(color: darkgreen)),
-                  ])),
-
-                    SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   // Login Button - Global navigation to the main page
@@ -200,8 +201,6 @@ class RegisterCard extends StatelessWidget {
                     onTap: () {
                       navigationController.goBack();
                       navigationController.navigateTo(loginRoute);
-
-                      
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -218,7 +217,7 @@ class RegisterCard extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                    SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                 ],
