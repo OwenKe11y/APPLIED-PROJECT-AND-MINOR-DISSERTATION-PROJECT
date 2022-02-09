@@ -3,6 +3,7 @@
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/routing/routes.dart';
@@ -105,12 +106,15 @@ class WelcomeCard extends StatelessWidget {
     final user = await GoogleSignInApi.login();
 
     if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Sign in Failed')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Sign in Failed'),
+        ),
+      );
     } else {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomeViewPage(user: user),
-      ));
+      debugPrint(user.email);
+      debugPrint(user.displayName);
+      Get.offAll(() => SiteLayout());
     }
   }
 }
