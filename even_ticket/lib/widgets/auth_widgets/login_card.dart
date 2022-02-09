@@ -141,7 +141,7 @@ class LoginCard extends StatelessWidget {
                       //Get.offAll(SiteLayout());
 
                       createUser(nameController.text, emailController.text,
-                          pass1Controller.text, pass2Controller.text);
+                          pass1Controller.text);
                     },
                     child: Container(
                       decoration: BoxDecoration(

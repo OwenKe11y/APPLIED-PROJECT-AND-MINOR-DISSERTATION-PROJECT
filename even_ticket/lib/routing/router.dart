@@ -22,7 +22,6 @@ Route<dynamic> dashRoutes(RouteSettings settings) {
       return _pageRoute(MapsViewPage());
     case settingsPageRoute:
       return _pageRoute(SettingsViewPage());
-    case welcomeRoute:
     default:
       return _pageRoute(HomeViewPage());
   }
