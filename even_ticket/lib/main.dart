@@ -11,11 +11,14 @@ import 'package:even_ticket/utils/splash_navigator.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Main method, use GetX for the Controllers and run the App
 void main() {
+  Stripe.publishableKey =
+      'pk_test_51KRLjFLq7ImpQvpE7CUgEqLJvymGSBcQ2wwDPBPuTj1F0yzVmwLJriYN4N01RVVk0kgkKRMlULc4q1zW7v2OwP6z00F8oy9qt4';
   Get.put(MenuController());
   Get.put(NavigationController());
   runApp(MyApp());
