@@ -90,6 +90,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
+                    key: Key('Email'),
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "example@email.com",
