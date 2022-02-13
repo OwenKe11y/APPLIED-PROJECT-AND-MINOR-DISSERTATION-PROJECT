@@ -23,7 +23,7 @@ class MapsViewPage extends StatelessWidget {
                       text: menuController.activeItem.value,
                       size: 25,
                       color: lightGrey,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                 ),
               ]))
         ],

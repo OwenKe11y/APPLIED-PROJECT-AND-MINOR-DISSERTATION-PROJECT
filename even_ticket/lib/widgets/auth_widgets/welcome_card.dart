@@ -30,7 +30,7 @@ class WelcomeCard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.6,
         ),
         Card(
           elevation: 10,
@@ -62,7 +62,7 @@ class WelcomeCard extends StatelessWidget {
                           text: ' Sign Up using email',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,
                         ),
                       ),
 
@@ -84,7 +84,7 @@ class WelcomeCard extends StatelessWidget {
                           text: ' Sign Up using Google',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,
                         ),
                         onPressed: () => signIn(context),
                       ),

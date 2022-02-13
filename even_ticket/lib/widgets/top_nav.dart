@@ -2,9 +2,6 @@
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
-import 'package:even_ticket/widgets/custom_text_with_shadow.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Component that renders the Top navbar
@@ -15,7 +12,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
           ? Row(
               children: [
                 Container(
-                  padding: EdgeInsets.only(left: 14),
+                  padding: EdgeInsets.only(left: 13),
                   child: Image.asset(
                     "assets/icons/logo.png",
                     width: 28,

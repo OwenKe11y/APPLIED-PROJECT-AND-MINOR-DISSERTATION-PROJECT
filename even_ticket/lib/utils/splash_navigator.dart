@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 Navigator splashNavigator() => Navigator(
   key: navigationController.navigationKey,
-  initialRoute: homePageRoute,
+  initialRoute: welcomeRoute,
   onGenerateRoute: splashRoutes, 
   
   );

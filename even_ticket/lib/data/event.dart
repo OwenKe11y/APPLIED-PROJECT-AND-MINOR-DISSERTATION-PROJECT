@@ -1,33 +1,57 @@
-class Event{
-  final String imagePath, title, description, location, duration, punchLine1, punchline2;
+class Event {
+  final String imagePath,
+      title,
+      description,
+      location,
+      duration,
+      punchLine1,
+      punchline2;
   final List catagoryIds, galleryImages;
 
-  Event(this.imagePath, this.title, this.description, this.location, this.duration, this.punchLine1, this.punchline2, this.catagoryIds, this.galleryImages);
+  Event(
+      {required this.imagePath,
+      required this.title,
+      required this.description,
+      required this.location,
+      required this.duration,
+      required this.punchLine1,
+      required this.punchline2,
+      required this.catagoryIds,
+      required this.galleryImages});
+}
 
   final genericConcert = Event(
-  "assets/gallery/concert.jpg", 
-  "Generic Concert", 
-  "Insert band name here", 
-  "3 Arena", 
-  "4h", 
-  "Concert!", 
-  "Playing after 200 years of retirement", 
-  [0, 1, 4], 
-  ["assets/gallery/concert.jpg"]);
+      imagePath: 'assets/gallery/concert.jpg',
+      title: "Generic Concert",
+      description: "Insert band name here",
+      location: "3 Arena",
+      duration: "4h",
+      punchLine1: "Concert!",
+      punchline2: "Playing after 200 years of retirement",
+      catagoryIds: [0, 1, 4],
+      galleryImages: ["assets/gallery/concert.jpg"]);
 
   final genericSport = Event(
-  "assets/gallery/sports.jpg", 
-  "Generic Sporting Event", 
-  "Team 1 vs Team 2", 
-  "Croagh Park", 
-  "3h", 
-  "Exciting Sports!", 
-  "Will Team 1 knock out Team 2 from the tournament?", 
-  [0, 3], 
-  ["assets/gallery/sports.jpg"]);
+      imagePath: 'assets/gallery/sports.jpg',
+      title: "Generic Sporting Event",
+      description: "Team 1 vs Team 2",
+      location: "Croagh Park",
+      duration: "3h",
+      punchLine1: "Exciting Sports!",
+      punchline2: "Will Team 1 knock out Team 2 from the tournament?",
+      catagoryIds: [0, 3],
+      galleryImages: ["assets/gallery/sports.jpg"]);
+  
+  final genericBleh = Event(
+      imagePath: 'assets/gallery/sports.jpg',
+      title: "PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEYAAAAAAAAAAA",
+      description: "Team 1 vs Team 2",
+      location: "Croagh Park",
+      duration: "3h",
+      punchLine1: "Exciting Sports!",
+      punchline2: "Will Team 1 knock out Team 2 from the tournament?",
+      catagoryIds: [0, 3],
+      galleryImages: ["assets/gallery/sports.jpg"]);
 
+  final events = [genericConcert, genericSport, genericBleh];
 
-
-
-
-}

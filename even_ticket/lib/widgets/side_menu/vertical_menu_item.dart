@@ -72,7 +72,7 @@ class VerticalMenuItem extends StatelessWidget {
                           color: menuController.isHovering(itemName)
                               ? darkgreen
                               : darkGrey,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,
                         
                       ))
                 // If the item is active, maintain colour
@@ -82,7 +82,7 @@ class VerticalMenuItem extends StatelessWidget {
                           text: itemName,
                           size: 18,
                           color: darkgreen,
-                          fontWeight: FontWeight.bold))
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,))
               ],
             ),
           )),

@@ -2,12 +2,10 @@
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
-import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginCard extends StatelessWidget {
@@ -62,7 +60,7 @@ class LoginCard extends StatelessWidget {
                           text: "Log in using the form below",
                           size: 16,
                           color: darkGrey,
-                          fontWeight: FontWeight.normal)
+                          fontWeight: FontWeight.normal, textAlign: TextAlign.center,)
                     ],
                   ),
 
@@ -73,7 +71,7 @@ class LoginCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    textAlign: TextAlign.center,
+                    
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "example@email.com",
@@ -87,7 +85,7 @@ class LoginCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
-                    textAlign: TextAlign.center,
+                   
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -113,7 +111,7 @@ class LoginCard extends StatelessWidget {
                           text: "Remember me",
                           size: 16,
                           color: darkGrey,
-                          fontWeight: FontWeight.bold)
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
                     ],
                   ),
 
@@ -124,7 +122,7 @@ class LoginCard extends StatelessWidget {
                   // Forget Password Text
                   // Admin Credentials text, right now this is just to fill up space
                   RichText(
-                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.ltr,
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Forget password?",
@@ -155,7 +153,7 @@ class LoginCard extends StatelessWidget {
                           text: "Log in",
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                     ),
                   ),
 
@@ -166,7 +164,7 @@ class LoginCard extends StatelessWidget {
 
                   // Admin Credentials text, right now this is just to fill up space
                   RichText(
-                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.ltr,
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Don't have an account? ",
@@ -195,7 +193,7 @@ class LoginCard extends StatelessWidget {
                           text: "Register",
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                     ),
                   ),
                 ],

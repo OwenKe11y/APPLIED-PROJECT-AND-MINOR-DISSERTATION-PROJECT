@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:even_ticket/layout.dart';
-import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/widgets/auth_widgets/welcome_card.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +10,7 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       
       body: Center(
         

@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'dart:developer';
-
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
-import 'package:even_ticket/pages/authentication/login_page.dart';
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +26,9 @@ class RegisterCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 15,
+        ),
         child: Column(
           children: [
             ClipRRect(
@@ -37,8 +36,6 @@ class RegisterCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-
                   // Divider
                   SizedBox(
                     height: 30,
@@ -67,7 +64,7 @@ class RegisterCard extends StatelessWidget {
                           text: "Sign up using the form below",
                           size: 16,
                           color: darkGrey,
-                          fontWeight: FontWeight.normal)
+                          fontWeight: FontWeight.normal, textAlign: TextAlign.center,)
                     ],
                   ),
 
@@ -78,7 +75,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    textAlign: TextAlign.center,
+                    key: Key('name'),
                     decoration: InputDecoration(
                       labelText: "Name",
                       hintText: "Full Name",
@@ -106,9 +103,8 @@ class RegisterCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
-                    textAlign: TextAlign.center,
+                   
                     obscureText: true,
-                    
                     decoration: InputDecoration(
                       labelText: "Password",
                     ),
@@ -121,7 +117,7 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    textAlign: TextAlign.center,
+                    
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Repeat Password",
@@ -143,7 +139,7 @@ class RegisterCard extends StatelessWidget {
                           text: "Remember me",
                           size: 16,
                           color: darkGrey,
-                          fontWeight: FontWeight.bold)
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
                     ],
                   ),
 
@@ -155,25 +151,23 @@ class RegisterCard extends StatelessWidget {
                   // Login Button - Global navigation to the main page
                   InkWell(
                     onTap: () {
-                      //Get.offAll(SiteLayout());
-
                       createUser(nameController.text, emailController.text,
                           pass1Controller.text);
+                      () => Get.offAll(SiteLayout());
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         color: darkgreen,
-                         borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
                       ),
                       alignment: Alignment.center,
                       width: double.maxFinite,
-                      
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: CustomText(
                           text: "Sign Up!",
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                     ),
                   ),
 
@@ -184,15 +178,14 @@ class RegisterCard extends StatelessWidget {
 
                   // Admin Credentials text, right now this is just to fill up space
                   RichText(
-                    textAlign: TextAlign.center,
+                      textDirection: TextDirection.ltr,
                       text: TextSpan(children: [
+                        TextSpan(
+                            text: "Already have an account? ",
+                            style: TextStyle(color: darkgreen)),
+                      ])),
 
-                    TextSpan(
-                        text: "Already have an account? ",
-                        style: TextStyle(color: darkgreen)),
-                  ])),
-
-                    SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   // Login Button - Global navigation to the main page
@@ -200,8 +193,6 @@ class RegisterCard extends StatelessWidget {
                     onTap: () {
                       navigationController.goBack();
                       navigationController.navigateTo(loginRoute);
-
-                      
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -215,10 +206,10 @@ class RegisterCard extends StatelessWidget {
                           text: "Log In",
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                     ),
                   ),
-                    SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                 ],

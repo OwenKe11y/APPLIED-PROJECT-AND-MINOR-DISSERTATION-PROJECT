@@ -8,7 +8,6 @@ const welcomeRoute = "Welcome";
 const registerRoute = "Register";
 const loginRoute = "Login";
 
-
 List dashboardItems = [
   homePageRoute,
   ticketsPageRoute,
@@ -16,13 +15,10 @@ List dashboardItems = [
   mapsPageRoute,
   settingsPageRoute,
   authenticationPageRoute,
+];
+
+List authenticationPages = [
   welcomeRoute,
   loginRoute,
   registerRoute,
 ];
-
-List authenticationPages = [
- 
-];
-
-
