@@ -11,23 +11,7 @@ class TicketViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          Obx(() => Row(children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    top: ResponsiveWidget.isSmallScreen(context) ? 42 : 6,
-                    left: ResponsiveWidget.isSmallScreen(context) ? 50 : 6,
-                  ),
-                  child: CustomText(
-                      text: menuController.activeItem.value,
-                      size: 25,
-                      color: lightGrey,
-                      fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
-                ),
-              ]))
-        ],
-      ),
+     
     );
   }
 }

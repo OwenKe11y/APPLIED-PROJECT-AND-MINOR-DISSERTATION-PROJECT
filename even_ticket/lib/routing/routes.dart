@@ -7,6 +7,7 @@ const authenticationPageRoute = "Authentication";
 const welcomeRoute = "Welcome";
 const registerRoute = "Register";
 const loginRoute = "Login";
+const detailsRoute = "Details";
 
 List dashboardItems = [
   homePageRoute,

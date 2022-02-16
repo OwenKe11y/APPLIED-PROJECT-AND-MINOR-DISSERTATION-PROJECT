@@ -5,6 +5,7 @@ import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/catagory.dart';
 import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/pages/home/event_details.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
@@ -22,27 +23,12 @@ class HomeViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Center(
-      
-      child: ChangeNotifierProvider<AppState>(
-        create: (_) => AppState(),
+    return ChangeNotifierProvider<AppState>(
+      create: (_) => AppState(),
+      child: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Obx(() => Row(children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: ResponsiveWidget.isSmallScreen(context) ? 42 : 6,
-                        left: ResponsiveWidget.isSmallScreen(context) ? 50 : 6,
-                      ),
-                      child: CustomText(
-                          text: menuController.activeItem.value,
-                          size: 25,
-                          color: lightGrey,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
-                    ),
-                  ])),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Consumer<AppState>(
@@ -63,10 +49,19 @@ class HomeViewPage extends StatelessWidget {
                 child: Consumer<AppState>(
                   builder: (context, appstate, _) => Column(
                     children: [
-                      for(final event in events.where((element) => element.catagoryIds.contains(appstate.selectedCatagoryID))) EventWidget(event: event,)
+                      for (final event in events.where((element) => element
+                          .catagoryIds
+                          .contains(appstate.selectedCatagoryID)))
+                        GestureDetector(
+                          onTap: () => {
+                            Get.offAll(() => EventDetail(event: event))
+                          },
+                          child: EventWidget(
+                            event: event,
+                          ),
+                        ),
                     ],
                   ),
-             
                 ),
               )
               // CircleAvatar(

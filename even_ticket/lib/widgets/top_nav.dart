@@ -2,7 +2,11 @@
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
+import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../constants/controllers.dart';
 
 // Component that renders the Top navbar
 AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
@@ -36,6 +40,19 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
       // Render the title of the webpage
       title: Row(
         children: [
+          Obx(() => Row(children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: ResponsiveWidget.isSmallScreen(context) ? 0 : 6,
+                      left: ResponsiveWidget.isSmallScreen(context) ? 2 : 6,
+                    ),
+                    child: CustomText(
+                        text: menuController.activeItem.value,
+                        size: 25,
+                        color: lightGrey,
+                        fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                  ),
+                ])),
           
   
 

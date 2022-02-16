@@ -29,7 +29,7 @@ class Event {
       punchLine1: "Concert!",
       punchline2: "Playing after 200 years of retirement",
       catagoryIds: [0, 1, 4],
-      galleryImages: ["assets/gallery/concert.jpg"]);
+      galleryImages: ["assets/gallery/concert.jpg", "assets/gallery/sports.jpg", "assets/gallery/sports.jpg"] );
 
   final genericSport = Event(
       imagePath: 'assets/gallery/sports.jpg',
