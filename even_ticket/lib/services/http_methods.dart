@@ -12,9 +12,38 @@ import '../data/event.dart';
 import '../layout.dart';
 
 // Create User
+Future<String> loginUser(String email, String password) async {
+  final response = await http.post(
+    Uri.parse('http://192.168.1.5:3000/api/users/login'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode(<String, String>{'email': email, 'password': password}),
+  );
+
+  if (response.statusCode == 200 && response.body == 'PASS') {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return "PASS";
+  } else if (response.body == 'FAIL') {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    return 'FAIL';
+  } else {
+    throw Exception('Failed to login');
+  }
+}
+
+// Create User
 Future<User> createUser(String name, String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://insertiphere/api/users'),
+    Uri.parse('http://192.168.1.5:3000/api/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -44,7 +73,7 @@ Future<User> createUser(String name, String email, String password) async {
 // Get all events and send back each event
 Future<void> getEvents() async {
   final response = await http.get(
-      Uri.parse('http://insertiphere:3000/api/events'),
+      Uri.parse('http://192.168.1.5:3000/api/events'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "Access-Control-Allow-Origin": "*", // Required for CORS support to work

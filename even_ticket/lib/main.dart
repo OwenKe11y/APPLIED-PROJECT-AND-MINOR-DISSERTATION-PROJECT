@@ -4,6 +4,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
 import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/utils/splash_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF64ff38),
       ),
       // Gets the responsive layout from layout.dart depending on the screen size
-      home: SiteLayout(),
+      home: splashNavigator(),
     );
   }
 }

@@ -48,9 +48,9 @@ exports.login = (req, res) => {
     .then((authenticated) => {
       console.log(authenticated)
       if (authenticated) {
-        res.send("Logged in")
+        res.send("PASS")
       } else {
-        res.send("Invalid Login")
+        res.send("FAIL")
       }
     })
     .catch(err => {

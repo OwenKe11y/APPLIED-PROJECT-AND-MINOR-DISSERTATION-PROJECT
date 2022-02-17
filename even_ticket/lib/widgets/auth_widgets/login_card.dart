@@ -2,11 +2,14 @@
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../services/http_methods.dart';
 
 class LoginCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -57,10 +60,12 @@ class LoginCard extends StatelessWidget {
                   Row(
                     children: [
                       CustomText(
-                          text: "Log in using the form below",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.normal, textAlign: TextAlign.center,)
+                        text: "Log in using the form below",
+                        size: 16,
+                        color: darkGrey,
+                        fontWeight: FontWeight.normal,
+                        textAlign: TextAlign.center,
+                      )
                     ],
                   ),
 
@@ -71,7 +76,6 @@ class LoginCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    
                     decoration: InputDecoration(
                       labelText: "Email",
                       hintText: "example@email.com",
@@ -85,7 +89,6 @@ class LoginCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
-                   
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -108,10 +111,12 @@ class LoginCard extends StatelessWidget {
                     children: [
                       Checkbox(value: true, onChanged: (value) {}),
                       CustomText(
-                          text: "Remember me",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
+                        text: "Remember me",
+                        size: 16,
+                        color: darkGrey,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.center,
+                      )
                     ],
                   ),
 
@@ -136,10 +141,13 @@ class LoginCard extends StatelessWidget {
                   // Login Button - Global navigation to the main page
                   InkWell(
                     onTap: () {
-                      //Get.offAll(SiteLayout());
-
-                      createUser(nameController.text, emailController.text,
-                          pass1Controller.text);
+                      loginUser(emailController.text, pass1Controller.text)
+                          .then((value) => {
+                                if (value == 'PASS')
+                                  {Get.offAll(SiteLayout())}
+                                else
+                                  {throw Exception("Failed Login Dart")}
+                              });
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -150,10 +158,12 @@ class LoginCard extends StatelessWidget {
                       width: double.maxFinite,
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: CustomText(
-                          text: "Log in",
-                          size: 16,
-                          color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                        text: "Log in",
+                        size: 16,
+                        color: light,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
 
@@ -190,10 +200,12 @@ class LoginCard extends StatelessWidget {
                       width: double.maxFinite,
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: CustomText(
-                          text: "Register",
-                          size: 16,
-                          color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                        text: "Register",
+                        size: 16,
+                        color: light,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
