@@ -27,7 +27,8 @@ class EventDetailsContent extends StatelessWidget {
             height: 50,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.01),
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.2, vertical: screenHeight * 0.01),
             child: CustomText(
                 text: event.title,
                 size: 50,
@@ -68,22 +69,19 @@ class EventDetailsContent extends StatelessWidget {
                   ],
                 ),
               )),
-        SizedBox(
-          height: 80,
-        ),
-         Card(
-          elevation: 10,
-          color: light,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-               
-                    ],
-                  ),
-                ),
-       
-        ),
+          SizedBox(
+            height: 80,
+          ),
+          Card(
+            elevation: 10,
+            color: light,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [],
+              ),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.all(16),
             child: RichText(
@@ -117,37 +115,37 @@ class EventDetailsContent extends StatelessWidget {
             height: 30,
           ),
           if (event.galleryImages.isNotEmpty)
-           Padding(
-            padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
-            child: CustomText(
-                text: "GALLERY",
-                size: 16,
-                color: darkGrey,
-                fontWeight: FontWeight.bold,
-                textAlign: TextAlign.start),
-          ),
+            Padding(
+              padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
+              child: CustomText(
+                  text: "GALLERY",
+                  size: 16,
+                  color: darkGrey,
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.start),
+            ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
                 for (final galleryImagePath in event.galleryImages)
-                Container(
-                  margin: EdgeInsets.only(left: 16, right: 16, bottom: 32),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    child: Image.asset(
-                      galleryImagePath,
-                      width: 180,
-                      height: 180,
-                      fit: BoxFit.cover,
+                  Container(
+                    margin: EdgeInsets.only(left: 16, right: 16, bottom: 32),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: galleryImagePath
+                        // Image.asset(
+                        //   galleryImagePath,
+                        //   width: 180,
+                        //   height: 180,
+                        //   fit: BoxFit.cover,
 
-                    ),
-                  ),
-                )
+                        // ),
+                        ),
+                  )
               ],
             ),
           )
-        
         ],
       ),
     );

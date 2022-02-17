@@ -25,11 +25,7 @@ class EventWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: Image.asset(
-                    event.imagePath,
-                    height: 150,
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: event.galleryImages[0],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, left: 8.0),
@@ -39,17 +35,14 @@ class EventWidget extends StatelessWidget {
                           flex: 2,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-
                               children: [
-                                
                                 CustomText(
                                   color: darkGrey,
                                   text: event.title,
                                   size: 24,
-                                  fontWeight: FontWeight.bold, textAlign: TextAlign.start,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.start,
                                 ),
-                                
-                                
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -64,20 +57,21 @@ class EventWidget extends StatelessWidget {
                                         color: darkGrey,
                                         text: event.location,
                                         size: 16,
-                                        fontWeight: FontWeight.w300, textAlign: TextAlign.left,
+                                        fontWeight: FontWeight.w300,
+                                        textAlign: TextAlign.left,
                                       ),
                                     ],
                                   ),
                                 )
                               ])),
-
                       Expanded(
                         flex: 1,
                         child: CustomText(
                           color: darkGrey,
                           text: event.duration,
                           size: 16,
-                          fontWeight: FontWeight.w900, textAlign: TextAlign.right,
+                          fontWeight: FontWeight.w900,
+                          textAlign: TextAlign.right,
                         ),
                       ),
                     ],

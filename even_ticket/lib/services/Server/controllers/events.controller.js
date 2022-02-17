@@ -10,19 +10,20 @@ exports.create = (req, res) => {
         });
         return;
     }
-    
+
     // Create a Event
     const event = {
-    event_name: req.body.event_name,
-    image: req.body.image,
+    title: req.body.title,
     description: req.body.description,
     location: req.body.location,    
-    category: req.body.category,
-    organiser: req.body.organiser,
-    date: req.body.date,
+    duration: req.body.duration,
+    punchline1: req.body.punchline1,
+    punchline2: req.body.punchline2,
+    categoryIds: req.body.categoryIds,
     galleryImages: req.body.galleryImages,
+    displayImage: req.body.displayImage
     };
-
+    
     // Save Event in the database
     Events.create(event)
         .then(data => {
@@ -51,31 +52,31 @@ exports.findAll = (req, res) => {
       });
 };
 
-// Find a single Event by event_name
+// Find a single Event by title
 exports.findOne = (req, res) => {
-  const event_name = req.params.event_name;
-  Events.findAll({ where: {event_name: event_name}})
+  const title = req.params.title;
+  Events.findAll({ where: {title: title}})
     .then(data => {
       if (data[0] != null) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Event with event_name: ${event_name}.`
+          message: `Cannot find Event with title: ${title}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Event with event_name: " + event_name
+        message: "Error retrieving Event with title: " + title
       });
     });
 };
 
 // Update a Event by name
 exports.update = (req, res) => {
-  const event_name = req.body.event_name;
+  const title = req.body.title;
   Events.update(req.body, {
-    where: { event_name: event_name }
+    where: { title: title }
   })
     .then(num => {
       console.log(num)
@@ -85,22 +86,22 @@ exports.update = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update Event with event_name: ${event_name}. Maybe Event was not found or req.body is empty!`
+          message: `Cannot update Event with title: ${title}. Maybe Event was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Event with event_name: " + event_name + "\n" + err
+        message: "Error updating Event with title: " + title + "\n" + err
       });
     });
 };
 
-// Delete a Event by event_name
+// Delete a Event by title
 exports.delete = (req, res) => {
-  const event_name = req.body.event_name;
+  const title = req.body.title;
   Events.destroy({
-    where: { event_name: event_name }
+    where: { title: title }
   })
     .then(num => {
       if (num == 1) {
@@ -109,13 +110,13 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot delete Event with event_name: ${event_name}. Maybe Event was not found!`
+          message: `Cannot delete Event with title: ${title}. Maybe Event was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Event with event_name: " + event_name + " " + err
+        message: "Could not delete Event with title: " + title + " " + err
       });
     });
 };
