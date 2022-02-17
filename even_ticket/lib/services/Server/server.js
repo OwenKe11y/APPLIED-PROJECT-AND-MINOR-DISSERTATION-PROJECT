@@ -19,8 +19,9 @@ require("./routes/tickets.routes")(app);
 require("./routes/events.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
+const LOCALIP = '';
 
-app.listen(PORT, () => {
+app.listen(PORT, LOCALIP, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

@@ -14,7 +14,7 @@ import '../layout.dart';
 // Create User
 Future<User> createUser(String name, String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://localhost:3000/api/users'),
+    Uri.parse('http://insertiphere/api/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -43,7 +43,8 @@ Future<User> createUser(String name, String email, String password) async {
 
 // Get all events and send back each event
 Future<void> getEvents() async {
-  final response = await http.get(Uri.parse('http://localhost:3000/api/events'),
+  final response = await http.get(
+      Uri.parse('http://insertiphere:3000/api/events'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -62,19 +63,18 @@ Future<void> getEvents() async {
     // Create event out of each object
     for (var event in parsedJson) {
       // Convert displayImage from blob to Image
-      Uint8List bytes = base64Decode(event['displayImage']);
-      Image displayImageTemp = Image.memory(bytes);
+      Uint8List imageBytes = base64Decode(event['displayImage']);
 
       // Convert blob to image and add to the list
       List<dynamic> galleryImages = List.empty(growable: true);
       for (var blob in event['galleryImages']) {
         Uint8List bytes = base64Decode(blob);
-        galleryImages.add(Image.memory(bytes));
+        galleryImages.add(bytes);
       }
 
       // Create Event from json
       var tempEvent = Event(
-          displayImage: displayImageTemp,
+          displayImage: imageBytes,
           title: event['title'],
           description: event['description'],
           location: event['location'],

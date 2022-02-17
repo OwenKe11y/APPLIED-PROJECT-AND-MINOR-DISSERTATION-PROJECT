@@ -14,16 +14,16 @@ class EventDetailsBackground extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final event = Provider.of<Event>(context);
 
-    return ClipPath(clipper: LoginClipper(), child: event.displayImage
-        // Image.asset(
-        //   ,
-        //   alignment: Alignment.topCenter,
-        //   fit: BoxFit.cover,
-        //   width: screenWidth * 2,
-        //   height: screenHeight * 0.5,
-        //   color: Color(0x99000000),
-        //   colorBlendMode: BlendMode.darken,
-        // ),
-        );
+    return ClipPath(
+      clipper: LoginClipper(),
+      child: Image(
+          image: MemoryImage(event.displayImage),
+          fit: BoxFit.fitWidth,
+          alignment: Alignment.topCenter,
+          height: screenWidth * 2,
+          width: screenWidth * 2,
+          color: Color(0x99000000),
+          colorBlendMode: BlendMode.darken),
+    );
   }
 }

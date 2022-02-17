@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
 class Event {
-  final Image displayImage;
+  final Uint8List displayImage;
   final String title, description, location, duration, punchLine1, punchline2;
   final List catagoryIds, galleryImages;
 

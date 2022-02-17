@@ -128,20 +128,17 @@ class EventDetailsContent extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                for (final galleryImagePath in event.galleryImages)
+                for (final galleryImage in event.galleryImages)
                   Container(
                     margin: EdgeInsets.only(left: 16, right: 16, bottom: 32),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        child: galleryImagePath
-                        // Image.asset(
-                        //   galleryImagePath,
-                        //   width: 180,
-                        //   height: 180,
-                        //   fit: BoxFit.cover,
-
-                        // ),
-                        ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      child: Image(
+                          image: MemoryImage(galleryImage),
+                          width: 180,
+                          height: 180,
+                          fit: BoxFit.cover),
+                    ),
                   )
               ],
             ),

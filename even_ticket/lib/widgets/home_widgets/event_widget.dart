@@ -25,7 +25,11 @@ class EventWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  child: event.galleryImages[0],
+                  child: Image(
+                    image: MemoryImage(event.displayImage),
+                    height: 150,
+                    fit: BoxFit.fitWidth,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, left: 8.0),
