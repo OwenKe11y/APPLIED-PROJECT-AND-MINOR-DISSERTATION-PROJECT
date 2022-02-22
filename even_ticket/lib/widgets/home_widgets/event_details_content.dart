@@ -2,9 +2,11 @@
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/controllers.dart';
@@ -23,9 +25,11 @@ class EventDetailsContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 50,
+            SizedBox(
+            height: 20,
           ),
+          IconButton(onPressed: () => {Get.offAll(() => SiteLayout())}, icon: Icon(FontAwesomeIcons.windowClose), color: light,),
+        
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: screenWidth * 0.2, vertical: screenHeight * 0.01),
@@ -41,26 +45,27 @@ class EventDetailsContent extends StatelessWidget {
           ),
           Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.1,
+                horizontal: screenWidth * 0.05,
               ),
               child: FittedBox(
+                fit: BoxFit.fill,
                 child: Row(
                   children: [
                     CustomText(
                         text: "-",
                         size: 25,
-                        color: light,
+                        color: darkGrey,
                         fontWeight: FontWeight.normal,
                         textAlign: TextAlign.end),
                     Icon(
                       Icons.location_on,
-                      color: light,
+                      color: darkGrey,
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     CustomText(
-                      color: light,
+                      color: darkGrey,
                       text: event.location,
                       size: 18,
                       fontWeight: FontWeight.w900,
@@ -78,7 +83,16 @@ class EventDetailsContent extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                children: [],
+                children: [
+                  Card(
+                      elevation: 10,
+                      color: light,
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            
+                          )))
+                ],
               ),
             ),
           ),

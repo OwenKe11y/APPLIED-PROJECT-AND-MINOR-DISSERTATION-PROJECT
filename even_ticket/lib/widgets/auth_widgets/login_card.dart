@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/http_methods.dart';
+import '../../utils/local_navigator.dart';
 
 class LoginCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -144,7 +145,7 @@ class LoginCard extends StatelessWidget {
                       loginUser(emailController.text, pass1Controller.text)
                           .then((value) => {
                                 if (value == 'PASS')
-                                  {Get.offAll(SiteLayout())}
+                                  {navigationController.navigateTo(homePageRoute)}
                                 else
                                   {throw Exception("Failed Login Dart")}
                               });

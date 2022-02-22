@@ -18,9 +18,9 @@ class EventDetailsBackground extends StatelessWidget {
       clipper: LoginClipper(),
       child: Image(
           image: MemoryImage(event.displayImage),
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
           alignment: Alignment.topCenter,
-          height: screenWidth * 2,
+          height: screenWidth * 0.9,
           width: screenWidth * 2,
           color: Color(0x99000000),
           colorBlendMode: BlendMode.darken),
