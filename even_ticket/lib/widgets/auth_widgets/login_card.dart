@@ -5,12 +5,12 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/http_methods.dart';
-import '../../utils/local_navigator.dart';
+import '../../utils/application_navigator.dart';
 
 class LoginCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -28,30 +28,13 @@ class LoginCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Divider
-                  SizedBox(
-                    height: 30,
-                  ),
-
-                  // Title of Container being Login
-                  Row(
-                    children: [
-                      Text(
-                        "Log in ",
-                        style: GoogleFonts.roboto(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-
                   // Divider
                   SizedBox(
                     height: 30,
@@ -62,11 +45,11 @@ class LoginCard extends StatelessWidget {
                     children: [
                       CustomText(
                         text: "Log in using the form below",
-                        size: 16,
+                        size: 20,
                         color: darkGrey,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.w700,
                         textAlign: TextAlign.center,
-                      )
+                      ),
                     ],
                   ),
 
@@ -139,32 +122,26 @@ class LoginCard extends StatelessWidget {
                     height: 15,
                   ),
 
-                  // Login Button - Global navigation to the main page
-                  InkWell(
-                    onTap: () {
-                      loginUser(emailController.text, pass1Controller.text)
-                          .then((value) => {
-                                if (value == 'PASS')
-                                  {navigationController.navigateTo(homePageRoute)}
-                                else
-                                  {throw Exception("Failed Login Dart")}
-                              });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: darkgreen,
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                      ),
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: CustomText(
-                        text: "Log in",
-                        size: 16,
-                        color: light,
-                        fontWeight: FontWeight.bold,
-                        textAlign: TextAlign.center,
-                      ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: darkgreen,
+                      onPrimary: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    onPressed: () =>
+                        loginUser(emailController.text, pass1Controller.text)
+                            .then((value) => {
+                                  if (value == 'PASS')
+                                    {Get.offAll(SiteLayout())}
+                                  else
+                                    {throw Exception("Failed Login Dart")}
+                                }),
+                    child: CustomText(
+                      text: 'Log in',
+                      size: 16,
+                      color: light,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
                     ),
                   ),
 
@@ -187,26 +164,24 @@ class LoginCard extends StatelessWidget {
                   ),
 
                   // Login Button - Global navigation to the main page
-                  InkWell(
-                    onTap: () {
-                      navigationController.goBack();
-                      navigationController.navigateTo(registerRoute);
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: darkgreen,
+                      onPrimary: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    onPressed: () => {
+                      loginNavController.goBack(),
+                      loginNavController.navigateTo(registerRoute),    
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: darkgreen,
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                      ),
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: CustomText(
-                        text: "Register",
-                        size: 16,
-                        color: light,
-                        fontWeight: FontWeight.bold,
-                        textAlign: TextAlign.center,
-                      ),
+                              
+                        
+                    child: CustomText(
+                      text: 'Register',
+                      size: 16,
+                      color: light,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],

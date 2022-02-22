@@ -1,4 +1,4 @@
-import 'package:even_ticket/utils/local_navigator.dart';
+import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 
 // Class for rendering the pages in a Small Screen layout

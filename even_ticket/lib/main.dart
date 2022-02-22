@@ -5,7 +5,7 @@ import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
-import 'package:even_ticket/utils/splash_navigator.dart';
+import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -15,8 +15,9 @@ import 'services/http_methods.dart';
 // Main method, use GetX for the Controllers and run the App
 Future<void> main() async {
   Get.put(MenuController());
-  Get.put(NavigationController());
-  await getEvents();
+  Get.put(LocalNavController());
+  Get.put(LoginNavController());
+  //await getEvents();
   runApp(MyApp());
 }
 
@@ -43,8 +44,8 @@ class MyApp extends StatelessWidget {
         }),
         primaryColor: Color(0xFF64ff38),
       ),
-      // Gets the responsive layout from layout.dart depending on the screen size
-      home: splashNavigator(),
+      // Gets login page navigator
+      home: loginNavigator(),
     );
   }
 }

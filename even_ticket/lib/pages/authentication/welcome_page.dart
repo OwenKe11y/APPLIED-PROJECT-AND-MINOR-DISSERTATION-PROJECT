@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/widgets/auth_widgets/welcome_card.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +10,10 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Avoids pushing content to overload when keyboard shows up
       resizeToAvoidBottomInset: false,
-      
       body: Center(
-        
         child: Stack(
-          
           children: [
           ClipPath(
               clipper: BottomShapeClipper(),
@@ -31,6 +29,8 @@ class WelcomePage extends StatelessWidget {
                         Colors.green,
                         Colors.green.shade200
                       ])))),
+                      
+          // Handles the size of the LoginCard background            
           Padding(
             padding: EdgeInsets.all(22.0),
             child: WelcomeCard(),

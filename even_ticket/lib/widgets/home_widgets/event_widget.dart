@@ -4,7 +4,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_text.dart';
+import '../custom_assets/custom_text.dart';
 
 class EventWidget extends StatelessWidget {
   final Event event;

@@ -2,11 +2,11 @@
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../constants/controllers.dart';
+import '../../constants/controllers.dart';
 
 // Component that renders the Top navbar
 AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(

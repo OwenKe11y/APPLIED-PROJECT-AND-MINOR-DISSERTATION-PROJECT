@@ -4,11 +4,12 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../custom_text.dart';
+import '../custom_assets/custom_text.dart';
 
 class RegisterCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -36,21 +37,7 @@ class RegisterCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Divider
-                  SizedBox(
-                    height: 30,
-                  ),
-
-                  // Title of Container being Login
-                  Row(
-                    children: [
-                      Text(
-                        "Register",
-                        style: GoogleFonts.roboto(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
+                 
 
                   // Divider
                   SizedBox(
@@ -61,10 +48,12 @@ class RegisterCard extends StatelessWidget {
                   Row(
                     children: [
                       CustomText(
-                          text: "Sign up using the form below",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.normal, textAlign: TextAlign.center,)
+                        text: "Sign up using the form below",
+                        size: 20,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w700,
+                        textAlign: TextAlign.center,
+                      )
                     ],
                   ),
 
@@ -104,7 +93,6 @@ class RegisterCard extends StatelessWidget {
 
                   // Password Text Field
                   TextField(
-                   
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -118,7 +106,6 @@ class RegisterCard extends StatelessWidget {
 
                   // Email Text Field
                   TextField(
-                    
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Repeat Password",
@@ -137,10 +124,12 @@ class RegisterCard extends StatelessWidget {
                     children: [
                       Checkbox(value: true, onChanged: (value) {}),
                       CustomText(
-                          text: "Remember me",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
+                        text: "Remember me",
+                        size: 16,
+                        color: darkGrey,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.center,
+                      )
                     ],
                   ),
 
@@ -150,25 +139,23 @@ class RegisterCard extends StatelessWidget {
                   ),
 
                   // Login Button - Global navigation to the main page
-                  InkWell(
-                    onTap: () {
-                      createUser(nameController.text, emailController.text,
-                          pass1Controller.text);
-                      () => Get.offAll(SiteLayout());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: darkgreen,
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                      ),
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: CustomText(
-                          text: "Sign Up!",
-                          size: 16,
-                          color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: darkgreen,
+                      onPrimary: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    onPressed: () => Get.offAll(
+                      () => SiteLayout(),
+                      arguments:
+                          menuController.changeActiveItemTo(homePageRoute),
+                    ),
+                    child: CustomText(
+                      text: 'Register',
+                      size: 16,
+                      color: light,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
                     ),
                   ),
 
@@ -190,24 +177,22 @@ class RegisterCard extends StatelessWidget {
                     height: 15,
                   ),
                   // Login Button - Global navigation to the main page
-                  InkWell(
-                    onTap: () {
-                      navigationController.goBack();
-                      navigationController.navigateTo(loginRoute);
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: darkgreen,
+                      onPrimary: Colors.black,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    onPressed: () => {
+                      loginNavController.goBack(),
+                      loginNavController.navigateTo(loginRoute),
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: darkgreen,
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                      ),
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: CustomText(
-                          text: "Log In",
-                          size: 16,
-                          color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                    child: CustomText(
+                      text: 'Log in',
+                      size: 16,
+                      color: light,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(

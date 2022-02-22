@@ -8,12 +8,12 @@ import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
-import 'package:even_ticket/utils/local_navigator.dart';
+import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../custom_text.dart';
+import '../custom_assets/custom_text.dart';
 
 class WelcomeCard extends StatelessWidget {
   static final nameController = TextEditingController();
@@ -56,7 +56,7 @@ class WelcomeCard extends StatelessWidget {
                           minimumSize: Size(double.infinity, 50),
                         ),
                         onPressed: () =>
-                            navigationController.navigateTo(registerRoute),
+                            loginNavController.navigateTo(registerRoute),
                         icon: FaIcon(FontAwesomeIcons.mailBulk, color: light),
                         label: CustomText(
                           text: ' Sign Up using email',

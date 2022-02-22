@@ -2,7 +2,7 @@
 
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
-import 'package:even_ticket/utils/local_navigator.dart';
+import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
 

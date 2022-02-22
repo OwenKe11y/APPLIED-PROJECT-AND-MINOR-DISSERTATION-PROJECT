@@ -1,26 +1,28 @@
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/constants/style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// Class for managing the active items and icons for the items in the side menu
 class MenuController extends GetxController {
   static MenuController instance = Get.find();
   var activeItem = homePageRoute.obs;
   var hoverItem = "".obs;
 
+  // Change the current page
   changeActiveItemTo(String itemName) {
     activeItem.value = itemName;
   }
 
+  // These 3 methods are designed for the webview and handle the animation of using a cursor
   onHover(String itemName) {
     if (!isActive(itemName)) hoverItem.value = itemName;
   }
-
   isActive(String itemName) => activeItem.value == itemName;
 
   isHovering(String itemName) => hoverItem.value == itemName;
 
+  // Return an icon for the menu items
   Widget returnIconFor(String itemName) {
     switch (itemName) {
       case homePageRoute:

@@ -5,7 +5,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../custom_text.dart';
+import '../custom_assets/custom_text.dart';
 
 // This class populates the menu of the side bar.
 // It handles the presentation of the side menu in a small screen vertical view.

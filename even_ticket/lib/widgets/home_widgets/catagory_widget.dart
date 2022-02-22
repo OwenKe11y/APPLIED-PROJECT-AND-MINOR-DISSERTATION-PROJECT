@@ -3,7 +3,7 @@
 import 'package:even_ticket/app_state.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/catagory.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

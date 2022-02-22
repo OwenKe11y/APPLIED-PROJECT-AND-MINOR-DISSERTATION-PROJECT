@@ -15,7 +15,7 @@ class EventDetailsBackground extends StatelessWidget {
     final event = Provider.of<Event>(context);
 
     return ClipPath(
-      clipper: LoginClipper(),
+      clipper: SideClipper(),
       child: Image(
           image: MemoryImage(event.displayImage),
           fit: BoxFit.cover,

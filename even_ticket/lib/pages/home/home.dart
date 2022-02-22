@@ -8,7 +8,7 @@ import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/pages/home/event_details.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/home_widgets/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

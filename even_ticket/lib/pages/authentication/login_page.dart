@@ -4,7 +4,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/auth_widgets/login_card.dart';
-import 'package:even_ticket/widgets/custom_text.dart';
+import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/auth_widgets/register_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,12 +24,15 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
          backgroundColor: darkgreen,
+         title: CustomText(text: "Login", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
       ),
+
+      // Avoids pushing content to overload when keyboard shows up
       resizeToAvoidBottomInset: false,
       body: Center(
         child: Stack(children: [
           ClipPath(
-              clipper: LoginClipper(),
+              clipper: SideClipper(),
               child: Container(
                   height: MediaQuery.of(context).size.height * 0.5,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -42,8 +45,10 @@ class LoginPage extends StatelessWidget {
                         Colors.green,
                         Colors.green.shade200
                       ])))),
+
+          // Handles the size of the LoginCard background
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 110),
             child: LoginCard(),
           )
         ]),
@@ -52,21 +57,4 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    Offset curveStartPoint = new Offset(0, 0);
-    Offset curveEndPoint = new Offset(size.width, size.height * 0.99);
-    path.quadraticBezierTo(size.width * 0.2, size.height * 0.95,
-        curveEndPoint.dx, curveEndPoint.dy);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
 
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}
