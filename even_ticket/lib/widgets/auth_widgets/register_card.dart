@@ -37,8 +37,6 @@ class RegisterCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 
-
                   // Divider
                   SizedBox(
                     height: 30,
@@ -145,11 +143,15 @@ class RegisterCard extends StatelessWidget {
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    onPressed: () => Get.offAll(
-                      () => SiteLayout(),
-                      arguments:
-                          menuController.changeActiveItemTo(homePageRoute),
-                    ),
+                    onPressed: () => {
+                      createUser(nameController.text, emailController.text,
+                          pass1Controller.text),
+                      Get.offAll(
+                        () => SiteLayout(),
+                        arguments:
+                            menuController.changeActiveItemTo(homePageRoute),
+                      ),
+                    },
                     child: CustomText(
                       text: 'Register',
                       size: 16,

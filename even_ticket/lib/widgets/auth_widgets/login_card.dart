@@ -128,14 +128,18 @@ class LoginCard extends StatelessWidget {
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    onPressed: () =>
-                        loginUser(emailController.text, pass1Controller.text)
-                            .then((value) => {
-                                  if (value == 'PASS')
-                                    {Get.offAll(SiteLayout())}
-                                  else
-                                    {throw Exception("Failed Login Dart")}
-                                }),
+                    onPressed: () => loginUser(
+                            emailController.text, pass1Controller.text)
+                        .then((value) => {
+                              if (value == 'PASS')
+                                {
+                                  Get.offAll(() => SiteLayout(),
+                                      arguments: menuController
+                                          .changeActiveItemTo(homePageRoute)),
+                                }
+                              else
+                                {throw Exception("Failed Login Dart")}
+                            }),
                     child: CustomText(
                       text: 'Log in',
                       size: 16,
@@ -172,10 +176,8 @@ class LoginCard extends StatelessWidget {
                     ),
                     onPressed: () => {
                       loginNavController.goBack(),
-                      loginNavController.navigateTo(registerRoute),    
+                      loginNavController.navigateTo(registerRoute),
                     },
-                              
-                        
                     child: CustomText(
                       text: 'Register',
                       size: 16,

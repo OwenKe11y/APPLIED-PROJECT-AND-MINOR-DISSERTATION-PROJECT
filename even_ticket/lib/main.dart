@@ -17,7 +17,7 @@ Future<void> main() async {
   Get.put(MenuController());
   Get.put(LocalNavController());
   Get.put(LoginNavController());
-  //await getEvents();
+  await getEvents();
   runApp(MyApp());
 }
 

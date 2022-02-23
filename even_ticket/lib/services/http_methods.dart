@@ -60,7 +60,6 @@ Future<User> createUser(String name, String email, String password) async {
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    Get.offAll(SiteLayout());
     log(User.fromJson(jsonDecode(response.body)).toString());
     return User.fromJson(jsonDecode(response.body));
   } else {

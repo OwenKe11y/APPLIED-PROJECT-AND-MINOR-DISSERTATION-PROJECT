@@ -32,7 +32,7 @@ class WelcomePage extends StatelessWidget {
                       
           // Handles the size of the LoginCard background            
           Padding(
-            padding: EdgeInsets.all(22.0),
+            padding: EdgeInsets.all(10.0),
             child: WelcomeCard(),
           ),
         ]),

@@ -56,13 +56,70 @@ class WelcomeCard extends StatelessWidget {
                           minimumSize: Size(double.infinity, 50),
                         ),
                         onPressed: () =>
+                            loginNavController.navigateTo(loginRoute),
+                        icon: FaIcon(FontAwesomeIcons.doorOpen, color: light),
+                        label: CustomText(
+                          text: ' Log in',
+                          size: 16,
+                          color: light,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+
+                      //Divider
+                      SizedBox(
+                        height: 15,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Divider(
+                            endIndent: 20,
+                            thickness: 1,
+                            color: darkgreen,
+                          )),
+                          Align(
+                              alignment: AlignmentDirectional.center,
+                              child: CustomText(
+                                  text: "Don't have an account?",
+                                  size: 16,
+                                  color: darkgreen,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Divider(
+                            indent: 20,
+                            thickness: 1,
+                            color: darkgreen,
+                          )),
+                        ],
+                      ),
+                      // Admin Credentials text, right now this is just to fill up space
+
+                      //Divider
+                      SizedBox(
+                        height: 15,
+                      ),
+
+                      // Login Button - Global navigation to the main page
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: darkgreen,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50),
+                        ),
+                        onPressed: () =>
                             loginNavController.navigateTo(registerRoute),
                         icon: FaIcon(FontAwesomeIcons.mailBulk, color: light),
                         label: CustomText(
                           text: ' Sign Up using email',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.center,
                         ),
                       ),
 
@@ -84,7 +141,8 @@ class WelcomeCard extends StatelessWidget {
                           text: ' Sign Up using Google',
                           size: 16,
                           color: light,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.center,
                         ),
                         onPressed: () => signIn(context),
                       ),
@@ -114,7 +172,8 @@ class WelcomeCard extends StatelessWidget {
     } else {
       debugPrint(user.email);
       debugPrint(user.displayName);
-      Get.offAll(() => HomeViewPage());
+      Get.offAll(() => SiteLayout(),
+          arguments: menuController.changeActiveItemTo(homePageRoute));
     }
   }
 }
