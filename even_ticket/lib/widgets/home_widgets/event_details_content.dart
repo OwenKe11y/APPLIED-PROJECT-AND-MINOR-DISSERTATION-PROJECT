@@ -4,6 +4,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
+import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -261,31 +262,24 @@ class EventDetailsContent extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                   Padding(
-                      padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
-                      child: CustomText(
-                          text: "MAP",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.start),
-                    ),
-                    Container(
-                      color: darkGrey,
-                      height: screenWidth * 0.5,
-                      width: screenWidth * 1,
-                      //child: MapScreen(),
-                    )
+                  Padding(
+                    padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
+                    child: CustomText(
+                        text: "MAP",
+                        size: 16,
+                        color: darkGrey,
+                        fontWeight: FontWeight.bold,
+                        textAlign: TextAlign.start),
+                  ),
+                  Container(
+                    height: screenHeight * .75,
+                    width: screenWidth * 1,
+                    child: MapScreen(),
+                  )
                 ],
               ),
             )),
       ],
     );
   }
-
 }
-
-
-
-
