@@ -54,6 +54,7 @@ class HomeViewPage extends StatelessWidget {
                           .contains(appstate.selectedCatagoryID)))
                         GestureDetector(
                           onTap: () => {
+                            
                             Get.offAll(() => EventDetail(event: event))
                           },
                           child: EventWidget(

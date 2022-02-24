@@ -5,6 +5,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/routing/routes.dart';
+import 'package:even_ticket/services/google_signin_api.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu_items.dart';
@@ -41,9 +42,10 @@ class SideMenu extends StatelessWidget {
                         itemName: itemName == authenticationPageRoute
                             ? "Log Out"
                             : itemName,
-                        onTap: () {
+                        onTap: () async {
                           if (itemName == authenticationPageRoute) {
                             
+                            await GoogleSignInApi.logout();
                             Get.offAll(() => loginNavigator());
                             
                           }
