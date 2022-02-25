@@ -87,104 +87,141 @@ class EventDetailsContent extends StatelessWidget {
                 ),
 
                 // Card for interactions
-                SizedBox(
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 10,
+                        offset: Offset(0, 10, ), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   height: screenHeight * 0.12,
-                  child: Card(
-                    elevation: 5,
+                  width: screenWidth * 1,
+                  child: Container(
                     color: light,
                     child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Login Button - Global navigation to the main page
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.03),
-                                child: ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: darkgreen,
-                                    onPrimary: Colors.black,
+                        Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.03),
+                          child: Container(
+                            width: screenWidth * 0.25,
+                            height: screenHeight * 0.065,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Login Button - Global navigation to the main page
+                                  ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: darkgreen,
+                                      onPrimary: Colors.black,
+                                    ),
+                                    onPressed: () => loginNavController
+                                        .navigateTo(loginRoute),
+                                    icon: FaIcon(FontAwesomeIcons.heart,
+                                        color: light),
+                                    label: CustomText(
+                                      text: ' Like',
+                                      size: 16,
+                                      color: light,
+                                      fontWeight: FontWeight.bold,
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
-                                  onPressed: () =>
-                                      loginNavController.navigateTo(loginRoute),
-                                  icon: FaIcon(FontAwesomeIcons.heart,
-                                      color: light),
-                                  label: CustomText(
-                                    text: ' Like',
-                                    size: 16,
-                                    color: light,
-                                    fontWeight: FontWeight.bold,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Login Button - Global navigation to the main page
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.001),
-                                child: ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: darkgreen,
-                                    onPrimary: Colors.black,
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: screenWidth * 0.025,
+                              right: screenWidth * 0.025),
+                          child: Container(
+                            width: screenWidth * 0.265,
+                            height: screenHeight * 0.065,
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Login Button - Global navigation to the main page
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: screenWidth * 0),
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: darkgreen,
+                                        onPrimary: Colors.black,
+                                      ),
+                                      onPressed: () => loginNavController
+                                          .navigateTo(loginRoute),
+                                      icon: FaIcon(FontAwesomeIcons.shareAlt,
+                                          color: light),
+                                      label: CustomText(
+                                        text: ' Share',
+                                        size: 16,
+                                        color: light,
+                                        fontWeight: FontWeight.bold,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
                                   ),
-                                  onPressed: () =>
-                                      loginNavController.navigateTo(loginRoute),
-                                  icon: FaIcon(FontAwesomeIcons.shareAlt,
-                                      color: light),
-                                  label: CustomText(
-                                    text: ' Share',
-                                    size: 16,
-                                    color: light,
-                                    fontWeight: FontWeight.bold,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Login Button - Global navigation to the main page
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.03,
-                                ),
-                                child: ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: darkgreen,
-                                    onPrimary: Colors.black,
+                        Padding(
+                          padding: EdgeInsets.only(right: screenWidth * 0),
+                          child: SizedBox(
+                            width: screenWidth * 0.37,
+                            height: screenHeight * 0.07,
+                            child: Stack(
+                              children: [
+                                GlowAnimation(),
+                                ClipRRect(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Login Button - Global navigation to the main page
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: screenWidth * 0.03,
+                                        ),
+                                        child: ElevatedButton.icon(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: darkgreen,
+                                              onPrimary: Colors.black,
+                                              fixedSize: Size(screenWidth * 1,
+                                                  screenHeight * 0.065)),
+                                          onPressed: () => loginNavController
+                                              .navigateTo(loginRoute),
+                                          icon: FaIcon(
+                                              FontAwesomeIcons.shoppingBasket,
+                                              color: light),
+                                          label: CustomText(
+                                            text: ' Buy Ticket',
+                                            size: 16,
+                                            color: light,
+                                            fontWeight: FontWeight.bold,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  onPressed: () =>
-                                      loginNavController.navigateTo(loginRoute),
-                                  icon: FaIcon(FontAwesomeIcons.shoppingBasket,
-                                      color: light),
-                                  label: CustomText(
-                                    text: ' Buy Ticket',
-                                    size: 16,
-                                    color: light,
-                                    fontWeight: FontWeight.bold,
-                                    textAlign: TextAlign.center,
-                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -263,7 +300,7 @@ class EventDetailsContent extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
+                    padding: EdgeInsets.only(left: 16.0, top: 16),
                     child: CustomText(
                         text: "MAP",
                         size: 16,
@@ -271,10 +308,15 @@ class EventDetailsContent extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.start),
                   ),
-                  Container(
-                    height: screenHeight * .75,
-                    width: screenWidth * 1,
-                    child: MapScreen(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.02,
+                        vertical: screenHeight * 0.02),
+                    child: Container(
+                      height: screenHeight * .3,
+                      width: screenWidth * 1,
+                      child: MapScreen(),
+                    ),
                   )
                 ],
               ),

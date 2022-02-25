@@ -47,3 +47,50 @@ class BottomShapeClipper extends CustomClipper<Path> {
   }
 }
 
+class GlowAnimation extends StatefulWidget {
+  @override
+  _GlowState createState() => _GlowState();
+}
+
+class _GlowState extends State<GlowAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation _animation;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animationController.repeat(reverse: true);
+    _animation = Tween(begin: 5.0, end: 12.0).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+
+  @override
+void dispose() {
+  _animationController.dispose();
+  super.dispose();
+}
+
+  @override
+  Widget build(BuildContext context) {
+     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Center(
+      child: Container(
+        width: screenWidth * 0.28,
+                            height: screenHeight * 0.05,
+        decoration: BoxDecoration(shape: BoxShape.rectangle, boxShadow: [
+          BoxShadow(
+              color: lightgreen,
+              blurRadius: _animation.value,
+              spreadRadius: _animation.value)
+        ]),
+      ),
+    );
+  }
+}
