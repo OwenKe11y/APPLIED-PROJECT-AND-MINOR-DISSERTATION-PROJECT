@@ -24,6 +24,8 @@ class LoginCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Card(
       elevation: 10,
       color: light,
@@ -37,7 +39,7 @@ class LoginCard extends StatelessWidget {
                 children: [
                   // Divider
                   SizedBox(
-                    height: 30,
+                    height: screenHeight * 0.04,
                   ),
 
                   // Subtitle of Container

@@ -13,6 +13,11 @@ class LocalNavController extends GetxController{
     return navigationKey.currentState!.pushNamed(routeName);
   }
 
+  // Allows user to change screens
+  Future<dynamic> navigateToWithData(String routeName, Object data){
+    return navigationKey.currentState!.pushNamed(routeName, arguments: data);
+  }
+
   // Allows user to go back
   goBack() => navigationKey.currentState!.pop();
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/main.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/screen_sizes/large_screen.dart';
@@ -8,6 +10,7 @@ import 'package:even_ticket/widgets/screen_sizes/medium_screen.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu.dart';
 import 'package:even_ticket/widgets/custom_assets/top_nav.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 // Class for determining responsive page layout, out putting the correct screen depending on the size
 class SiteLayout extends StatelessWidget {
@@ -20,7 +23,6 @@ class SiteLayout extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(0),
       child: Scaffold(
-          
           key: scaffoldKey,
           extendBodyBehindAppBar: true,
           appBar: topNavBar(context, scaffoldKey),
@@ -38,7 +40,6 @@ class SiteLayout extends StatelessWidget {
                   clipper: BottomShapeClipper(),
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.5,
-                  
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
@@ -48,18 +49,47 @@ class SiteLayout extends StatelessWidget {
                           Colors.green,
                           Colors.green.shade200
                         ])),
-                   
                   ),
                 )),
-                 Container(
-             
-              child: localNavigator(),
-            )
+            WillPop()
           ])),
     );
   }
 }
 
+class WillPop extends StatelessWidget {
+  const WillPop({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        final result = await showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text("Exit Application?"),
+            content: Text("Would you like to log out and return to the login page?"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => {
+                  Get.offAll(() => AppStart())
+                },
+              child: Text("Yes")),
+              TextButton(
+                onPressed: () => {
+                  Navigator.pop(context)
+                },
+              child: Text("No")),
+            ],
+          ),
+        );
+        return result;
+      },
+      child: localNavigator(),
+      
+    );
+    
+  }
+}
 
 

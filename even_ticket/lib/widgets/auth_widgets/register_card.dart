@@ -27,9 +27,7 @@ class RegisterCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 15,
-        ),
+       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
         child: Column(
           children: [
             ClipRRect(
