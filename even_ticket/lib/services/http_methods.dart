@@ -14,7 +14,7 @@ import '../layout.dart';
 // Create User
 Future<String> loginUser(String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://192.168.1.11:3000/api/users/login'),
+    Uri.parse('http://192.168.0.129:3000/api/users/login'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -101,7 +101,7 @@ Future<void> getEvents() async {
       }
 
       // Create Event from json
-      var tempEvent = Event(
+      var tempEvent = Events(
           displayImage: imageBytes,
           title: event['title'],
           description: event['description'],

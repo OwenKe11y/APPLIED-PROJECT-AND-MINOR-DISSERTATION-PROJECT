@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
+import '../../constants/controllers.dart';
+
 class RegisterPage extends StatelessWidget {
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
@@ -20,10 +22,13 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkgreen,
-        title: CustomText(text: "Register", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,), 
+        title: CustomText(text: "Register", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+        leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => loginNavController.goBack(),) 
       ),
 
       // Avoids pushing content to overload when keyboard shows up
@@ -47,7 +52,7 @@ class RegisterPage extends StatelessWidget {
 
           // Handles the size of the LoginCard background            
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.02),
             child: RegisterCard(),
           )
         ]),

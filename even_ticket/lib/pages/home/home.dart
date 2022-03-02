@@ -23,6 +23,7 @@ class HomeViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Events event;
     return ChangeNotifierProvider<AppState>(
       create: (_) => AppState(),
       child: SafeArea(
@@ -49,18 +50,10 @@ class HomeViewPage extends StatelessWidget {
                 child: Consumer<AppState>(
                   builder: (context, appstate, _) => Column(
                     children: [
-                      for (final event in events.where((element) => element
+                      for (event in events.where((element) => element
                           .catagoryIds
                           .contains(appstate.selectedCatagoryID)))
-                        GestureDetector(
-                          onTap: () => {
-                            
-                            Get.offAll(() => EventDetail(event: event))
-                          },
-                          child: EventWidget(
-                            event: event,
-                          ),
-                        ),
+                        EventWidget(event: event)
                     ],
                   ),
                 ),

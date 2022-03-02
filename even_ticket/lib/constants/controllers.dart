@@ -7,4 +7,3 @@ MenuController menuController = MenuController.instance;
 LocalNavController localNavController = LocalNavController.instance;
 // Controller instance for the navigation of the login pages
 LoginNavController loginNavController = LoginNavController.instance;
-

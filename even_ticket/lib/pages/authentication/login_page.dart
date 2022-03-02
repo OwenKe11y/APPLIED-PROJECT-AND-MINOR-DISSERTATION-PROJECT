@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_import
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/services/http_methods.dart';
@@ -21,16 +22,18 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-         backgroundColor: darkgreen,
-         title: CustomText(text: "Login", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
-      ),
+        appBar: AppBar(
+           backgroundColor: darkgreen,
+           title: CustomText(text: "Login", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+           leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => loginNavController.goBack(),)
+        ),
 
-      // Avoids pushing content to overload when keyboard shows up
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Stack(children: [
+        // Avoids pushing content to overload when keyboard shows up
+        resizeToAvoidBottomInset: false,
+        body: Stack(children: [
           ClipPath(
               clipper: SideClipper(),
               child: Container(
@@ -48,12 +51,11 @@ class LoginPage extends StatelessWidget {
 
           // Handles the size of the LoginCard background
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 110),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.07),
             child: LoginCard(),
           )
         ]),
-      ),
-    );
+      );
   }
 }
 

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
@@ -18,7 +19,7 @@ Future<void> main() async {
   Get.put(LocalNavController());
   Get.put(LoginNavController());
   await getEvents();
-  runApp(MyApp());
+  runApp(RootRestorationScope(restorationId: 'root', child: MyApp()));
 }
 
 // Class for top of hierarchy settings such as theme colour and Webpage name
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return GetMaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: "EvenTicket",
       theme: ThemeData(
@@ -45,7 +47,22 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF64ff38),
       ),
       // Gets login page navigator
-      home: loginNavigator(),
+      home: AppStart(),
+    );
+  }
+}
+
+class AppStart extends StatelessWidget {
+  const AppStart({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+       onWillPop: () async { 
+        
+        return loginNavController.goBack();
+       },
+      child: loginNavigator(),
     );
   }
 }

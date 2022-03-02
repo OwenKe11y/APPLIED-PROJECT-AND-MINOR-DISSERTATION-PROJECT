@@ -1,18 +1,24 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/pages/authentication/login_page.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
+import 'package:even_ticket/pages/home/event_details.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/pages/calender/calender.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/pages/maps/maps.dart';
 import 'package:even_ticket/pages/settings/settings.dart';
 import 'package:even_ticket/pages/tickets/tickets.dart';
+import 'package:even_ticket/widgets/home_widgets/event_widget.dart';
 import 'package:flutter/material.dart';
+import '../../pages/home/event_details.dart';
 
 // All routes for every page of the app goes into this switch statement
 Route<dynamic> generateRoute(RouteSettings settings) {
+  final args = settings.arguments;
+
   switch (settings.name) {
     case homePageRoute:
       return _pageRoute(HomeViewPage());
@@ -24,6 +30,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(MapsViewPage());
     case settingsPageRoute:
       return _pageRoute(SettingsViewPage());
+    case detailsRoute:
+      if (args is Events) {
+        return _pageRoute(EventDetail(event: args));
+      }
+      return _pageRoute(HomeViewPage());
     case authenticationPageRoute:
       return _pageRoute(WelcomePage());
     case loginRoute:
@@ -34,6 +45,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(HomeViewPage());
   }
 }
+
 PageRoute _pageRoute(Widget child) {
   return MaterialPageRoute(builder: (context) => (child));
 }

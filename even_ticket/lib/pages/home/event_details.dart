@@ -13,37 +13,43 @@ import 'package:provider/provider.dart';
 import '../../data/event.dart';
 
 class EventDetail extends StatelessWidget {
-  final Event event;
+  final Events event;
 
   const EventDetail({Key? key, required this.event}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar:
-          AppBar(elevation: 0, backgroundColor: Colors.transparent, actions: [
-        IconButton(
-          icon: Icon(Icons.close_sharp),
-          iconSize: 40,
-          splashRadius: 25,
-          onPressed: () {
-            Get.offAll(() => SiteLayout());
-          },
-        )
-      ]),
-      body: Stack(
-        children: [
-          Provider<Event>.value(
-            value: event,
-            child: Stack(
-              children: [
-                EventDetailsBackground(),
-                EventDetailsContent(),
-              ],
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAll(() => SiteLayout());
+        return true;
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar:
+            AppBar(elevation: 0, backgroundColor: Colors.transparent, actions: [
+          IconButton(
+            icon: Icon(Icons.close_sharp),
+            iconSize: 40,
+            splashRadius: 25,
+            onPressed: () {
+              Get.offAll(() => SiteLayout());
+            },
+          )
+        ]),
+        body: Stack(
+          children: [
+            Provider<Events>.value(
+              value: event,
+              child: Stack(
+                children: [
+                  EventDetailsBackground(),
+                  EventDetailsContent(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
