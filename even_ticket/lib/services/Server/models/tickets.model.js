@@ -6,7 +6,8 @@ module.exports = (sequelize, Sequelize) => {
       location: Sequelize.STRING,  
       image:  Sequelize.STRING,
       date:   Sequelize.DATEONLY,
-      owner: Sequelize.STRING
+      owner: Sequelize.STRING,
+      face: Sequelize.TEXT
     }, {
       timestamps: false
     });

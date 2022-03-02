@@ -1,9 +1,9 @@
 const db = require("../models");
+const fs = require('fs');
 const Tickets = db.tickets;
 
-// Create and Store a new User
+// Create and Store a new Ticket
 exports.create = (req, res) => {
-  console.log("create function")
     // Validate not Null
     if (!req.body) {
         res.status(400).send({
@@ -18,7 +18,8 @@ exports.create = (req, res) => {
     location: req.body.location,
     image: req.body.image,
     date: req.body.date,
-    owner: req.body.owner
+    owner: req.body.owner,
+    face: req.body.face
     };
 
     // Save Ticket in the database
@@ -29,7 +30,7 @@ exports.create = (req, res) => {
         .catch(err => {
         res.status(500).send({
             message:
-            err.message || "Some error occurred while creating the user."
+            err.message || "Some error occurred while creating the ticket."
         });
         });
 
@@ -64,7 +65,38 @@ exports.findOne = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Ticker with id: " + id
+        message: "Error retrieving Ticket with id: " + id
+      });
+    });
+};
+
+// Verify face with ticket on db
+exports.findAllFaces = (req, res) => {
+  Tickets.findAll({ attributes: ['owner', 'face']})
+    .then(data => {
+      data.forEach(face => {
+        // Write each blob to jpg file
+        const base64 = face.face;
+        const buffer = Buffer.from(base64, "base64");
+        fs.writeFileSync('../../python/faces/' + face.owner + ".jpg", buffer);
+      });
+
+      // Run python recognition script
+      const spawn = require("child_process").spawn;
+      const pythonProcess = spawn('python',['../../python/facial_rec.py']);  
+
+      pythonProcess.stdout.on('data', function(data) {
+        res.send(Buffer.from(data).toString())
+      });
+
+      pythonProcess.stderr.on("data", (data) => {
+        res.send(Buffer.from(data).toString())
+      })     
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tickets"
       });
     });
 };

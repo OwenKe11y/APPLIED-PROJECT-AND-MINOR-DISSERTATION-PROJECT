@@ -36,7 +36,7 @@ require("./routes/events.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
-const LOCALIP = results['WiFi 3'][0];
-app.listen(PORT, LOCALIP, () => {
+const LOCALIP = results['Wi-Fi 2'][0];
+app.listen(PORT, 'localhost', () => {
   console.log(`Server is running on port ${PORT}.`);
 });

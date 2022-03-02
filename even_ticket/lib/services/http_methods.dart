@@ -121,3 +121,28 @@ Future<void> getEvents() async {
     throw Exception('Failed to get events');
   }
 }
+
+// Get all events and send back each event
+Future<String> getTicketsFaces() async {
+  final response = await http.get(
+      Uri.parse('http://localhost:3000/api/tickets/faces'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+        "Access-Control-Allow-Credentials":
+            "true", // Required for cookies, authorization headers with HTTPS
+        "Access-Control-Allow-Headers":
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+        "Access-Control-Allow-Methods": "GET, OPTIONS"
+      });
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return response.body;
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to get events');
+  }
+}

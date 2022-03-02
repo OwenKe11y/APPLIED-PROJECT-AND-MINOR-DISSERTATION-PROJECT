@@ -1,15 +1,24 @@
+import 'dart:io';
+import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/widgets/home_widgets/event_details_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 
 class MapScreen extends StatefulWidget {
+  // final Event event;
+  // const MapScreen({Key? key, required this.event}) : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
+  //final Event event;
   @override
   void initState() {
     myCurrentLocation();
@@ -22,9 +31,10 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   late GoogleMapController _googleMapController;
-
   late LocationData currentLocation;
   var location = new Location();
+
+  late Marker mapMarker;
 
   myCurrentLocation() async {
     try {
@@ -40,12 +50,20 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-  static final Marker _CrokeParkMarker = Marker(
-    markerId: MarkerId('CrokePark'),
-    infoWindow: InfoWindow(title: 'Croke Park'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-    position: LatLng(53.3608176244587, -6.251144528771498),
-  );
+  getEventLocation(Event event) async {
+    List<geo.Location> locations =
+        await geo.locationFromAddress(event.location);
+
+    mapMarker = Marker(
+      markerId: MarkerId(event.location),
+      infoWindow: InfoWindow(title: event.location),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      position: LatLng(
+          locations.elementAt(0).latitude, locations.elementAt(0).longitude),
+    );
+
+    return mapMarker;
+  }
 
   @override
   void dispose() {
@@ -55,12 +73,15 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final event = Provider.of<Event>(context);
+    mapMarker = getEventLocation(event);
+    sleep((Duration(seconds: 5)));
     return Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
         zoomControlsEnabled: false,
-        markers: {_CrokeParkMarker},
+        markers: {mapMarker},
         initialCameraPosition: _initialCameraPosition,
         onMapCreated: (controller) => _googleMapController = controller,
       ),
