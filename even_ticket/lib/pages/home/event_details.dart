@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 import '../../data/event.dart';
 
 class EventDetail extends StatelessWidget {
-  final Event event;
+  final Events event;
 
   const EventDetail({Key? key, required this.event}) : super(key: key);
 
@@ -39,7 +39,7 @@ class EventDetail extends StatelessWidget {
         ]),
         body: Stack(
           children: [
-            Provider<Event>.value(
+            Provider<Events>.value(
               value: event,
               child: Stack(
                 children: [

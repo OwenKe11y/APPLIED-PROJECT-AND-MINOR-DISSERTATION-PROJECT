@@ -12,7 +12,7 @@ class EventDetailsBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final event = Provider.of<Event>(context);
+    final event = Provider.of<Events>(context);
 
     return ClipPath(
       clipper: SideClipper(),

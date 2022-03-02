@@ -31,7 +31,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case settingsPageRoute:
       return _pageRoute(SettingsViewPage());
     case detailsRoute:
-      if(args is Event){
+      if (args is Events) {
         return _pageRoute(EventDetail(event: args));
       }
       return _pageRoute(HomeViewPage());
@@ -45,6 +45,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(HomeViewPage());
   }
 }
+
 PageRoute _pageRoute(Widget child) {
   return MaterialPageRoute(builder: (context) => (child));
 }

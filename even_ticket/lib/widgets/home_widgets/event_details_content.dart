@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/layout.dart';
@@ -16,9 +17,27 @@ import '../../routing/routes.dart';
 class EventDetailsContent extends StatelessWidget {
   const EventDetailsContent({Key? key}) : super(key: key);
 
+  Event buildEvent({Recurrence? recurrence}) {
+    return Event(
+      title: 'Test eventeee',
+      description: 'example',
+      location: 'Flutter app',
+      startDate: DateTime.now(),
+      endDate: DateTime.now().add(Duration(minutes: 30)),
+      allDay: false,
+      iosParams: IOSParams(
+        reminder: Duration(minutes: 40),
+      ),
+      androidParams: AndroidParams(
+        emailInvites: ["test@example.com"],
+      ),
+      recurrence: recurrence,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final event = Provider.of<Event>(context);
+    final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
@@ -94,7 +113,10 @@ class EventDetailsContent extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 0.1,
                         blurRadius: 10,
-                        offset: Offset(0, 10, ), // changes position of shadow
+                        offset: Offset(
+                          0,
+                          10,
+                        ), // changes position of shadow
                       ),
                     ],
                   ),
@@ -160,8 +182,11 @@ class EventDetailsContent extends StatelessWidget {
                                         primary: darkgreen,
                                         onPrimary: Colors.black,
                                       ),
-                                      onPressed: () => loginNavController
-                                          .navigateTo(loginRoute),
+                                      onPressed: () {
+                                        Add2Calendar.addEvent2Cal(
+                                          buildEvent(),
+                                        );
+                                      },
                                       icon: FaIcon(FontAwesomeIcons.shareAlt,
                                           color: light),
                                       label: CustomText(

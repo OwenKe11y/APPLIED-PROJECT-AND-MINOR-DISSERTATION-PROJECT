@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeViewPage extends StatelessWidget {
-  
   const HomeViewPage({
     Key? key,
     /*required this.user*/
@@ -24,7 +23,7 @@ class HomeViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Event event;
+    Events event;
     return ChangeNotifierProvider<AppState>(
       create: (_) => AppState(),
       child: SafeArea(
@@ -54,7 +53,7 @@ class HomeViewPage extends StatelessWidget {
                       for (event in events.where((element) => element
                           .catagoryIds
                           .contains(appstate.selectedCatagoryID)))
-                       EventWidget(event: event)
+                        EventWidget(event: event)
                     ],
                   ),
                 ),

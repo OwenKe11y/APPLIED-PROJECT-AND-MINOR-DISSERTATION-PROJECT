@@ -12,7 +12,7 @@ import '../../pages/home/event_details.dart';
 import '../custom_assets/custom_text.dart';
 
 class EventWidget extends StatelessWidget {
-  final Event event;
+  final Events event;
   const EventWidget({Key? key, required this.event}) : super(key: key);
 
   @override
@@ -29,7 +29,6 @@ class EventWidget extends StatelessWidget {
             Future.delayed(Duration(milliseconds: 190), () {
               Get.offAll(() => EventDetail(event: event));
             })
-            
           },
           child: Padding(
               padding: EdgeInsets.all(20),

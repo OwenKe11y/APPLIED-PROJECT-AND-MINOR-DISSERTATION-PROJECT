@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-class Event {
+class Events {
   final Uint8List displayImage;
   final String title, description, location, duration, punchLine1, punchline2;
   final List catagoryIds, galleryImages;
 
-  Event(
+  Events(
       {required this.displayImage,
       required this.title,
       required this.description,
