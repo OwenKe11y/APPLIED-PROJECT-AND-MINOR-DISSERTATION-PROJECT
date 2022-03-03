@@ -53,7 +53,7 @@ class HomeViewPage extends StatelessWidget {
                       for (event in events.where((element) => element
                           .catagoryIds
                           .contains(appstate.selectedCatagoryID)))
-                        EventWidget(event: event)
+                        EventWidget(events: event)
                     ],
                   ),
                 ),

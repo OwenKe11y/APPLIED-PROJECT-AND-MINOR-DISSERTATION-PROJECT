@@ -13,9 +13,9 @@ import 'package:provider/provider.dart';
 import '../../data/event.dart';
 
 class EventDetail extends StatelessWidget {
-  final Events event;
+  final Events events;
 
-  const EventDetail({Key? key, required this.event}) : super(key: key);
+  const EventDetail({Key? key, required this.events}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class EventDetail extends StatelessWidget {
         body: Stack(
           children: [
             Provider<Events>.value(
-              value: event,
+              value: events,
               child: Stack(
                 children: [
                   EventDetailsBackground(),

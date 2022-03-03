@@ -82,7 +82,6 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     //final event = Provider.of<Events>(context);
     //mapMarker = getEventLocation(event);
-    sleep((Duration(seconds: 5)));
     return Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,

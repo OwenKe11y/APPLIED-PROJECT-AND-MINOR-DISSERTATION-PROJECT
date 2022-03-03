@@ -4,6 +4,7 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
 import 'package:flutter/material.dart';
@@ -226,8 +227,7 @@ class EventDetailsContent extends StatelessWidget {
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
-                                          onPressed: () => loginNavController
-                                              .navigateTo(loginRoute),
+                                          onPressed: () => Get.offAll(() => PurchasePage(events: event,)),
                                           icon: FaIcon(
                                               FontAwesomeIcons.shoppingBasket,
                                               color: light),

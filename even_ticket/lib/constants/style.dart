@@ -7,6 +7,7 @@ Color lightgreen = Colors.green.shade400;
 Color darkgreen = Colors.green.shade700;
 Color active = Color(0xFFf51b1b);
 
+
 class SideClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

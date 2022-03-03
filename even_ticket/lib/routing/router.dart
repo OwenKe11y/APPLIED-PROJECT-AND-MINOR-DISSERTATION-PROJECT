@@ -32,7 +32,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(SettingsViewPage());
     case detailsRoute:
       if (args is Events) {
-        return _pageRoute(EventDetail(event: args));
+        return _pageRoute(EventDetail(events: args));
       }
       return _pageRoute(HomeViewPage());
     case authenticationPageRoute:

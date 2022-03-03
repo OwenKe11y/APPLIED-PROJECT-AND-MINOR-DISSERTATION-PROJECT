@@ -3,6 +3,7 @@
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,13 @@ import '../../pages/home/event_details.dart';
 import '../custom_assets/custom_text.dart';
 
 class EventWidget extends StatelessWidget {
-  final Events event;
-  const EventWidget({Key? key, required this.event}) : super(key: key);
+  final Events events;
+  const EventWidget({Key? key, required this.events}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin: EdgeInsets.symmetric(vertical: 10),
         elevation: 4,
         color: light,
         shape: RoundedRectangleBorder(
@@ -27,7 +28,7 @@ class EventWidget extends StatelessWidget {
           splashColor: darkGrey,
           onTap: () => {
             Future.delayed(Duration(milliseconds: 190), () {
-              Get.offAll(() => EventDetail(event: event));
+              Get.offAll(() => EventDetail(events: events,));
             })
           },
           child: Padding(
@@ -38,7 +39,7 @@ class EventWidget extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Image(
-                      image: MemoryImage(event.displayImage),
+                      image: MemoryImage(events.displayImage),
                       height: 150,
                       fit: BoxFit.fitWidth,
                     ),
@@ -54,7 +55,7 @@ class EventWidget extends StatelessWidget {
                                 children: [
                                   CustomText(
                                     color: darkGrey,
-                                    text: event.title,
+                                    text: events.title,
                                     size: 24,
                                     fontWeight: FontWeight.bold,
                                     textAlign: TextAlign.start,
@@ -71,7 +72,7 @@ class EventWidget extends StatelessWidget {
                                         ),
                                         CustomText(
                                           color: darkGrey,
-                                          text: event.location,
+                                          text: events.location,
                                           size: 16,
                                           fontWeight: FontWeight.w300,
                                           textAlign: TextAlign.left,
@@ -84,7 +85,7 @@ class EventWidget extends StatelessWidget {
                           flex: 1,
                           child: CustomText(
                             color: darkGrey,
-                            text: event.duration,
+                            text: events.duration,
                             size: 16,
                             fontWeight: FontWeight.w900,
                             textAlign: TextAlign.right,
