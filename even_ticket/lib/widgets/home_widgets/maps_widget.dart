@@ -36,6 +36,13 @@ class _MapScreenState extends State<MapScreen> {
 
   late Marker mapMarker;
 
+  static final Marker _CrokeParkMarker = Marker(
+    markerId: MarkerId('CrokePark'),
+    infoWindow: InfoWindow(title: 'Croke Park'),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    position: LatLng(53.3608176244587, -6.251144528771498),
+  );
+
   myCurrentLocation() async {
     try {
       currentLocation = await location.getLocation();
@@ -50,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-  getEventLocation(Event event) async {
+  getEventLocation(Events event) async {
     List<geo.Location> locations =
         await geo.locationFromAddress(event.location);
 
@@ -73,15 +80,15 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final event = Provider.of<Event>(context);
-    mapMarker = getEventLocation(event);
+    //final event = Provider.of<Events>(context);
+    //mapMarker = getEventLocation(event);
     sleep((Duration(seconds: 5)));
     return Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
         zoomControlsEnabled: false,
-        markers: {mapMarker},
+        markers: {_CrokeParkMarker},
         initialCameraPosition: _initialCameraPosition,
         onMapCreated: (controller) => _googleMapController = controller,
       ),
