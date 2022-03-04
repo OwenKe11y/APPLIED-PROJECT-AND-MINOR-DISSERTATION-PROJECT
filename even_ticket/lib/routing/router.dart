@@ -6,7 +6,6 @@ import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/pages/home/event_details.dart';
 import 'package:even_ticket/routing/routes.dart';
-import 'package:even_ticket/pages/calender/calender.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/pages/maps/maps.dart';
 import 'package:even_ticket/pages/settings/settings.dart';
@@ -24,10 +23,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(HomeViewPage());
     case ticketsPageRoute:
       return _pageRoute(TicketViewPage());
-    case calenderPageRoute:
-      return _pageRoute(CalenderViewPage());
-    case mapsPageRoute:
-      return _pageRoute(MapsViewPage());
+    case favouritePageRoute:
+      return _pageRoute(FavouritesViewPage());
     case settingsPageRoute:
       return _pageRoute(SettingsViewPage());
     case detailsRoute:

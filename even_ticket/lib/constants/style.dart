@@ -13,7 +13,7 @@ class SideClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     Offset curveStartPoint = new Offset(0, 0);
-    Offset curveEndPoint = new Offset(size.width, size.height * 0.99);
+    Offset curveEndPoint = new Offset(size.width, 275);
     path.quadraticBezierTo(size.width * 0.2, size.height * 0.95,
         curveEndPoint.dx, curveEndPoint.dy);
     path.lineTo(size.width, 0);

@@ -10,14 +10,20 @@ import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/controllers.dart';
 import '../../routing/routes.dart';
 
-class EventDetailsContent extends StatelessWidget {
+class EventDetailsContent extends StatefulWidget {
   const EventDetailsContent({Key? key}) : super(key: key);
 
+  @override
+  State<EventDetailsContent> createState() => _EventDetailsContentState();
+}
+
+class _EventDetailsContentState extends State<EventDetailsContent> {
   Event buildEvent({Recurrence? recurrence}) {
     return Event(
       title: 'Test eventeee',
@@ -41,6 +47,7 @@ class EventDetailsContent extends StatelessWidget {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    const String event_start = "10:00";
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,17 +55,19 @@ class EventDetailsContent extends StatelessWidget {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.1),
+            padding: EdgeInsets.only(top: screenHeight * 0.07),
             child: Column(
               children: [
                 // Main Title Text
                 Padding(
-                  padding: EdgeInsets.only(right: screenWidth * 0.15),
+                  padding: EdgeInsets.only(
+                    right: screenWidth * 0.15,
+                  ),
                   child: Align(
                     alignment: FractionalOffset.centerRight,
                     child: Container(
                       alignment: Alignment.topRight,
-                      height: screenHeight * 0.25,
+                      height: screenHeight * 0.220,
                       width: screenWidth * 0.6,
                       child: CustomText(
                           text: event.title,
@@ -77,29 +86,43 @@ class EventDetailsContent extends StatelessWidget {
                     alignment: FractionalOffset.centerLeft,
                     child: Container(
                         alignment: Alignment.topRight,
-                        height: screenHeight * 0.03,
+                        height: screenHeight * 0.09,
                         width: screenWidth * 0.6,
-                        child: Row(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            CustomText(
-                                text: "-",
-                                size: 25,
-                                color: darkGrey,
-                                fontWeight: FontWeight.normal,
-                                textAlign: TextAlign.end),
-                            Icon(
-                              Icons.location_on,
-                              color: darkGrey,
+                            Row(
+                              children: [
+                                FaIcon(FontAwesomeIcons.clock, color: darkGrey),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CustomText(
+                                  color: darkGrey,
+                                  text: event_start.toString(),
+                                  size: 18,
+                                  fontWeight: FontWeight.w900,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            CustomText(
-                              color: darkGrey,
-                              text: event.location,
-                              size: 18,
-                              fontWeight: FontWeight.w900,
-                              textAlign: TextAlign.right,
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: darkGrey,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CustomText(
+                                  color: darkGrey,
+                                  text: event.location,
+                                  size: 18,
+                                  fontWeight: FontWeight.w900,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
                             ),
                           ],
                         )),
@@ -113,7 +136,7 @@ class EventDetailsContent extends StatelessWidget {
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 0.1,
-                        blurRadius: 10,
+                        blurRadius: 5,
                         offset: Offset(
                           0,
                           10,
@@ -131,30 +154,37 @@ class EventDetailsContent extends StatelessWidget {
                           padding: EdgeInsets.only(left: screenWidth * 0.03),
                           child: Container(
                             width: screenWidth * 0.25,
-                            height: screenHeight * 0.065,
+                            height: screenHeight * 0.071,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                                color: darkgreen),
                             child: ClipRRect(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(0)),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   // Login Button - Global navigation to the main page
-                                  ElevatedButton.icon(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: darkgreen,
-                                      onPrimary: Colors.black,
-                                    ),
-                                    onPressed: () => loginNavController
-                                        .navigateTo(loginRoute),
-                                    icon: FaIcon(FontAwesomeIcons.heart,
-                                        color: light),
-                                    label: CustomText(
-                                      text: ' Like',
-                                      size: 16,
-                                      color: light,
-                                      fontWeight: FontWeight.bold,
-                                      textAlign: TextAlign.center,
-                                    ),
+
+                                  LikeButton(
+                                    size: 60,
+                                    circleColor: CircleColor(
+                                        end: light, start: lightGrey),
+                                    bubblesColor: BubblesColor(
+                                        dotPrimaryColor: light,
+                                        dotSecondaryColor: lightGrey),
+                                    bubblesSize: 60,
+                                    onTap: onLikeButtonTapped,
+                                    likeBuilder: (isLiked) {
+                                      return Icon(
+                                        isLiked
+                                            ? Icons.favorite
+                                            : Icons.favorite_outline,
+                                        color: light,
+                                        size: 40,
+                                      );
+                                    },
                                   ),
                                 ],
                               ),
@@ -163,14 +193,14 @@ class EventDetailsContent extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.only(
-                              left: screenWidth * 0.025,
+                              left: screenWidth * 0.05,
                               right: screenWidth * 0.025),
                           child: Container(
                             width: screenWidth * 0.265,
-                            height: screenHeight * 0.065,
+                            height: screenHeight * 0.07,
                             child: ClipRRect(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                                  BorderRadius.all(Radius.circular(5)),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -182,16 +212,18 @@ class EventDetailsContent extends StatelessWidget {
                                       style: ElevatedButton.styleFrom(
                                         primary: darkgreen,
                                         onPrimary: Colors.black,
+                                        fixedSize: Size(screenWidth * 1,
+                                            screenHeight * 0.07),
                                       ),
                                       onPressed: () {
                                         Add2Calendar.addEvent2Cal(
                                           buildEvent(),
                                         );
                                       },
-                                      icon: FaIcon(FontAwesomeIcons.shareAlt,
+                                      icon: FaIcon(FontAwesomeIcons.calendarAlt,
                                           color: light),
                                       label: CustomText(
-                                        text: ' Share',
+                                        text: ' Add',
                                         size: 16,
                                         color: light,
                                         fontWeight: FontWeight.bold,
@@ -227,7 +259,10 @@ class EventDetailsContent extends StatelessWidget {
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
-                                          onPressed: () => Get.offAll(() => PurchasePage(events: event,)),
+                                          onPressed: () =>
+                                              Get.offAll(() => PurchasePage(
+                                                    events: event,
+                                                  )),
                                           icon: FaIcon(
                                               FontAwesomeIcons.shoppingBasket,
                                               color: light),
@@ -296,12 +331,22 @@ class EventDetailsContent extends StatelessWidget {
                   if (event.galleryImages.isNotEmpty)
                     Padding(
                       padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
-                      child: CustomText(
-                          text: "GALLERY",
-                          size: 16,
-                          color: darkGrey,
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.start),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                              text: "GALLERY",
+                              size: 16,
+                              color: darkGrey,
+                              fontWeight: FontWeight.bold,
+                              textAlign: TextAlign.start),
+                          Divider(
+                            endIndent: 20,
+                            thickness: 1,
+                            color: darkgreen,
+                          ),
+                        ],
+                      ),
                     ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -326,12 +371,22 @@ class EventDetailsContent extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 16.0, top: 16),
-                    child: CustomText(
-                        text: "MAP",
-                        size: 16,
-                        color: darkGrey,
-                        fontWeight: FontWeight.bold,
-                        textAlign: TextAlign.start),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                            text: "MAP",
+                            size: 16,
+                            color: darkGrey,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.start),
+                        Divider(
+                          endIndent: 20,
+                          thickness: 1,
+                          color: darkgreen,
+                        ),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -348,5 +403,17 @@ class EventDetailsContent extends StatelessWidget {
             )),
       ],
     );
+  }
+
+  Future<bool> onLikeButtonTapped(bool isLiked) async {
+    SnackBar snackBar = SnackBar(
+      content: isLiked ? Text('Unfavourited') : Text('Favourited!'),
+    );
+
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+    return !isLiked;
   }
 }

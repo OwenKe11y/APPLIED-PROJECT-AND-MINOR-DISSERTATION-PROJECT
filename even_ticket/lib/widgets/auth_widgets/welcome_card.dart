@@ -15,16 +15,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../custom_assets/custom_text.dart';
 
-class WelcomeCard extends StatelessWidget {
+class WelcomeCard extends StatefulWidget {
+  const WelcomeCard({Key? key}) : super(key: key);
+
+  @override
+  State<WelcomeCard> createState() => _WelcomeCardState();
+}
+
+class _WelcomeCardState extends State<WelcomeCard> {
   static final nameController = TextEditingController();
   static final emailController = TextEditingController();
   static final pass1Controller = TextEditingController();
   static final pass2Controller = TextEditingController();
-
-  const WelcomeCard({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -144,7 +146,7 @@ class WelcomeCard extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           textAlign: TextAlign.center,
                         ),
-                        onPressed: () => signIn(context),
+                        onPressed: () => signIn(),
                       ),
                       SizedBox(
                         height: 15,
@@ -160,7 +162,7 @@ class WelcomeCard extends StatelessWidget {
     );
   }
 
-  Future signIn(BuildContext context) async {
+  Future signIn() async {
     final user = await GoogleSignInApi.login();
 
     if (user == null) {

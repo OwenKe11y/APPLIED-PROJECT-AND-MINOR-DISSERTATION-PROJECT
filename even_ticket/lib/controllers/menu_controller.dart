@@ -29,10 +29,8 @@ class MenuController extends GetxController {
         return _customIcon(Icons.home_rounded, itemName);
       case ticketsPageRoute:
         return _customIcon(Icons.book_online_rounded, itemName);
-      case calenderPageRoute:
-        return _customIcon(Icons.calendar_today_rounded, itemName);
-      case mapsPageRoute:
-        return _customIcon(Icons.map_rounded, itemName);
+      case favouritePageRoute:
+        return _customIcon(Icons.favorite, itemName);
       case settingsPageRoute:
         return _customIcon(Icons.settings, itemName);
       case authenticationPageRoute:

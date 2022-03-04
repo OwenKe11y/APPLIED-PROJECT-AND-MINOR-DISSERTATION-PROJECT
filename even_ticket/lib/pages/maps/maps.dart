@@ -5,8 +5,8 @@ import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MapsViewPage extends StatelessWidget {
-  const MapsViewPage({Key? key}) : super(key: key);
+class FavouritesViewPage extends StatelessWidget {
+  const FavouritesViewPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

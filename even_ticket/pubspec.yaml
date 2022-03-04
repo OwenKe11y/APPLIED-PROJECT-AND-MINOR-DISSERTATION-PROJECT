@@ -53,6 +53,7 @@ dependencies:
   add_2_calendar: ^2.1.2
   geocoding: ^2.0.2
   numberpicker: ^2.1.1
+  like_button: ^2.0.4
 
 dev_dependencies:
   flutter_test:

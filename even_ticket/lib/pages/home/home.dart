@@ -31,7 +31,7 @@ class HomeViewPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Consumer<AppState>(
                   builder: (context, appstate, _) => SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -46,7 +46,7 @@ class HomeViewPage extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Consumer<AppState>(
                   builder: (context, appstate, _) => Column(
                     children: [

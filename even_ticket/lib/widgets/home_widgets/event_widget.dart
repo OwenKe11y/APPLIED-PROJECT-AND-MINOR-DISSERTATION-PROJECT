@@ -7,6 +7,7 @@ import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../pages/home/event_details.dart';
@@ -28,7 +29,9 @@ class EventWidget extends StatelessWidget {
           splashColor: darkGrey,
           onTap: () => {
             Future.delayed(Duration(milliseconds: 190), () {
-              Get.offAll(() => EventDetail(events: events,));
+              Get.offAll(() => EventDetail(
+                    events: events,
+                  ));
             })
           },
           child: Padding(
@@ -82,14 +85,8 @@ class EventWidget extends StatelessWidget {
                                   )
                                 ])),
                         Expanded(
-                          flex: 1,
-                          child: CustomText(
-                            color: darkGrey,
-                            text: events.duration,
-                            size: 16,
-                            fontWeight: FontWeight.w900,
-                            textAlign: TextAlign.right,
-                          ),
+                          flex: 0,
+                          child: FaIcon(Icons.touch_app, color: darkGrey),
                         ),
                       ],
                     ),
