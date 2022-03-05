@@ -1,7 +1,7 @@
 // Names of routes go here, name each root DO NOT leave the string blank
 const homePageRoute = "Home";
 const ticketsPageRoute = "My Tickets";
-const favouritePageRoute = "Favourites";
+const eventGenerationPageRoute = "Create Event";
 const settingsPageRoute = "Settings";
 const authenticationPageRoute = "Auth";
 const registerRoute = "Register";
@@ -12,7 +12,7 @@ const detailsRoute = "Details";
 List dashboardItems = [
   homePageRoute,
   ticketsPageRoute,
-  favouritePageRoute,
+  eventGenerationPageRoute,
   settingsPageRoute,
   authenticationPageRoute,
 ];

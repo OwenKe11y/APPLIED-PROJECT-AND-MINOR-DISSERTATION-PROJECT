@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/home_widgets/event_details_content.dart';
@@ -92,8 +93,8 @@ class _MapScreenState extends State<MapScreen> {
         onMapCreated: (controller) => _googleMapController = controller,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.black,
+        backgroundColor: darkgreen,
+        foregroundColor:  light,
         onPressed: () => _googleMapController.animateCamera(
           CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),

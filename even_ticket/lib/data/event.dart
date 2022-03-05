@@ -17,4 +17,4 @@ class Events {
       required this.galleryImages});
 }
 
-final events = [];
+var events = [];

@@ -168,7 +168,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                   // Login Button - Global navigation to the main page
 
                                   LikeButton(
-                                    size: 60,
+                                    size: 55,
                                     circleColor: CircleColor(
                                         end: light, start: lightGrey),
                                     bubblesColor: BubblesColor(
@@ -392,7 +392,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                     padding: EdgeInsets.symmetric(
                         horizontal: screenWidth * 0.02,
                         vertical: screenHeight * 0.02),
-                    child: Container(
+                    child: SizedBox(
                       height: screenHeight * .3,
                       width: screenWidth * 1,
                       child: MapScreen(),
@@ -407,7 +407,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
     SnackBar snackBar = SnackBar(
-      content: isLiked ? Text('Unfavourited') : Text('Favourited!'),
+      content: isLiked ? Text('Removed from Liked') : Text('Added to Liked'),
     );
 
 // Find the ScaffoldMessenger in the widget tree
