@@ -7,6 +7,7 @@ import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/home/home.dart';
+import 'package:even_ticket/payments/stripe_main.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 import '../custom_assets/custom_text.dart';
@@ -29,6 +31,7 @@ class PaymentCard extends StatefulWidget {
 }
 
 class _PaymentCardState extends State<PaymentCard> {
+  final _paymentItems = <PaymentItem>[];
   int _currentValue = 1;
   double _ticketPrice = 10.00;
   @override
@@ -90,7 +93,6 @@ class _PaymentCardState extends State<PaymentCard> {
                       child: Row(
                         children: [
                           VerticalDivider(
-                            
                             thickness: 1,
                           ),
                           ClipRRect(
@@ -113,7 +115,6 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                           ),
                           VerticalDivider(
-                           
                             thickness: 1,
                           ),
                         ],
@@ -152,8 +153,8 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                             onPressed: () =>
                                 loginNavController.navigateTo(loginRoute),
-                            icon:
-                                FaIcon(FontAwesomeIcons.creditCard, color: light),
+                            icon: FaIcon(FontAwesomeIcons.creditCard,
+                                color: light),
                             label: CustomText(
                               text: ' Pay with card',
                               size: 16,
@@ -209,7 +210,8 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                             onPressed: () =>
                                 loginNavController.navigateTo(registerRoute),
-                            icon: FaIcon(FontAwesomeIcons.bitcoin, color: light),
+                            icon:
+                                FaIcon(FontAwesomeIcons.bitcoin, color: light),
                             label: CustomText(
                               text: ' Pay with Crypto',
                               size: 16,
@@ -223,24 +225,21 @@ class _PaymentCardState extends State<PaymentCard> {
                           SizedBox(
                             height: 15,
                           ),
-                          ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.black87,
-                                onPrimary: Colors.black,
-                                minimumSize: Size(double.infinity, 50),
-                              ),
-                              icon: FaIcon(
-                                FontAwesomeIcons.googlePay,
-                                color: active,
-                              ),
-                              label: CustomText(
-                                text: ' Pay with Google Pay',
-                                size: 16,
-                                color: light,
-                                fontWeight: FontWeight.bold,
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: () => {}),
+                          GooglePayButton(
+                            paymentConfigurationAsset: 'gpay.json',
+                            paymentItems: _paymentItems,
+                            width: 200,
+                            height: 50,
+                            style: GooglePayButtonStyle.black,
+                            type: GooglePayButtonType.pay,
+                            margin: const EdgeInsets.only(top: 15.0),
+                            onPaymentResult: (data) {
+                              print(data);
+                            },
+                            loadingIndicator: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
                           SizedBox(
                             height: 15,
                           ),

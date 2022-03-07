@@ -54,6 +54,7 @@ dependencies:
   geocoding: ^2.0.2
   numberpicker: ^2.1.1
   like_button: ^2.0.4
+  pay: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,7 @@ flutter:
     - assets/icons/background.jpg
     - assets/gallery/concert.jpg
     - assets/gallery/sports.jpg
+    - assets/gpay.json
 
     
   

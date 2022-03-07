@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import 'package:even_ticket/data/user.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../data/event.dart';
@@ -14,7 +15,7 @@ import '../layout.dart';
 // Create User
 Future<String> loginUser(String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://192.168.0.129:3000/api/users/login'),
+    Uri.parse('http://192.168.1.11:3000/api/users/login'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -43,7 +44,7 @@ Future<String> loginUser(String email, String password) async {
 // Create User
 Future<User> createUser(String name, String email, String password) async {
   final response = await http.post(
-    Uri.parse('http://192.168.0.129:3000/api/users'),
+    Uri.parse('http://192.168.1.11:3000/api/users'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -72,7 +73,7 @@ Future<User> createUser(String name, String email, String password) async {
 // Get all events and send back each event
 Future<void> getEvents() async {
   final response = await http.get(
-      Uri.parse('http://192.168.0.129:3000/api/events'),
+      Uri.parse('http://192.168.1.11:3000/api/events'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -125,7 +126,7 @@ Future<void> getEvents() async {
 // Get all events and send back each event
 Future<String> getTicketsFaces() async {
   final response = await http.get(
-      Uri.parse('http://192.168.0.129:3000/api/tickets/faces'),
+      Uri.parse('http://192.168.1.11:3000/api/tickets/faces'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -146,3 +147,9 @@ Future<String> getTicketsFaces() async {
     throw Exception('Failed to get events');
   }
 }
+
+// If you are using a real device to test the integration replace this url
+// with the endpoint of your test server (it usually should be the IP of your computer)
+final kApiUrl = defaultTargetPlatform == TargetPlatform.android
+    ? 'http://192.168.1.11:3000'
+    : 'http://localhost:4242';
