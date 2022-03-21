@@ -35,3 +35,10 @@ final catagories = [
   sportCata,
   festivalCata
 ];
+
+final catagoriesSelect = [
+  musicCata,
+  meetCata,
+  sportCata,
+  festivalCata
+];

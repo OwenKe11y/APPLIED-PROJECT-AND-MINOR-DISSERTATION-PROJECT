@@ -55,6 +55,8 @@ dependencies:
   numberpicker: ^2.1.1
   like_button: ^2.0.4
   pay: ^1.0.8
+  image_picker: ^0.8.4+10
+  currency_text_input_formatter: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +95,8 @@ flutter:
     - assets/gpay.json
 
     
+dependency_overrides:
+  intl: 0.17.0
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,18 +1,16 @@
-import 'package:even_ticket/constants/controllers.dart';
-import 'package:even_ticket/constants/style.dart';
-import 'package:even_ticket/utils/responsiveness.dart';
-import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:even_ticket/widgets/home_widgets/event_generation_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class EventGenerationPage extends StatelessWidget {
   const EventGenerationPage({Key? key}) : super(key: key);
 
    @override
   Widget build(BuildContext context) {
-     final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return SafeArea(child: Container(color: active,));
+    return SafeArea(child: EventGenCard());
     
           
   }
