@@ -60,12 +60,13 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                           fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
                     ),
                   ])),
-            
-  
-
-            // Render the two icons for notifications and settings
-            // Settings Icon
-            Expanded(child: Container()),
+                       
+          ],
+        ),
+      ),
+      actions: [
+         // Settings Icon
+           
             IconButton(
               splashRadius: 20,
               icon: Icon(
@@ -74,49 +75,23 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
               ),
               onPressed: () {},
             ),
-
-            // Notifications Icon
-            Stack(
-              children: [
-                // Actual Icon
-                IconButton(
-                    splashRadius: 20,
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.notifications,
-                      color: light,
-                    )),
-
-                // Red Blurb on top of Notification Icon
-                Positioned(
-                    top: 7,
-                    right: 7,
-                    child: Container(
-                      width: 12,
-                      height: 12,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                          color: active,
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: light, width: 2)),
-                    ))
-              ],
-            ),
-            Container(
-              
-              width: 1,
-              height: 22,
-              color: lightGrey,
-            ),
-          
-           
-            Padding(
-              padding: const EdgeInsets.only(left: 10 ,),
+         Padding(
+           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+           child: Container(
+                
+                width: 1,
+                height: 2,
+                color: lightGrey,
+              ),
+         ),
+         Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               child: Container(
+           
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                    color: Colors.white, borderRadius: BorderRadius.circular(40)),
                 child: Container(
-                  padding: EdgeInsets.all(2),
+                  padding: EdgeInsets.all(1),
                   margin: EdgeInsets.all(2),
                   child: CircleAvatar(
                     backgroundColor: lightGrey,
@@ -128,9 +103,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                 ),
               ),
             ),
-          ],
-        ),
-      ),
+      ],
       iconTheme: IconThemeData(color: darkgreen),
       backgroundColor: Colors.transparent,
     );

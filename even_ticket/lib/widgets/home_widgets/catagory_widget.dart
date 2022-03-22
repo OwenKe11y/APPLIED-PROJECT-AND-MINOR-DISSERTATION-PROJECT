@@ -20,9 +20,9 @@ class CategoryWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => {
-        if(!isSelected){
-          appstate.updateCatagoryID(category.catagoryId)
-        }
+       
+        appstate.displayCatagoryID(category.catagoryId)
+        
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8),

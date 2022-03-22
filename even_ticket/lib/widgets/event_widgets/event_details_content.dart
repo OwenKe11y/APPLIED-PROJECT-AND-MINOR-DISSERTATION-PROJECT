@@ -168,7 +168,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                   // Login Button - Global navigation to the main page
 
                                   LikeButton(
-                                    size: 55,
+                                    size: screenWidth * 0.135,
                                     circleColor: CircleColor(
                                         end: light, start: lightGrey),
                                     bubblesColor: BubblesColor(

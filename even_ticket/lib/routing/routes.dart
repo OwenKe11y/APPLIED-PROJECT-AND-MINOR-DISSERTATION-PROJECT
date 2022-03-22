@@ -3,6 +3,7 @@ const homePageRoute = "Home";
 const ticketsPageRoute = "My Tickets";
 const eventGenerationPageRoute = "Create Event";
 const settingsPageRoute = "Settings";
+const scannerPageRoute = "Scanner";
 const authenticationPageRoute = "Auth";
 const registerRoute = "Register";
 const loginRoute = "Login";
@@ -13,6 +14,7 @@ List dashboardItems = [
   homePageRoute,
   ticketsPageRoute,
   eventGenerationPageRoute,
+  scannerPageRoute,
   settingsPageRoute,
   authenticationPageRoute,
 ];

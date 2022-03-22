@@ -31,6 +31,8 @@ class MenuController extends GetxController {
         return _customIcon(Icons.book_online_rounded, itemName);
       case eventGenerationPageRoute:
         return _customIcon(Icons.new_label_rounded, itemName);
+        case scannerPageRoute:
+        return _customIcon(Icons.camera, itemName);
       case settingsPageRoute:
         return _customIcon(Icons.settings, itemName);
       case authenticationPageRoute:

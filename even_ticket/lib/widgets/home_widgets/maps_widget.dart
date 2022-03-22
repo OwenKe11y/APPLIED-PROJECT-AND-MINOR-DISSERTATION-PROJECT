@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/services/http_methods.dart';
-import 'package:even_ticket/widgets/home_widgets/event_details_content.dart';
+import 'package:even_ticket/widgets/event_widgets/event_details_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

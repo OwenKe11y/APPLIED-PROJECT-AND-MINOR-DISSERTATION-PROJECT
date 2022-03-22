@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:even_ticket/widgets/home_widgets/event_generation_widget.dart';
+import 'package:even_ticket/widgets/event_widgets/event_generation_widget.dart';
 import 'package:flutter/material.dart';
 
 class EventGenerationPage extends StatelessWidget {

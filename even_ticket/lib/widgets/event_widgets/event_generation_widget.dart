@@ -19,7 +19,7 @@ import '../../services/http_methods.dart';
 import '../../utils/application_navigator.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 
-import 'catagory_widget.dart';
+import '../home_widgets/catagory_widget.dart';
 
 class EventGenCard extends StatefulWidget {
   const EventGenCard({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class _EventGenCardState extends State<EventGenCard> {
   var imageFile;
   var imageFileList = [];
 
-  static final titleController = TextEditingController();
+  final titleController = TextEditingController();
   static final descriptionController = TextEditingController();
   static final priceController = TextEditingController();
   static final locationController = TextEditingController();
@@ -44,6 +44,11 @@ class _EventGenCardState extends State<EventGenCard> {
   static final punchLine1Controller = TextEditingController();
   static final punchline2Controller = TextEditingController();
 
+  Widget _title() {
+    return (titleController.text.isEmpty)
+        ? CustomText(text: "Insert a Title", size: 30, color: lightGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center)
+        : CustomText(text: titleController.text, size: 30, color: darkGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center);
+  }
   /// Get from gallery
   _getFromGallery() async {
     XFile? pickedFile = await ImagePicker().pickImage(
@@ -149,7 +154,7 @@ class _EventGenCardState extends State<EventGenCard> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: screenHeight * 0.40,
+          height: screenHeight * 0.43,
           width: screenWidth,
           child: Card(
               margin: EdgeInsets.symmetric(vertical: 25),
@@ -158,7 +163,7 @@ class _EventGenCardState extends State<EventGenCard> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(24))),
               child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -175,13 +180,7 @@ class _EventGenCardState extends State<EventGenCard> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      CustomText(
-                                        color: darkGrey,
-                                        text: titleController.text,
-                                        size: 24,
-                                        fontWeight: FontWeight.bold,
-                                        textAlign: TextAlign.start,
-                                      ),
+                                     _title(),
                                       SizedBox(
                                         height: 10,
                                       ),
@@ -245,7 +244,7 @@ class _EventGenCardState extends State<EventGenCard> {
                   ))),
         ),
         SizedBox(
-          height: screenHeight * 0.4,
+          height: screenHeight * 0.45,
           width: screenWidth,
           child: SingleChildScrollView(
             child: Card(

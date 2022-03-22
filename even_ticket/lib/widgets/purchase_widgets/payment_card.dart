@@ -11,7 +11,7 @@ import 'package:even_ticket/payments/stripe_main.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
-import 'package:even_ticket/widgets/home_widgets/event_widget.dart';
+import 'package:even_ticket/widgets/event_widgets/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -221,18 +221,16 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                           ),
 
-                          // Divider
-                          SizedBox(
-                            height: 15,
-                          ),
+                     
                           GooglePayButton(
                             paymentConfigurationAsset: 'gpay.json',
                             paymentItems: _paymentItems,
-                            width: 200,
+                            width: 500,
                             height: 50,
+                            
                             style: GooglePayButtonStyle.black,
                             type: GooglePayButtonType.pay,
-                            margin: const EdgeInsets.only(top: 15.0),
+                            margin: EdgeInsets.only(top: screenHeight * 0.01),
                             onPaymentResult: (data) {
                               print(data);
                             },
@@ -241,7 +239,7 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 10,
                           ),
                         ],
                       ),

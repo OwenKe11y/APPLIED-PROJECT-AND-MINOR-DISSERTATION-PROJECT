@@ -10,7 +10,7 @@ import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
-import 'package:even_ticket/widgets/home_widgets/event_widget.dart';
+import 'package:even_ticket/widgets/event_widgets/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
