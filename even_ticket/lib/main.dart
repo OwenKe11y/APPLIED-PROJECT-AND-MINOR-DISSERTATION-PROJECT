@@ -12,13 +12,21 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'services/http_methods.dart';
+import 'package:camera/camera.dart';
+
+import 'widgets/scanner_widgets/face_dectector_view.dart';
+
+List<CameraDescription> cameras = [];
 
 // Main method, use GetX for the Controllers and run the App
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(MenuController());
   Get.put(LocalNavController());
   Get.put(LoginNavController());
-  await getEvents();
+  //await getEvents();
+  cameras = await availableCameras();
+  print(cameras);
   runApp(RootRestorationScope(restorationId: 'root', child: MyApp()));
 }
 
@@ -33,7 +41,6 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return GetMaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: "EvenTicket",
       theme: ThemeData(
@@ -58,11 +65,10 @@ class AppStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-       onWillPop: () async { 
-        
+      onWillPop: () async {
         return loginNavController.goBack();
-       },
-      child: loginNavigator(),
+      },
+      child: FaceDetectorView(),
     );
   }
 }

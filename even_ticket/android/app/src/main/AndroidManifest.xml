@@ -6,6 +6,14 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+
+     <uses-feature
+      android:name="android.hardware.camera"
+      android:required="true"/>
 
     <queries>
       <intent>
@@ -14,6 +22,9 @@
       </intent>
     </queries>
 
+   
+
+    
   
    <application
         android:label="even_ticket"
@@ -54,6 +65,9 @@
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"
               android:value="AIzaSyBl9oF-1EaMepCsX0GXWaD6MBRJt8XXGM8"/>
+        <meta-data
+          android:name="com.google.mlkit.vision.DEPENDENCIES"
+          android:value="ica,ocr,face" />
 
       
     </application>

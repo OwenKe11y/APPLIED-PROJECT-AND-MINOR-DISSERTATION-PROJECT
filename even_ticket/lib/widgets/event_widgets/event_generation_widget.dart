@@ -46,9 +46,20 @@ class _EventGenCardState extends State<EventGenCard> {
 
   Widget _title() {
     return (titleController.text.isEmpty)
-        ? CustomText(text: "Insert a Title", size: 30, color: lightGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center)
-        : CustomText(text: titleController.text, size: 30, color: darkGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center);
+        ? CustomText(
+            text: "Insert a Title",
+            size: 30,
+            color: lightGrey,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center)
+        : CustomText(
+            text: titleController.text,
+            size: 30,
+            color: darkGrey,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center);
   }
+
   /// Get from gallery
   _getFromGallery() async {
     XFile? pickedFile = await ImagePicker().pickImage(
@@ -132,18 +143,17 @@ class _EventGenCardState extends State<EventGenCard> {
     }
   }
 
- _selectTime(BuildContext context) async {          
-      final TimeOfDay? timeOfDay = await showTimePicker(
-        context: context,
-        initialTime: selectedTime,
-        initialEntryMode: TimePickerEntryMode.dial,
-      );
-      if(timeOfDay != null && timeOfDay != selectedTime)
-        {
-          setState(() {
-            selectedTime = timeOfDay;
-          });
-        }
+  _selectTime(BuildContext context) async {
+    final TimeOfDay? timeOfDay = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+      initialEntryMode: TimePickerEntryMode.dial,
+    );
+    if (timeOfDay != null && timeOfDay != selectedTime) {
+      setState(() {
+        selectedTime = timeOfDay;
+      });
+    }
   }
 
   @override
@@ -180,14 +190,17 @@ class _EventGenCardState extends State<EventGenCard> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                     _title(),
+                                      _title(),
                                       SizedBox(
                                         height: 10,
                                       ),
                                       FittedBox(
                                         child: Row(
                                           children: [
-                                            Icon(Icons.location_on, color: darkGrey,),
+                                            Icon(
+                                              Icons.location_on,
+                                              color: darkGrey,
+                                            ),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -204,7 +217,8 @@ class _EventGenCardState extends State<EventGenCard> {
                                       FittedBox(
                                         child: Row(
                                           children: [
-                                            Icon(Icons.attach_money_sharp, color: darkGrey),
+                                            Icon(Icons.attach_money_sharp,
+                                                color: darkGrey),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -218,17 +232,20 @@ class _EventGenCardState extends State<EventGenCard> {
                                           ],
                                         ),
                                       ),
-
-                                       FittedBox(
+                                      FittedBox(
                                         child: Row(
                                           children: [
-                                            Icon(Icons.access_time_filled_outlined, color: darkGrey),
+                                            Icon(
+                                                Icons
+                                                    .access_time_filled_outlined,
+                                                color: darkGrey),
                                             SizedBox(
                                               width: 5,
                                             ),
                                             CustomText(
                                               color: darkGrey,
-                                              text: "${selectedTime.hour}:${selectedTime.minute}",
+                                              text:
+                                                  "${selectedTime.hour}:${selectedTime.minute}",
                                               size: 16,
                                               fontWeight: FontWeight.w300,
                                               textAlign: TextAlign.left,
@@ -362,7 +379,6 @@ class _EventGenCardState extends State<EventGenCard> {
                             decoration: InputDecoration(
                               labelText: "Ticket Price",
                             ),
-                            
                             controller: priceController,
                           ),
 
@@ -420,25 +436,29 @@ class _EventGenCardState extends State<EventGenCard> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              CustomText(text: "${selectedDate.toLocal()}".split(' ')[0], size: 16, color: darkGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center),
+                              CustomText(
+                                  text:
+                                      "${selectedDate.toLocal()}".split(' ')[0],
+                                  size: 16,
+                                  color: darkGrey,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.center),
                               SizedBox(
-                                
                                 width: screenWidth * 0.40,
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
-                              onPrimary: darkgreen,
-                             
-                            ),
+                                  primary: darkgreen,
+                                  onPrimary: darkgreen,
+                                ),
                                 onPressed: () => _selectDate(context),
                                 child: CustomText(
-                              text: 'Select Date',
-                              size: 16,
-                              color: light,
-                              fontWeight: FontWeight.bold,
-                              textAlign: TextAlign.center,
-                            ),
+                                  text: 'Select Date',
+                                  size: 16,
+                                  color: light,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ],
                           ),
@@ -464,25 +484,29 @@ class _EventGenCardState extends State<EventGenCard> {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              CustomText(text: "${selectedTime.hour}:${selectedTime.minute}", size: 16, color: darkGrey, fontWeight: FontWeight.bold, textAlign: TextAlign.center),
+                              CustomText(
+                                  text:
+                                      "${selectedTime.hour}:${selectedTime.minute}",
+                                  size: 16,
+                                  color: darkGrey,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.center),
                               SizedBox(
-                                
                                 width: screenWidth * 0.5,
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
-                              onPrimary: darkgreen,
-                             
-                            ),
+                                  primary: darkgreen,
+                                  onPrimary: darkgreen,
+                                ),
                                 onPressed: () => _selectTime(context),
                                 child: CustomText(
-                              text: 'Select Time',
-                              size: 16,
-                              color: light,
-                              fontWeight: FontWeight.bold,
-                              textAlign: TextAlign.center,
-                            ),
+                                  text: 'Select Time',
+                                  size: 16,
+                                  color: light,
+                                  fontWeight: FontWeight.bold,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ],
                           ),

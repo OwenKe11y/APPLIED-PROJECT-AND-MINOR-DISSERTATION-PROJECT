@@ -66,6 +66,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    dependencies {
+       implementation 'com.google.android.gms:play-services-mlkit-face-detection:17.0.1'
+    }
 }
 
 flutter {
@@ -74,4 +78,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    
 }
