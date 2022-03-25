@@ -10,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
           console.log(value)
           this.setDataValue('password', bcrypt.hashSync(value, 10))
         }
-      }
+      },
+      favourites: Sequelize.ARRAY(Sequelize.TEXT),
+      isOrganiser: Sequelize.BOOLEAN,
+      face: Sequelize.TEXT
     }, {
       timestamps: false
     });

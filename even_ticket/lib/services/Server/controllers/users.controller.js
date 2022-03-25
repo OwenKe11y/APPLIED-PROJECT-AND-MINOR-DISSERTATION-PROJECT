@@ -16,7 +16,10 @@ exports.create = (req, res) => {
     const user = {
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    favourites: req.body.favourites,
+    isOrganiser: req.body.isOrganiser,
+    face: req.body.face,
     };
 
     // Save User in the database
@@ -76,14 +79,14 @@ exports.findAll = (req, res) => {
 
 // Find a single User by email
 exports.findOne = (req, res) => {
-  const email = req.params.email;
+  const email = req.body.email;
   Users.findAll({ where: {email: email}})
     .then(data => {
       if (data[0] != null) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find User with email: ${email}.`
+          message: `Cannot find User with email: ${email}`
         });
       }
     })

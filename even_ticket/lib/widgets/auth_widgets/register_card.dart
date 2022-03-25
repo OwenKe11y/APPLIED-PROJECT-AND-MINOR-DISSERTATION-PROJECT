@@ -27,7 +27,7 @@ class RegisterCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
         child: Column(
           children: [
             ClipRRect(
@@ -143,7 +143,7 @@ class RegisterCard extends StatelessWidget {
                     ),
                     onPressed: () => {
                       createUser(nameController.text, emailController.text,
-                          pass1Controller.text),
+                          pass1Controller.text, true, "none"),
                       Get.offAll(
                         () => SiteLayout(),
                         arguments:

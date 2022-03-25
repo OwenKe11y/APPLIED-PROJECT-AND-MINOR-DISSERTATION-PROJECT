@@ -2,6 +2,7 @@
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
@@ -130,18 +131,33 @@ class LoginCard extends StatelessWidget {
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    onPressed: () => loginUser(
-                            emailController.text, pass1Controller.text)
-                        .then((value) => {
-                              if (value == 'PASS')
-                                {
-                                  Get.offAll(() => SiteLayout(),
-                                      arguments: menuController
-                                          .changeActiveItemTo(homePageRoute)),
-                                }
-                              else
-                                {throw Exception("Failed Login Dart")}
-                            }),
+                    onPressed: () =>
+                        loginUser(emailController.text, pass1Controller.text)
+                            .then((value) => {
+                                  if (value == 'PASS')
+                                    {
+                                      getUser(emailController.text)
+                                          .then((value) => {
+                                                if (value == 'OK')
+                                                  {
+                                                    Get.offAll(
+                                                        () => SiteLayout(),
+                                                        arguments: menuController
+                                                            .changeActiveItemTo(
+                                                                homePageRoute))
+                                                  }
+                                                else
+                                                  {
+                                                    {
+                                                      throw Exception(
+                                                          "Failed Login Dart")
+                                                    }
+                                                  }
+                                              }),
+                                    }
+                                  else
+                                    {throw Exception("Failed Login Dart")}
+                                }),
                     child: CustomText(
                       text: 'Log in',
                       size: 16,

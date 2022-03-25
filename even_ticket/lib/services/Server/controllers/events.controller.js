@@ -16,14 +16,16 @@ exports.create = (req, res) => {
     title: req.body.title,
     description: req.body.description,
     location: req.body.location,    
-    duration: req.body.duration,
+    price: req.body.price,  
+    time: req.body.time,
     punchline1: req.body.punchline1,
     punchline2: req.body.punchline2,
+    date: req.body.date,
     categoryIds: req.body.categoryIds,
-    galleryImages: req.body.galleryImages,
+    galleryImages: [req.body.galleryImages],
     displayImage: req.body.displayImage
     };
-    
+
     // Save Event in the database
     Events.create(event)
         .then(data => {
@@ -32,7 +34,7 @@ exports.create = (req, res) => {
         .catch(err => {
         res.status(500).send({
             message:
-            err.message || "Some error occurred while creating the Event."
+            err.message + " Some error occurred while creating the Event."
         });
         });
 
