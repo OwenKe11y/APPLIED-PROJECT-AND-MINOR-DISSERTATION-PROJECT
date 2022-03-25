@@ -90,7 +90,7 @@ class _CameraViewState extends State<CameraView> {
           ),
         ],
       ),
-      body: _body(),
+      body: _galleryBody(),
       floatingActionButton: _floatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -113,65 +113,65 @@ class _CameraViewState extends State<CameraView> {
         ));
   }
 
-  Widget _body() {
-    Widget body;
-    if (_mode == ScreenMode.liveFeed)
-      body = _liveFeedBody();
-    else
-      body = _galleryBody();
-    return body;
-  }
+  // Widget _body() {
+  //   Widget body;
+  //   if (_mode == ScreenMode.liveFeed)
+  //     body = _liveFeedBody();
+  //   else
+  //     body = _galleryBody();
+  //   return body;
+  // }
 
-  Widget _liveFeedBody() {
-    if (_controller?.value.isInitialized == false) {
-      return Container();
-    }
+  // Widget _liveFeedBody() {
+  //   if (_controller?.value.isInitialized == false) {
+  //     return Container();
+  //   }
 
-    final size = MediaQuery.of(context).size;
-    // calculate scale depending on screen and camera ratios
-    // this is actually size.aspectRatio / (1 / camera.aspectRatio)
-    // because camera preview size is received as landscape
-    // but we're calculating for portrait orientation
-    var scale = size.aspectRatio * _controller!.value.aspectRatio;
+  //   final size = MediaQuery.of(context).size;
+  //   // calculate scale depending on screen and camera ratios
+  //   // this is actually size.aspectRatio / (1 / camera.aspectRatio)
+  //   // because camera preview size is received as landscape
+  //   // but we're calculating for portrait orientation
+  //   var scale = size.aspectRatio * _controller!.value.aspectRatio;
 
-    // to prevent scaling down, invert the value
-    if (scale < 1) scale = 1 / scale;
+  //   // to prevent scaling down, invert the value
+  //   if (scale < 1) scale = 1 / scale;
 
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Transform.scale(
-            scale: scale,
-            child: Center(
-              child: CameraPreview(_controller!),
-            ),
-          ),
-          if (widget.customPaint != null) widget.customPaint!,
-          Positioned(
-            bottom: 100,
-            left: 50,
-            right: 50,
-            child: Slider(
-              value: zoomLevel,
-              min: minZoomLevel,
-              max: maxZoomLevel,
-              onChanged: (newSliderValue) {
-                setState(() {
-                  zoomLevel = newSliderValue;
-                  _controller!.setZoomLevel(zoomLevel);
-                });
-              },
-              divisions: (maxZoomLevel - 1).toInt() < 1
-                  ? null
-                  : (maxZoomLevel - 1).toInt(),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  //   return Container(
+  //     color: Colors.black,
+  //     child: Stack(
+  //       fit: StackFit.expand,
+  //       children: <Widget>[
+  //         Transform.scale(
+  //           scale: scale,
+  //           child: Center(
+  //             child: CameraPreview(_controller!),
+  //           ),
+  //         ),
+  //         if (widget.customPaint != null) widget.customPaint!,
+  //         Positioned(
+  //           bottom: 100,
+  //           left: 50,
+  //           right: 50,
+  //           child: Slider(
+  //             value: zoomLevel,
+  //             min: minZoomLevel,
+  //             max: maxZoomLevel,
+  //             onChanged: (newSliderValue) {
+  //               setState(() {
+  //                 zoomLevel = newSliderValue;
+  //                 _controller!.setZoomLevel(zoomLevel);
+  //               });
+  //             },
+  //             divisions: (maxZoomLevel - 1).toInt() < 1
+  //                 ? null
+  //                 : (maxZoomLevel - 1).toInt(),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _galleryBody() {
     return ListView(shrinkWrap: true, children: [

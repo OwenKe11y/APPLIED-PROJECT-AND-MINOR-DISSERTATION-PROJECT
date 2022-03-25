@@ -24,7 +24,7 @@ Future<void> main() async {
   Get.put(MenuController());
   Get.put(LocalNavController());
   Get.put(LoginNavController());
-  //await getEvents();
+  await getEvents();
   cameras = await availableCameras();
   print(cameras);
   runApp(RootRestorationScope(restorationId: 'root', child: MyApp()));
@@ -68,7 +68,7 @@ class AppStart extends StatelessWidget {
       onWillPop: () async {
         return loginNavController.goBack();
       },
-      child: FaceDetectorView(),
-    );
+      child: loginNavigator(),
+    ); //
   }
 }
