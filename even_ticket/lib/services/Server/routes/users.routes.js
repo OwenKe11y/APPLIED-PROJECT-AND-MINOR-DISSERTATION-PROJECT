@@ -6,7 +6,7 @@ module.exports = app => {
   // Retrieve all User
   router.get("/", users.findAll);
   // Retrieve a single User with email
-  router.get("/:email", users.findOne);
+  router.post("/retrieve", users.findOne);
   // Update a User with email
   router.put("/", users.update);
   // Delete a User with email

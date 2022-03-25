@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
@@ -32,7 +33,8 @@ class _EventGenCardState extends State<EventGenCard> {
   //final _formKey = GlobalKey<FormState>();
 
   var imageFile;
-  var imageFileList = [];
+  List<File> imageFileList = [];
+  List<int> categoryIdArray = [];
 
   final titleController = TextEditingController();
   static final descriptionController = TextEditingController();
@@ -605,6 +607,18 @@ class _EventGenCardState extends State<EventGenCard> {
                               minimumSize: Size(double.infinity, 50),
                             ),
                             onPressed: () => {
+                              createEvent(
+                                  titleController.text,
+                                  descriptionController.text,
+                                  priceController.text,
+                                  locationController.text,
+                                  selectedTime.toString(),
+                                  punchLine1Controller.text,
+                                  punchline2Controller.text,
+                                  selectedDate,
+                                  imageFile,
+                                  AppState().cataList,
+                                  imageFileList),
                               localNavController.goBack(),
                               localNavController.navigateTo(homePageRoute),
                               menuController.changeActiveItemTo(homePageRoute)

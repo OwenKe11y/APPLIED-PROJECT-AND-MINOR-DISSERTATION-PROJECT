@@ -94,7 +94,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: darkgreen,
-        foregroundColor:  light,
+        foregroundColor: light,
         onPressed: () => _googleMapController.animateCamera(
           CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),
