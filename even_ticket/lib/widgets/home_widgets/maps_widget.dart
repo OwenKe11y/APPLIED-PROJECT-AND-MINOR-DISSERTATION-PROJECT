@@ -93,13 +93,14 @@ class _MapScreenState extends State<MapScreen> {
         onMapCreated: (controller) => _googleMapController = controller,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: darkgreen,
-        foregroundColor: light,
+        backgroundColor: lightGrey,
+        foregroundColor: darkGrey,
         onPressed: () => _googleMapController.animateCamera(
           CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),
-        child: const Icon(Icons.center_focus_strong),
+        child: const Icon(Icons.location_pin),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
