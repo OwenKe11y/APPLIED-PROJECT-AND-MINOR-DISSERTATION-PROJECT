@@ -3,6 +3,7 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
@@ -24,30 +25,30 @@ class EventDetailsContent extends StatefulWidget {
 }
 
 class _EventDetailsContentState extends State<EventDetailsContent> {
-  Event buildEvent({Recurrence? recurrence}) {
-    return Event(
-      title: 'Test eventeee',
-      description: 'example',
-      location: 'Flutter app',
-      startDate: DateTime.now(),
-      endDate: DateTime.now().add(Duration(minutes: 30)),
-      allDay: false,
-      iosParams: IOSParams(
-        reminder: Duration(minutes: 40),
-      ),
-      androidParams: AndroidParams(
-        emailInvites: ["test@example.com"],
-      ),
-      recurrence: recurrence,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     const String event_start = "10:00";
+    currentUser;
+    Event buildEvent({Recurrence? recurrence}) {
+      return Event(
+        title: event.title,
+        description: event.description,
+        location: event.location,
+        startDate: event.date,
+        endDate: event.date.add(Duration(hours: 3)),
+        allDay: false,
+        iosParams: IOSParams(
+          reminder: Duration(hours: 1),
+        ),
+        androidParams: AndroidParams(
+          emailInvites: [currentUser.email],
+        ),
+        recurrence: recurrence,
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,6 +217,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                             screenHeight * 0.07),
                                       ),
                                       onPressed: () {
+                                        print(event.date);
                                         Add2Calendar.addEvent2Cal(
                                           buildEvent(),
                                         );
