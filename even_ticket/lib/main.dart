@@ -24,9 +24,7 @@ Future<void> main() async {
   Get.put(MenuController());
   Get.put(LocalNavController());
   Get.put(LoginNavController());
-  await getEvents();
   cameras = await availableCameras();
-  print(cameras);
   runApp(RootRestorationScope(restorationId: 'root', child: MyApp()));
 }
 

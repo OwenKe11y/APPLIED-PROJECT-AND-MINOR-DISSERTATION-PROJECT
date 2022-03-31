@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,10 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                 Icons.settings,
                 color: light,
               ),
-              onPressed: () {},
+              onPressed: () {
+                localNavController.navigateTo(settingsPageRoute);
+                menuController.changeActiveItemTo(settingsPageRoute);
+              },
             ),
          Padding(
            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),

@@ -3,6 +3,7 @@
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/home/home.dart';

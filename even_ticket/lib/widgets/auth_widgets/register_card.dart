@@ -11,15 +11,36 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../custom_assets/custom_text.dart';
 
-class RegisterCard extends StatelessWidget {
-  static final nameController = TextEditingController();
-  static final emailController = TextEditingController();
-  static final pass1Controller = TextEditingController();
-  static final pass2Controller = TextEditingController();
+class RegisterCard extends StatefulWidget {
+  const RegisterCard({Key? key}) : super(key: key);
 
-  const RegisterCard({
-    Key? key,
-  }) : super(key: key);
+  @override
+  State<RegisterCard> createState() => _RegisterCardState();
+}
+
+class _RegisterCardState extends State<RegisterCard> {
+  Key key = UniqueKey();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        //this is really dumb, but it works -OK
+        nameController.clear();
+        emailController.clear();
+        pass1Controller.clear();
+        pass2Controller.clear();
+      });
+    }
+  }
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final pass1Controller = TextEditingController();
+  final pass2Controller = TextEditingController();
+  bool isOrganiser = false;
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +139,16 @@ class RegisterCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Checkbox(value: true, onChanged: (value) {}),
+                      Checkbox(
+                          activeColor: darkgreen,
+                          value: isOrganiser,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isOrganiser = value!;
+                            });
+                          }),
                       CustomText(
-                        text: "Remember me",
+                        text: "Are you an Organiser?",
                         size: 16,
                         color: darkGrey,
                         fontWeight: FontWeight.bold,
@@ -143,12 +171,8 @@ class RegisterCard extends StatelessWidget {
                     ),
                     onPressed: () => {
                       createUser(nameController.text, emailController.text,
-                          pass1Controller.text, true, "none"),
-                      Get.offAll(
-                        () => SiteLayout(),
-                        arguments:
-                            menuController.changeActiveItemTo(homePageRoute),
-                      ),
+                          pass1Controller.text, isOrganiser, "none"),
+                      loginNavController.navigateTo(loginRoute)
                     },
                     child: CustomText(
                       text: 'Register',
@@ -183,9 +207,34 @@ class RegisterCard extends StatelessWidget {
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    onPressed: () => {
-                      loginNavController.goBack(),
-                      loginNavController.navigateTo(loginRoute),
+                    onPressed: () async {
+                      if (nameController.text.isNotEmpty) {
+                        final result = await showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text("Unsaved Changes"),
+                            content: Text(
+                                "Leaving the page will erase all inputted data, Continue?"),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () => {
+                                        Navigator.pop(context),
+                                        loginNavController.goBack(),
+                                        loginNavController
+                                            .navigateTo(loginRoute)
+                                      },
+                                  child: Text("Leave")),
+                              TextButton(
+                                  onPressed: () => {Navigator.pop(context)},
+                                  child: Text("Cancel")),
+                            ],
+                          ),
+                        );
+                        return result;
+                      } else {
+                        loginNavController.goBack();
+                        loginNavController.navigateTo(loginRoute);
+                      }
                     },
                     child: CustomText(
                       text: 'Log in',

@@ -1,22 +1,17 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:even_ticket/app_state.dart';
-import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/catagory.dart';
 import 'package:even_ticket/data/event.dart';
-import 'package:even_ticket/pages/home/event_details.dart';
 import 'package:even_ticket/services/http_methods.dart';
-import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
-import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/event_widgets/event_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeViewPage extends StatefulWidget {
-  const HomeViewPage({ Key? key }) : super(key: key);
+  const HomeViewPage({Key? key}) : super(key: key);
 
   @override
   State<HomeViewPage> createState() => _HomeViewPageState();
@@ -24,10 +19,26 @@ class HomeViewPage extends StatefulWidget {
 
 class _HomeViewPageState extends State<HomeViewPage> {
   @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        initEvents();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     Events event;
+
+    if (events.isEmpty) {
+      return Center(
+          child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(darkgreen)));
+    }
     return ChangeNotifierProvider<AppState>(
       create: (_) => AppState(),
       child: SafeArea(
@@ -52,9 +63,9 @@ class _HomeViewPageState extends State<HomeViewPage> {
                     ),
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                   child: Consumer<AppState>(
                     builder: (context, appstate, _) => Column(
                       children: [
@@ -65,21 +76,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
                       ],
                     ),
                   ),
-                )
-                // CircleAvatar(
-                //   radius: 40,
-                //   backgroundImage: NetworkImage(user.photoUrl!),
-                // ),
-                // SizedBox(height: 8),
-                // Text(
-                //   'Name: ' + user.displayName!,
-                //   style: TextStyle(color: Colors.black, fontSize: 12),
-                // ),
-                // SizedBox(height: 8),
-                // Text(
-                //   'Email: ' + user.email,
-                //   style: TextStyle(color: Colors.black, fontSize: 12),
-                // )
+                ),
               ],
             ),
           ),
@@ -87,10 +84,22 @@ class _HomeViewPageState extends State<HomeViewPage> {
       ),
     );
   }
+
   Future<void> _refresh() async {
     events = [];
-    await getEvents();
-    setState(() {});
-    
+
+    if (mounted) {
+      await getEvents();
+      setState(() {});
+    }
+  }
+
+  Future<void> initEvents() async {
+    if (mounted) {
+      if (events.isEmpty) {
+        await getEvents();
+      }
+      setState(() {});
+    }
   }
 }
