@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../constants/style.dart';
 import '../../main.dart';
 
 enum ScreenMode { liveFeed, gallery }
@@ -13,14 +16,13 @@ enum ScreenMode { liveFeed, gallery }
 class CameraView extends StatefulWidget {
   const CameraView(
       {Key? key,
-      required this.title,
-      required this.customPaint,
+     
+    
       required this.onImage,
       this.initialDirection = CameraLensDirection.back})
       : super(key: key);
 
-  final String title;
-  final CustomPaint? customPaint;
+
   final Function(InputImage inputImage) onImage;
   final CameraLensDirection initialDirection;
 
@@ -71,29 +73,27 @@ class _CameraViewState extends State<CameraView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            // child: GestureDetector(
-            //   onTap: _switchScreenMode,
-            //   child: Icon(
-            //     _mode == ScreenMode.liveFeed
-            //         ? Icons.photo_library_outlined
-            //         : (Platform.isIOS
-            //             ? Icons.camera_alt_outlined
-            //             : Icons.camera),
-            //   ),
-            // ),
-          ),
-        ],
-      ),
-      body: _galleryBody(),
-      floatingActionButton: _floatingActionButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    return SafeArea(
+  
+      child: Column(
+        children: [
+        Card(
+             margin: EdgeInsets.symmetric(vertical: 25),
+              elevation: 4,
+              color: light,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(24))),
+              child: _galleryBody(),
+
+
+        )
+        
+     
+    
+      
+        ])
     );
+  
   }
 
   Widget? _floatingActionButton() {
@@ -183,7 +183,7 @@ class _CameraViewState extends State<CameraView> {
                 fit: StackFit.expand,
                 children: <Widget>[
                   Image.file(_image!),
-                  if (widget.customPaint != null) widget.customPaint!,
+                  
                 ],
               ),
             )

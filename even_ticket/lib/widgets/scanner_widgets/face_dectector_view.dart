@@ -28,8 +28,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   @override
   Widget build(BuildContext context) {
     return CameraView(
-      title: 'Face Detector',
-      customPaint: customPaint,
+    
       onImage: (inputImage) {
         processImage(inputImage);
       },

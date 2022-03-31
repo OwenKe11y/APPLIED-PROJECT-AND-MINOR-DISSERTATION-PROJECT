@@ -2,6 +2,7 @@
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/routing/routes.dart';
@@ -44,9 +45,18 @@ class SideMenu extends StatelessWidget {
                             : itemName,
                         onTap: () async {
                           if (itemName == authenticationPageRoute) {
+                            if(currentUser.password == null){
+                              darkgreen = Colors.green.shade700;
+                              await GoogleSignInApi.logout();
+                              Get.offAll(() => loginNavigator());
+                            }
+                            else{
+                              darkgreen = Colors.green.shade700;
+                              currentUser = null;
+                              Get.offAll(() => loginNavigator());
+                            }
                             
-                            await GoogleSignInApi.logout();
-                            Get.offAll(() => loginNavigator());
+                            
                             
                           }
 

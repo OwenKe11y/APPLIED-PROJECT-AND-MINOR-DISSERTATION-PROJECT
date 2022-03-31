@@ -140,8 +140,9 @@ class LoginCard extends StatelessWidget {
                                           .then((value) => {
                                                 if (value == 'OK')
                                                   {
+                                                   
                                                     Get.offAll(
-                                                        () => SiteLayout(),
+                                                        () => SiteLayout(isOrganiser: currentUser.isOrganiser),
                                                         arguments: menuController
                                                             .changeActiveItemTo(
                                                                 homePageRoute))
