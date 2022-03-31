@@ -25,10 +25,6 @@ class WelcomeCard extends StatefulWidget {
 }
 
 class _WelcomeCardState extends State<WelcomeCard> {
-  static final nameController = TextEditingController();
-  static final emailController = TextEditingController();
-  static final pass1Controller = TextEditingController();
-  static final pass2Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -181,12 +177,20 @@ class _WelcomeCardState extends State<WelcomeCard> {
               {
                 createUser(user.displayName.toString(), user.email, "google",
                         false, "none")
-                    .then((value) => {getUser(user.email)}),
+                    .then((value) => {
+                          getUser(user.email).then((value) => {
+                                Get.offAll(() => SiteLayout(),
+                                    arguments: menuController
+                                        .changeActiveItemTo(homePageRoute))
+                              })
+                        }),
+              }
+            else
+              {
+                Get.offAll(() => SiteLayout(),
+                    arguments: menuController.changeActiveItemTo(homePageRoute))
               }
           });
-
-      Get.offAll(() => SiteLayout(),
-          arguments: menuController.changeActiveItemTo(homePageRoute));
     }
   }
 }

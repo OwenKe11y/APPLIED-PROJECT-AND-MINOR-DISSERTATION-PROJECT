@@ -16,8 +16,7 @@ import 'package:get/get.dart';
 
 // Class for determining responsive page layout, out putting the correct screen depending on the size
 class SiteLayout extends StatelessWidget {
-  final bool? isOrganiser;
-  const SiteLayout({Key? key, this.isOrganiser}) : super(key: key);
+  const SiteLayout({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

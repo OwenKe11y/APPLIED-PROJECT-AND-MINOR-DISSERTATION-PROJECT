@@ -36,7 +36,7 @@ class VerticalMenuItem extends StatelessWidget {
                   ? light.withOpacity(.1)
                   : Colors.transparent,
               border: Border(
-
+                
                 bottom: BorderSide(
                   color: darkGrey.withOpacity(.1),
                   width: 1,

@@ -10,11 +10,20 @@ const loginRoute = "Login";
 const detailsRoute = "Details";
 
 // Dashboard items to be displayed
-List dashboardItems = [
+List userItems = [
+  homePageRoute,
+  ticketsPageRoute,
+];
+
+List organiserItems = [
   homePageRoute,
   ticketsPageRoute,
   eventGenerationPageRoute,
   scannerPageRoute,
+
+];
+
+List unionItems = [
   settingsPageRoute,
   authenticationPageRoute,
 ];
