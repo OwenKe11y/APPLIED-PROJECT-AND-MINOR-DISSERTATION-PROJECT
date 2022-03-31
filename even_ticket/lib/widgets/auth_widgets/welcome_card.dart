@@ -8,6 +8,7 @@ import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/google_signin_api.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -174,6 +175,15 @@ class _WelcomeCardState extends State<WelcomeCard> {
     } else {
       debugPrint(user.email);
       debugPrint(user.displayName);
+      getUser(user.email).then((value) => {
+            if (value != "OK")
+              {
+                createUser(user.displayName.toString(), user.email, "google",
+                        false, "none")
+                    .then((value) => {getUser(user.email)}),
+              }
+          });
+
       Get.offAll(() => SiteLayout(),
           arguments: menuController.changeActiveItemTo(homePageRoute));
     }

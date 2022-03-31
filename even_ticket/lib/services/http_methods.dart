@@ -59,25 +59,21 @@ Future<String> getUser(String email) async {
     body: jsonEncode(<String, String>{'email': email}),
   );
 
-  final parsedUser = jsonDecode(response.body);
-
-  // Create Event from json
-  var tempUser = User(
-      email: parsedUser[0]['email'],
-      password: parsedUser[0]['password'],
-      name: parsedUser[0]['name'],
-      favourites: parsedUser[0]['favourites'],
-      isOrganiser: parsedUser[0]['isOrganiser'],
-      face: parsedUser[0]['face']);
-
-  currentUser = tempUser;
-
   if (response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
+    final parsedUser = jsonDecode(response.body);
+    // Create Event from json
+    var tempUser = User(
+        email: parsedUser[0]['email'],
+        password: parsedUser[0]['password'],
+        name: parsedUser[0]['name'],
+        favourites: parsedUser[0]['favourites'],
+        isOrganiser: parsedUser[0]['isOrganiser'],
+        face: parsedUser[0]['face']);
+
+    currentUser = tempUser;
     return "OK";
   } else {
-    throw Exception('Failed to login');
+    return "FAIL";
   }
 }
 
@@ -215,7 +211,7 @@ Future<void> getEvents() async {
 
       // Format event time
       event['time'] = event['time'].toString().split("(")[1].split(")")[0];
-
+      event['date'] = event['date'].toString().split(" ")[0];
       // Create Event from json
       var tempEvent = Events(
           title: event['title'],
