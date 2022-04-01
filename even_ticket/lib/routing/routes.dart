@@ -4,6 +4,7 @@ const ticketsPageRoute = "My Tickets";
 const eventGenerationPageRoute = "Create Event";
 const settingsPageRoute = "Settings";
 const scannerPageRoute = "Scanner";
+const userScannerPageRoute = "User Scanner";
 const authenticationPageRoute = "Auth";
 const registerRoute = "Register";
 const loginRoute = "Login";
@@ -13,6 +14,7 @@ const detailsRoute = "Details";
 List userItems = [
   homePageRoute,
   ticketsPageRoute,
+  userScannerPageRoute,
 ];
 
 List organiserItems = [
@@ -20,12 +22,9 @@ List organiserItems = [
   ticketsPageRoute,
   eventGenerationPageRoute,
   scannerPageRoute,
-
 ];
 
 List unionItems = [
   settingsPageRoute,
   authenticationPageRoute,
 ];
-
-

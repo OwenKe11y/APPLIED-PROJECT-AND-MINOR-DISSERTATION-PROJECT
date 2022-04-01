@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/data/user.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,7 +16,7 @@ class SettingsCard extends StatefulWidget {
 }
 
 class _SettingsCardState extends State<SettingsCard> {
-   File? imageFile;
+  File? imageFile;
 
   /// Get from Camera
   _getFromGallery() async {
@@ -29,44 +31,44 @@ class _SettingsCardState extends State<SettingsCard> {
       });
     }
   }
+
   Widget _imageSection() {
     return (imageFile == null)
         ? CircleAvatar(
-                  backgroundColor: lightGrey,
-                  maxRadius: 100,
-                  child: Icon(
-                    Icons.person_outline,
-                    color: darkGrey,
-                  ),
-                )
+            backgroundColor: lightGrey,
+            maxRadius: 100,
+            child: Icon(
+              Icons.person_outline,
+              color: darkGrey,
+            ),
+          )
         : Image.file(
             imageFile!,
             fit: BoxFit.cover,
           );
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, 
-    children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Container(
-                padding: EdgeInsets.all(1),
-                margin: EdgeInsets.all(2),
-                child: currentUser.face == null
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: Container(
+            padding: EdgeInsets.all(1),
+            margin: EdgeInsets.all(2),
+            child: currentUser.face == null
                 ? CircleAvatar(
-                  backgroundColor: lightGrey,
-                  maxRadius: 100,
-                  child: Icon(
-                    Icons.person_outline,
-                    color: darkGrey,
-                  ),
-                )
-                : _imageSection()
-              ),
-            ),
+                    backgroundColor: lightGrey,
+                    maxRadius: 100,
+                    child: Icon(
+                      Icons.person_outline,
+                      color: darkGrey,
+                    ),
+                  )
+                : _imageSection()),
+      ),
       SizedBox(
         height: screenHeight * 0.04,
       ),
@@ -89,7 +91,7 @@ class _SettingsCardState extends State<SettingsCard> {
                         minimumSize: Size(double.infinity, 50),
                       ),
                       onPressed: () {
-                        _getFromGallery();
+                        localNavController.navigateTo(userScannerPageRoute);
                       },
                       child: Text("PICK FROM CAMERA"),
                     ),

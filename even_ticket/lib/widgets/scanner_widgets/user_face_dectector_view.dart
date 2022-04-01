@@ -1,21 +1,16 @@
 import 'package:camera/camera.dart';
-import 'package:even_ticket/widgets/scanner_widgets/scanner_camera_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
+import 'user_camera_view.dart';
 import 'painters/face_detector_painter.dart';
 
-class FaceDetectorView extends StatefulWidget {
+class UserFaceDetectorView extends StatefulWidget {
   @override
   _FaceDetectorViewState createState() => _FaceDetectorViewState();
 }
 
-class _FaceDetectorViewState extends State<FaceDetectorView> {
-  FaceDetector faceDetector =
-      GoogleMlKit.vision.faceDetector(FaceDetectorOptions(
-    enableContours: true,
-    enableClassification: true,
-    enableTracking: true,
-  ));
+class _FaceDetectorViewState extends State<UserFaceDetectorView> {
+  FaceDetector faceDetector = GoogleMlKit.vision.faceDetector();
   bool isBusy = false;
   CustomPaint? customPaint;
 
@@ -27,7 +22,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return CameraView(
+    return UserCameraView(
       onImage: (inputImage) {
         processImage(inputImage);
       },
@@ -47,19 +42,17 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
     } else {
       print("Couldn't detect a face, try again");
     }
-    print("!!!");
-    print(inputImage.inputImageData?.size);
-    if (inputImage.inputImageData?.size != null &&
-        inputImage.inputImageData?.imageRotation != null) {
-      print("yo");
-      final painter = FaceDetectorPainter(
-          faces,
-          inputImage.inputImageData!.size,
-          inputImage.inputImageData!.imageRotation);
-      customPaint = CustomPaint(painter: painter);
-    } else {
-      customPaint = null;
-    }
+    // print(inputImage.inputImageData?.size);
+    // if (inputImage.inputImageData?.size != null &&
+    //     inputImage.inputImageData?.imageRotation != null) {
+    //   final painter = FaceDetectorPainter(
+    //       faces,
+    //       inputImage.inputImageData!.size,
+    //       inputImage.inputImageData!.imageRotation);
+    //   customPaint = CustomPaint(painter: painter);
+    // } else {
+    //   customPaint = null;
+    // }
     isBusy = false;
     if (mounted) {
       setState(() {});

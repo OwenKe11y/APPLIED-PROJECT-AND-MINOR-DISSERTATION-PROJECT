@@ -30,7 +30,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    const String event_start = "10:00";
+
     currentUser;
     Event buildEvent({Recurrence? recurrence}) {
       return Event(
@@ -100,7 +100,8 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                 ),
                                 CustomText(
                                   color: darkGrey,
-                                  text: event_start.toString(),
+                                  text: event.time
+                                      .toString(), // event.date.toString().split(" ")[0]
                                   size: 18,
                                   fontWeight: FontWeight.w900,
                                   textAlign: TextAlign.right,
