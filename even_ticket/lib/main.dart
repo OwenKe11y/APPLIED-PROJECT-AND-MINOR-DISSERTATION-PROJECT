@@ -4,17 +4,13 @@ import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/controllers/menu_controller.dart';
 import 'package:even_ticket/controllers/navigation_controller.dart';
-import 'package:even_ticket/layout.dart';
-import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'services/http_methods.dart';
 import 'package:camera/camera.dart';
 
-import 'widgets/scanner_widgets/face_dectector_view.dart';
 
 List<CameraDescription> cameras = [];
 

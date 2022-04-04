@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/routing/routes.dart';
+import 'package:even_ticket/widgets/scanner_widgets/scanner_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,21 +17,7 @@ class SettingsCard extends StatefulWidget {
 }
 
 class _SettingsCardState extends State<SettingsCard> {
-  File? imageFile;
-
-  /// Get from Camera
-  _getFromGallery() async {
-    XFile? pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-    }
-  }
+  File? imageFile = UserProfilePic.imageFile;
 
   Widget _imageSection() {
     return (imageFile == null)
@@ -42,9 +29,21 @@ class _SettingsCardState extends State<SettingsCard> {
               color: darkGrey,
             ),
           )
-        : Image.file(
+        : 
+        
+          CircleAvatar(
+            backgroundColor: light,
+            maxRadius: 120,
+            child: ClipOval(
+              
+              child: Image.file(
+
             imageFile!,
             fit: BoxFit.cover,
+            width: 200.0,
+            height: 200.0,
+          ),
+            )
           );
   }
 

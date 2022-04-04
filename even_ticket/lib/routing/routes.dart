@@ -14,7 +14,6 @@ const detailsRoute = "Details";
 List userItems = [
   homePageRoute,
   ticketsPageRoute,
-  userScannerPageRoute,
 ];
 
 List organiserItems = [

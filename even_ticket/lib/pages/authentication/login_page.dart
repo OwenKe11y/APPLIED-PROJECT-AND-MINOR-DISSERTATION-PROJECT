@@ -13,10 +13,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatelessWidget {
-  static final nameController = TextEditingController();
-  static final emailController = TextEditingController();
-  static final pass1Controller = TextEditingController();
-  static final pass2Controller = TextEditingController();
 
   const LoginPage({Key? key}) : super(key: key);
 
