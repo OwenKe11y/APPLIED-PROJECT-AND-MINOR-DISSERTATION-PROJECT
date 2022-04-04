@@ -104,7 +104,7 @@ class _PaymentCardState extends State<PaymentCard> {
                                 child: NumberPicker(
                                   textStyle: TextStyle(fontSize: 30),
                                   selectedTextStyle:
-                                      TextStyle(fontSize: 40, color: darkgreen),
+                                      TextStyle(fontSize: 40, color: mainColour),
                                   value: _currentValue,
                                   minValue: 1,
                                   maxValue: 20,
@@ -147,7 +147,7 @@ class _PaymentCardState extends State<PaymentCard> {
                           // Login Button - Global navigation to the main page
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
+                              primary: mainColour,
                               onPrimary: Colors.black,
                               minimumSize: Size(double.infinity, 50),
                             ),
@@ -176,21 +176,21 @@ class _PaymentCardState extends State<PaymentCard> {
                                   child: Divider(
                                 endIndent: 20,
                                 thickness: 1,
-                                color: darkgreen,
+                                color: mainColour,
                               )),
                               Align(
                                   alignment: AlignmentDirectional.center,
                                   child: CustomText(
                                       text: "Alternatively",
                                       size: 16,
-                                      color: darkgreen,
+                                      color: mainColour,
                                       fontWeight: FontWeight.w600,
                                       textAlign: TextAlign.center)),
                               Expanded(
                                   child: Divider(
                                 indent: 20,
                                 thickness: 1,
-                                color: darkgreen,
+                                color: mainColour,
                               )),
                             ],
                           ),

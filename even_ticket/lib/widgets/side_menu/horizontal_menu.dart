@@ -51,7 +51,7 @@ class HorizontalMenuItem extends StatelessWidget {
                 Visibility(
                   visible: menuController.isHovering(itemName) ||
                       menuController.isActive(itemName),
-                  child: Container(width: 6, height: 40, color: darkgreen),
+                  child: Container(width: 6, height: 40, color: mainColour),
                   // Want to maintain size, state and animation of this widget
                   maintainSize: true,
                   maintainState: true,
@@ -71,7 +71,7 @@ class HorizontalMenuItem extends StatelessWidget {
                           text: itemName,
                           size: 18,
                           color: menuController.isHovering(itemName)
-                              ? darkgreen
+                              ? mainColour
                               : darkGrey,
                           fontWeight: FontWeight.bold, textAlign: TextAlign.center,))
                 // If the item is active, maintain colour
@@ -80,7 +80,7 @@ class HorizontalMenuItem extends StatelessWidget {
                       child: CustomText(
                           text: itemName,
                           size: 18,
-                          color: darkgreen,
+                          color: mainColour,
                           fontWeight: FontWeight.normal, textAlign: TextAlign.center,))
               ],
             ),

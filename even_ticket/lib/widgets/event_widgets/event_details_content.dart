@@ -160,7 +160,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                             decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(5)),
-                                color: darkgreen),
+                                color: mainColour),
                             child: ClipRRect(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(0)),
@@ -212,7 +212,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                         horizontal: screenWidth * 0),
                                     child: ElevatedButton.icon(
                                       style: ElevatedButton.styleFrom(
-                                        primary: darkgreen,
+                                        primary: mainColour,
                                         onPrimary: Colors.black,
                                         fixedSize: Size(screenWidth * 1,
                                             screenHeight * 0.07),
@@ -258,7 +258,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                         ),
                                         child: ElevatedButton.icon(
                                           style: ElevatedButton.styleFrom(
-                                              primary: darkgreen,
+                                              primary: mainColour,
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
@@ -306,7 +306,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                         TextSpan(
                             text: event.punchLine1 + " ",
                             style: TextStyle(
-                                color: darkgreen,
+                                color: mainColour,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold)),
                         TextSpan(
@@ -346,7 +346,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                           Divider(
                             endIndent: 20,
                             thickness: 1,
-                            color: darkgreen,
+                            color: mainColour,
                           ),
                         ],
                       ),
@@ -386,7 +386,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                         Divider(
                           endIndent: 20,
                           thickness: 1,
-                          color: darkgreen,
+                          color: mainColour,
                         ),
                       ],
                     ),

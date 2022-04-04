@@ -49,7 +49,7 @@ class SiteLayout extends StatelessWidget {
 }
 
 Widget? setColour(Color newColour, double height) {
-  darkgreen = newColour;
+  mainColour = newColour;
 
   return currentUser.isOrganiser
       ? Container(
@@ -93,7 +93,10 @@ class WillPop extends StatelessWidget {
                 Text("Would you like to log out and return to the login page?"),
             actions: <Widget>[
               TextButton(
-                  onPressed: () => {Get.offAll(() => AppStart())},
+                  onPressed: () => {
+                    mainColour = Colors.green.shade700,
+                    Get.offAll(() => AppStart())
+                    },
                   child: Text("Yes")),
               TextButton(
                   onPressed: () => {Navigator.pop(context)}, child: Text("No")),

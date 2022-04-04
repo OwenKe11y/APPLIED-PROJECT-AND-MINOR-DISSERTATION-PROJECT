@@ -116,7 +116,7 @@ class _ScannerCameraViewState extends State<CameraView> {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkgreen,
+            primary: mainColour,
             onPrimary: light,
             minimumSize: Size(double.infinity, 50),
           ),

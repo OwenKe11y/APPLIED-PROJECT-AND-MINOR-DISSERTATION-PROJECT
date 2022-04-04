@@ -37,14 +37,14 @@ class _HomeViewPageState extends State<HomeViewPage> {
     if (events.isEmpty) {
       return Center(
           child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(darkgreen)));
+              valueColor: AlwaysStoppedAnimation<Color>(mainColour)));
     }
     return ChangeNotifierProvider<AppState>(
       create: (_) => AppState(),
       child: SafeArea(
         child: RefreshIndicator(
           displacement: screenHeight * 0.040,
-          color: darkgreen,
+          color: mainColour,
           onRefresh: _refresh,
           child: SingleChildScrollView(
             child: Column(

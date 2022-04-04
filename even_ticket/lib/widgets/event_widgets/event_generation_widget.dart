@@ -317,7 +317,7 @@ class _EventGenCardState extends State<EventGenCard> {
 
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
+                              primary: mainColour,
                               onPrimary: light,
                               minimumSize: Size(double.infinity, 50),
                             ),
@@ -449,8 +449,8 @@ class _EventGenCardState extends State<EventGenCard> {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: darkgreen,
-                                  onPrimary: darkgreen,
+                                  primary: mainColour,
+                                  onPrimary: mainColour,
                                 ),
                                 onPressed: () => _selectDate(context),
                                 child: CustomText(
@@ -497,8 +497,8 @@ class _EventGenCardState extends State<EventGenCard> {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  primary: darkgreen,
-                                  onPrimary: darkgreen,
+                                  primary: mainColour,
+                                  onPrimary: mainColour,
                                 ),
                                 onPressed: () => _selectTime(context),
                                 child: CustomText(
@@ -558,7 +558,7 @@ class _EventGenCardState extends State<EventGenCard> {
 
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
+                              primary: mainColour,
                               onPrimary: light,
                               minimumSize: Size(double.infinity, 50),
                             ),
@@ -601,7 +601,7 @@ class _EventGenCardState extends State<EventGenCard> {
                           // Login Button - Global navigation to the main page
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: darkgreen,
+                              primary: mainColour,
                               onPrimary: light,
                               minimumSize: Size(double.infinity, 50),
                             ),

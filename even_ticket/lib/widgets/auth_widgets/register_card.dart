@@ -140,7 +140,7 @@ class _RegisterCardState extends State<RegisterCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Checkbox(
-                          activeColor: darkgreen,
+                          activeColor: mainColour,
                           value: isOrganiser,
                           onChanged: (bool? value) {
                             setState(() {
@@ -165,7 +165,7 @@ class _RegisterCardState extends State<RegisterCard> {
                   // Login Button - Global navigation to the main page
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: darkgreen,
+                      primary: mainColour,
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
@@ -194,7 +194,7 @@ class _RegisterCardState extends State<RegisterCard> {
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Already have an account? ",
-                            style: TextStyle(color: darkgreen)),
+                            style: TextStyle(color: mainColour)),
                       ])),
 
                   SizedBox(
@@ -203,7 +203,7 @@ class _RegisterCardState extends State<RegisterCard> {
                   // Login Button - Global navigation to the main page
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: darkgreen,
+                      primary: mainColour,
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),

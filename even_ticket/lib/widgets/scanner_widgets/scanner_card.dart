@@ -54,7 +54,7 @@ class _ScannerCardState extends State<ScannerCard> {
                       // Divider
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: darkgreen,
+                          primary: mainColour,
                           onPrimary: light,
                           minimumSize: Size(double.infinity, 50),
                         ),

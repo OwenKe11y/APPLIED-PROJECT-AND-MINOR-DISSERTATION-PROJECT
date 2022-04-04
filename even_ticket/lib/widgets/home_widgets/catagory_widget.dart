@@ -38,13 +38,13 @@ class CategoryWidget extends StatelessWidget {
           children: [
             Icon(
               category.icon,
-              color: isSelected ? darkgreen : light,
+              color: isSelected ? mainColour : light,
               size: 40,
             ),
             CustomText(
                 text: category.name,
                 size: 16,
-                color: isSelected ?  darkgreen: light,
+                color: isSelected ?  mainColour: light,
                 fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
           ],
         ),
@@ -81,22 +81,22 @@ class CategoryWidgetGen extends StatelessWidget {
         width: 90,
         height: 90,
         decoration: BoxDecoration(
-          border: Border.all(color: isSelected ? light : darkgreen, width: 3),
+          border: Border.all(color: isSelected ? light : mainColour, width: 3),
           borderRadius: BorderRadius.all(Radius.circular(16)),
-          color: isSelected ? darkgreen : Colors.transparent,
+          color: isSelected ? mainColour : Colors.transparent,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               category.icon,
-              color: isSelected ? light : darkgreen,
+              color: isSelected ? light : mainColour,
               size: 40,
             ),
             CustomText(
                 text: category.name,
                 size: 16,
-                color: isSelected ? light : darkgreen,
+                color: isSelected ? light : mainColour,
                 fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
           ],
         ),

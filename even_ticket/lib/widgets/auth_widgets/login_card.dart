@@ -118,7 +118,7 @@ class LoginCard extends StatelessWidget {
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Forget password?",
-                            style: TextStyle(color: darkgreen)),
+                            style: TextStyle(color: mainColour)),
                       ])),
 
                   SizedBox(
@@ -127,7 +127,7 @@ class LoginCard extends StatelessWidget {
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: darkgreen,
+                      primary: mainColour,
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),
@@ -179,7 +179,7 @@ class LoginCard extends StatelessWidget {
                       text: TextSpan(children: [
                         TextSpan(
                             text: "Don't have an account? ",
-                            style: TextStyle(color: darkgreen)),
+                            style: TextStyle(color: mainColour)),
                       ])),
 
                   SizedBox(
@@ -189,7 +189,7 @@ class LoginCard extends StatelessWidget {
                   // Login Button - Global navigation to the main page
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: darkgreen,
+                      primary: mainColour,
                       onPrimary: Colors.black,
                       minimumSize: Size(double.infinity, 50),
                     ),

@@ -76,7 +76,7 @@ class _CameraViewState extends State<UserCameraView> {
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkgreen,
+            primary: mainColour,
             onPrimary: light,
             minimumSize: Size(double.infinity, 50),
           ),
@@ -88,7 +88,7 @@ class _CameraViewState extends State<UserCameraView> {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: darkgreen,
+            primary: mainColour,
             onPrimary: light,
             minimumSize: Size(double.infinity, 50),
           ),

@@ -26,7 +26,7 @@ class PurchasePage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: darkgreen,
+          backgroundColor: mainColour,
           title: CustomText(
             text: "Payment",
             size: 20,

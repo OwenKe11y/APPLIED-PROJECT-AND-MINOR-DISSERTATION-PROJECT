@@ -51,11 +51,11 @@ class SideMenu extends StatelessWidget {
                               onTap: () async {
                                 if (itemName == authenticationPageRoute) {
                                   if (currentUser.password == null) {
-                                    darkgreen = Colors.green.shade700;
+                                    mainColour = Colors.green.shade700;
                                     await GoogleSignInApi.logout();
                                     Get.offAll(() => loginNavigator());
                                   } else {
-                                    darkgreen = Colors.green.shade700;
+                                    mainColour = Colors.green.shade700;
                                     currentUser = null;
                                     Get.offAll(() => loginNavigator());
                                   }
@@ -80,11 +80,11 @@ class SideMenu extends StatelessWidget {
                               onTap: () async {
                                 if (itemName == authenticationPageRoute) {
                                   if (currentUser.password == null) {
-                                    darkgreen = Colors.green.shade700;
+                                    mainColour = Colors.green.shade700;
                                     await GoogleSignInApi.logout();
                                     Get.offAll(() => loginNavigator());
                                   } else {
-                                    darkgreen = Colors.green.shade700;
+                                    mainColour = Colors.green.shade700;
                                     currentUser = null;
                                     Get.offAll(() => loginNavigator());
                                   }
@@ -128,11 +128,11 @@ class SideMenu extends StatelessWidget {
                           onTap: () async {
                             if (itemName == authenticationPageRoute) {
                               if (currentUser.password == null) {
-                                darkgreen = Colors.green.shade700;
+                                mainColour = Colors.green.shade700;
                                 await GoogleSignInApi.logout();
                                 Get.offAll(() => loginNavigator());
                               } else {
-                                darkgreen = Colors.green.shade700;
+                                mainColour = Colors.green.shade700;
                                 currentUser = null;
                                 Get.offAll(() => loginNavigator());
                               }

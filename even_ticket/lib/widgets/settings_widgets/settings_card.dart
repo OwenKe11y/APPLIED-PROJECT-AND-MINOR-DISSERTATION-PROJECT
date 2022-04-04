@@ -86,7 +86,7 @@ class _SettingsCardState extends State<SettingsCard> {
                     // Divider
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: darkgreen,
+                        primary: mainColour,
                         onPrimary: light,
                         minimumSize: Size(double.infinity, 50),
                       ),

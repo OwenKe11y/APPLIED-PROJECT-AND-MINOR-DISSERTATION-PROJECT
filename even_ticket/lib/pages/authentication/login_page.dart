@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-           backgroundColor: darkgreen,
+           backgroundColor: mainColour,
            title: CustomText(text: "Login", size: 20, color: light, fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
            leading: IconButton(icon:Icon(Icons.chevron_left),onPressed:() => loginNavController.goBack(),)
         ),
