@@ -22,7 +22,7 @@ class _MapScreenState extends State<MapScreen> {
   //final Event event;
   @override
   void initState() {
-    myCurrentLocation();
+    //myCurrentLocation();
     super.initState();
   }
 
@@ -44,19 +44,19 @@ class _MapScreenState extends State<MapScreen> {
     position: LatLng(53.3608176244587, -6.251144528771498),
   );
 
-  myCurrentLocation() async {
-    try {
-      currentLocation = await location.getLocation();
-      print("locationLatitude: ${currentLocation.latitude.toString()}");
-      print("locationLongitude: ${currentLocation.longitude.toString()}");
-    } on PlatformException catch (e) {
-      if (e.code == 'PERMISSION_DENIED') {
-        String error = 'Permission denied';
-        print(error);
-      }
-      //currentLocation = null;
-    }
-  }
+  // myCurrentLocation() async {
+  //   try {
+  //     currentLocation = await location.getLocation();
+  //     print("locationLatitude: ${currentLocation.latitude.toString()}");
+  //     print("locationLongitude: ${currentLocation.longitude.toString()}");
+  //   } on PlatformException catch (e) {
+  //     if (e.code == 'PERMISSION_DENIED') {
+  //       String error = 'Permission denied';
+  //       print(error);
+  //     }
+  //     //currentLocation = null;
+  //   }
+  // }
 
   getEventLocation(Events event) async {
     List<geo.Location> locations =

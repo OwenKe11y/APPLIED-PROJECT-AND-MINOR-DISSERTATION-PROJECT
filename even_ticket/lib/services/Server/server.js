@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const { networkInterfaces } = require('os');
 
+
 // Get Local ip
 const nets = networkInterfaces();
 const results = Object.create(null);
@@ -40,3 +41,21 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+const Stripe = require('stripe')
+const stripe = Stripe('sk_test_51KRLjFLq7ImpQvpEnokWPnmMaIXW4f67cr4N4iHoh3YG6vOb631jj22yNVLZawyrUzzRpxg1tMTZFbmZk5xbDLQu00qDS2N4TR')
+
+
+
+stripe.charges.create({
+  amount: 5000,
+  currency: "eur",
+  source: "tok_visa", // obtained with Stripe.js
+  description: "My First Test Charge (created for API docs)"
+  
+},  function(err, charge) {
+  console.log(err)
+  console.log("this is an error")
+  console.log(charge)
+});
+

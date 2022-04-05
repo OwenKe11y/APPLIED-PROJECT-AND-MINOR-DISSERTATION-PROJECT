@@ -30,8 +30,9 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    //currentUser;
 
-    currentUser;
+    // Calendar class containing the event details
     Event buildEvent({Recurrence? recurrence}) {
       return Event(
         title: event.title,
@@ -262,10 +263,16 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
-                                          onPressed: () =>
-                                              Get.offAll(() => PurchasePage(
-                                                    events: event,
-                                                  )),
+                                          onPressed: currentUser.face == ''
+                                              ? () => {
+                                                    // Alert for uploading user profile picture
+                                                  }
+                                              : () => {
+                                                    Get.offAll(
+                                                        () => PurchasePage(
+                                                              events: event,
+                                                            ))
+                                                  },
                                           icon: FaIcon(
                                               FontAwesomeIcons.shoppingBasket,
                                               color: light),
