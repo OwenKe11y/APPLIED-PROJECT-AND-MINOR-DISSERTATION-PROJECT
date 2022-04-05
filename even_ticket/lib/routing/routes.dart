@@ -1,6 +1,7 @@
 // Names of routes go here, name each root DO NOT leave the string blank
 const homePageRoute = "Home";
 const ticketsPageRoute = "My Tickets";
+const myDetailsPageRoute = "My Events";
 const eventGenerationPageRoute = "Create Event";
 const settingsPageRoute = "Settings";
 const scannerPageRoute = "Scanner";
@@ -18,7 +19,7 @@ List userItems = [
 
 List organiserItems = [
   homePageRoute,
-  ticketsPageRoute,
+  myDetailsPageRoute,
   eventGenerationPageRoute,
   scannerPageRoute,
 ];
