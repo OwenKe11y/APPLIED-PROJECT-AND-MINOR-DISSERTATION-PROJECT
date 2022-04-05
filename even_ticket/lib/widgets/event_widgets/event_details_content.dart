@@ -95,6 +95,22 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                           children: [
                             Row(
                               children: [
+                               Icon(Icons.euro_symbol),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CustomText(
+                                  color: darkGrey,
+                                  text: event.price
+                                      .toString(), // event.date.toString().split(" ")[0]
+                                  size: 18,
+                                  fontWeight: FontWeight.w900,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
                                 FaIcon(FontAwesomeIcons.clock, color: darkGrey),
                                 SizedBox(
                                   width: 5,
@@ -306,6 +322,16 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CustomText(
+                          text: "Start Date " + event.date.day.toString() + "/" + event.date.month.toString()+ "/" +event.date.year.toString(),
+                          size: 30,
+                          color: darkGrey,
+                          fontWeight: FontWeight.w300,
+                          textAlign: TextAlign.center),
+                    ),
+                    Divider(thickness: 10,),
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: RichText(
