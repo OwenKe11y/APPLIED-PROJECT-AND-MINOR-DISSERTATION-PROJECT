@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
@@ -8,7 +11,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/controllers.dart';
-
+//File? imageFile = currentUser.face;
+// Widget _imageSection() {
+//     return (imageFile == null)
+//         ? CircleAvatar(
+//             backgroundColor: lightGrey,
+//             maxRadius: 100,
+//             child: Icon(
+//               Icons.person_outline,
+//               color: darkGrey,
+//             ),
+//           )
+//         : CircleAvatar(
+//             backgroundColor: light,
+//             maxRadius: 90,
+//             child: ClipOval(
+//               child: Image.file(
+//                 imageFile!,
+//                 fit: BoxFit.cover,
+//                 width: 150.0,
+//                 height: 150.0,
+//               ),
+//             ));
+//   }
 // Component that renders the Top navbar
 AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
       centerTitle: false,
@@ -97,13 +122,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                 child: Container(
                   padding: EdgeInsets.all(1),
                   margin: EdgeInsets.all(2),
-                  child: CircleAvatar(
-                    backgroundColor: lightGrey,
-                    child: Icon(
-                      Icons.person_outline,
-                      color: darkGrey,
-                    ),
-                  ),
+                  child: Container()//_imageSection()
                 ),
               ),
             ),

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:camera/camera.dart';
+import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,18 +36,24 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SafeArea(
-          child: ScannerCard(
-            onImage: (inputImage) {
-              processImage(inputImage);
-            },
-            
-            initialDirection: CameraLensDirection.back,
+    return WillPopScope(
+      onWillPop: () async{ 
+        localNavController.navigateTo(settingsPageRoute);
+        return true;
+       },
+      child: Column(
+        children: [
+          SafeArea(
+            child: ScannerCard(
+              onImage: (inputImage) {
+                processImage(inputImage);
+              },
+              
+              initialDirection: CameraLensDirection.back,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
   
@@ -115,6 +123,7 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
     },
   );
 }
+
 
 }
 

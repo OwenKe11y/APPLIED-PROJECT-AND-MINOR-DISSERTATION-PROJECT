@@ -111,6 +111,7 @@ class _CameraViewState extends State<ScannerCard> {
                           ? () =>
                               {
                                 UserProfilePic.imageFile = _image, 
+                                ButtonState.buttonActive = false,
                                 localNavController.navigateTo(settingsPageRoute)
                                 }
                           : null),
