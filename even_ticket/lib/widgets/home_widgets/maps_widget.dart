@@ -19,17 +19,12 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  //final Event event;
+  //final event = Provider.of<Events>(context);
+  //late Events event;
   @override
   void initState() {
-    //myCurrentLocation();
     super.initState();
   }
-
-  static const _initialCameraPosition = CameraPosition(
-    target: LatLng(53.3608176244587, -6.251144528771498),
-    zoom: 7,
-  );
 
   late GoogleMapController _googleMapController;
   late LocationData currentLocation;
@@ -69,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
       position: LatLng(
           locations.elementAt(0).latitude, locations.elementAt(0).longitude),
     );
-
+    print(mapMarker);
     return mapMarker;
   }
 
@@ -79,24 +74,60 @@ class _MapScreenState extends State<MapScreen> {
     super.dispose();
   }
 
+  double Longitude = 0;
+  double Latitude = 0;
+
+  locationtest(Events event) async {
+    List<geo.Location> locations =
+        await geo.locationFromAddress(event.location);
+
+    var Long = locations.elementAt(0).longitude;
+    var Lat = locations.elementAt(0).latitude;
+
+    Longitude = Long.toDouble();
+    Latitude = Lat.toDouble();
+  }
+
+  // static const _initialCameraPosition = CameraPosition(
+  //   target: LatLng(53.3608176244587, -6.251144528771498),
+  //   zoom: 7,
+  // );
+
+  initialCameraPosition() {
+    return CameraPosition(
+      target: LatLng(Latitude, Longitude),
+      zoom: 7,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    //final event = Provider.of<Events>(context);
+    final event = Provider.of<Events>(context);
+    locationtest(event);
+    print(Latitude);
+    print(Longitude);
+
+    Marker _EventMarker = Marker(
+      markerId: MarkerId('EventMarker'),
+      infoWindow: InfoWindow(title: event.title),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      position: LatLng(Latitude, Longitude),
+    );
     //mapMarker = getEventLocation(event);
     return Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
         zoomControlsEnabled: false,
-        markers: {_CrokeParkMarker},
-        initialCameraPosition: _initialCameraPosition,
+        markers: {_EventMarker},
+        initialCameraPosition: initialCameraPosition(),
         onMapCreated: (controller) => _googleMapController = controller,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: lightGrey,
         foregroundColor: darkGrey,
         onPressed: () => _googleMapController.animateCamera(
-          CameraUpdate.newCameraPosition(_initialCameraPosition),
+          CameraUpdate.newCameraPosition(initialCameraPosition()),
         ),
         child: const Icon(Icons.location_pin),
       ),
