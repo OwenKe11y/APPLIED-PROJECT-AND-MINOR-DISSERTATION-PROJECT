@@ -101,13 +101,13 @@ class _CustomCardPaymentScreenState extends State<CustomCardPaymentScreen> {
               },
               title: Text('Save card during payment'),
             ),
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: LoadingButton(
-                onPressed: test,
-                text: 'Pay',
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(16),
+            //   child: LoadingButton(
+            //     onPressed: test,
+            //     text: 'Pay',
+            //   ),
+            // ),
           ],
         ),
       ),
