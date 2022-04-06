@@ -100,25 +100,18 @@ exports.findAllFaces = (req, res) => {
 
 // Update a Ticket by id
 exports.update = (req, res) => {
-  const id = req.body.id;
-  Tickets.update(req.body, {
-    where: { id: id }
-  })
-    .then(num => {
-      console.log(num)
-      if (num == 1) {
-        res.send({
-          message: "User was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update Ticket with id: ${id}. Maybe Ticket was not found or req.body is empty!`
-        });
-      }
+  Tickets.findOne({
+      where: { event_name: req.body.event_name, organiserEmail: req.body.organiserEmail }
+    })
+    .then(data => {
+      data.update(req.body, {
+        where: {event_name: req.body.event_name, organiserEmail: req.body.organiserEmail}
+      })
+      res.send(data)
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Ticket with id: " + id + "\n" + err
+        message: "Error updating Ticket with event_name: " + req.body.event_name + "\n" + err
       });
     });
 };

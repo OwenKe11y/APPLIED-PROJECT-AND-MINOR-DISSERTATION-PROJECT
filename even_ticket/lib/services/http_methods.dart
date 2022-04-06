@@ -307,6 +307,37 @@ Future<String> createTickets(String eventName, String owner, int amount) async {
   }
 }
 
+Future<String> updateTicketOwner(
+    String eventName, String owner, String organiserEmail) async {
+  final response = await http.put(
+    Uri.parse('http://eventicketapi.herokuapp.com/api/tickets/create'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({
+      'event_name': eventName,
+      'owner': owner,
+      'organiserEmail': organiserEmail
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return 'OK';
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create User.');
+  }
+}
+
 // Get all events and send back each event
 Future<String> getTicketsFaces() async {
   final response = await http.get(
