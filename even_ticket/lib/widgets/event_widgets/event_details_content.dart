@@ -30,8 +30,9 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    //currentUser;
 
-    currentUser;
+    // Calendar class containing the event details
     Event buildEvent({Recurrence? recurrence}) {
       return Event(
         title: event.title,
@@ -92,6 +93,22 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            Row(
+                              children: [
+                               Icon(Icons.euro_symbol),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                CustomText(
+                                  color: darkGrey,
+                                  text: event.price
+                                      .toString(), // event.date.toString().split(" ")[0]
+                                  size: 18,
+                                  fontWeight: FontWeight.w900,
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
+                            ),
                             Row(
                               children: [
                                 FaIcon(FontAwesomeIcons.clock, color: darkGrey),
@@ -262,10 +279,16 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
-                                          onPressed: () =>
-                                              Get.offAll(() => PurchasePage(
-                                                    events: event,
-                                                  )),
+                                          onPressed: currentUser.face == ''
+                                              ? () => {
+                                                    // Alert for uploading user profile picture
+                                                  }
+                                              : () => {
+                                                    Get.offAll(
+                                                        () => PurchasePage(
+                                                              events: event,
+                                                            ))
+                                                  },
                                           icon: FaIcon(
                                               FontAwesomeIcons.shoppingBasket,
                                               color: light),
@@ -299,6 +322,16 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CustomText(
+                          text: "Start Date " + event.date.day.toString() + "/" + event.date.month.toString()+ "/" +event.date.year.toString(),
+                          size: 30,
+                          color: darkGrey,
+                          fontWeight: FontWeight.w300,
+                          textAlign: TextAlign.center),
+                    ),
+                    Divider(thickness: 10,),
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: RichText(

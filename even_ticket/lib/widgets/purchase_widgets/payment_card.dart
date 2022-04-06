@@ -103,8 +103,8 @@ class _PaymentCardState extends State<PaymentCard> {
                                 fit: BoxFit.contain,
                                 child: NumberPicker(
                                   textStyle: TextStyle(fontSize: 30),
-                                  selectedTextStyle:
-                                      TextStyle(fontSize: 40, color: mainColour),
+                                  selectedTextStyle: TextStyle(
+                                      fontSize: 40, color: mainColour),
                                   value: _currentValue,
                                   minValue: 1,
                                   maxValue: 20,
@@ -151,8 +151,7 @@ class _PaymentCardState extends State<PaymentCard> {
                               onPrimary: Colors.black,
                               minimumSize: Size(double.infinity, 50),
                             ),
-                            onPressed: () =>
-                                loginNavController.navigateTo(loginRoute),
+                            onPressed: () => Get.offAll(() => PaymentScreen()),
                             icon: FaIcon(FontAwesomeIcons.creditCard,
                                 color: light),
                             label: CustomText(
@@ -221,13 +220,11 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                           ),
 
-                     
                           GooglePayButton(
                             paymentConfigurationAsset: 'gpay.json',
                             paymentItems: _paymentItems,
                             width: 500,
                             height: 50,
-                            
                             style: GooglePayButtonStyle.black,
                             type: GooglePayButtonType.pay,
                             margin: EdgeInsets.only(top: screenHeight * 0.01),

@@ -82,6 +82,23 @@ class EventWidget extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                  ),
+                                  FittedBox(
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.euro_symbol_sharp),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        CustomText(
+                                          color: darkGrey,
+                                          text: events.price,
+                                          size: 24,
+                                          fontWeight: FontWeight.bold,
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ],
+                                    ),
                                   )
                                 ])),
                         Expanded(

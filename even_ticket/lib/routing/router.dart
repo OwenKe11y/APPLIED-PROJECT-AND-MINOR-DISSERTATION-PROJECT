@@ -6,6 +6,7 @@ import 'package:even_ticket/pages/authentication/register_page.dart';
 import 'package:even_ticket/pages/authentication/welcome_page.dart';
 import 'package:even_ticket/pages/event%20generation/event_generation.dart';
 import 'package:even_ticket/pages/home/event_details.dart';
+import 'package:even_ticket/pages/organiser/my_events.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/pages/settings/settings.dart';
@@ -30,6 +31,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(SettingsViewPage());
     case scannerPageRoute:
       return _pageRoute(FaceDetectorView());
+    case myDetailsPageRoute:
+      return _pageRoute(MyEventPageView());
     case userScannerPageRoute:
       return _pageRoute(UserFaceDetectorView());
     case detailsRoute:
