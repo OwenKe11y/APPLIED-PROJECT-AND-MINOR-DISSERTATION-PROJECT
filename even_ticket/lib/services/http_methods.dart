@@ -308,7 +308,7 @@ Future<String> createTickets(String eventName, String owner, int amount) async {
 Future<String> updateTicketOwner(
     String eventName, String owner, String organiserEmail) async {
   final response = await http.put(
-    Uri.parse('http://eventicketapi.herokuapp.com/api/tickets/create'),
+    Uri.parse('http://eventicketapi.herokuapp.com/api/tickets'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -332,7 +332,7 @@ Future<String> updateTicketOwner(
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    throw Exception('Failed to create User.');
+    throw Exception('Failed to update Ticket.');
   }
 }
 

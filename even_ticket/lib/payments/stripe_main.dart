@@ -4,6 +4,7 @@ import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/payments/loading_button.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -15,7 +16,7 @@ import '../widgets/event_widgets/event_widget.dart';
 // payment_screen.dart
 
 class PaymentScreen extends StatefulWidget {
-    final Events events;
+  final Events events;
 
   const PaymentScreen({Key? key, required this.events}) : super(key: key);
   @override
@@ -50,16 +51,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-           SizedBox(
-            height: screenHeight * 0.39,
-            width: screenWidth,
-            child: Provider<Events>.value(
-              value: widget.events,
-              child: Stack(
-                children: [EventWidget(events: widget.events)],
+            SizedBox(
+              child: Provider<Events>.value(
+                value: widget.events,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomText(
+                          text: "Enter card details to purchase " +
+                              widget.events.title +
+                              " ticket",
+                          size: 16,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.center),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
             Padding(
               padding: EdgeInsets.all(16),
               child: Row(
@@ -132,7 +143,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             Padding(
               padding: EdgeInsets.all(16),
               child: LoadingButton(
-                onPressed: ProccessCardDetails,
+                onPressed: () => ProccessCardDetails(),
                 text: 'Pay',
               ),
             ),
@@ -172,6 +183,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
           .showSnackBar(SnackBar(content: Text('Error: $e')));
       rethrow;
     }
+
+    updateTicketOwner(
+        widget.events.title, currentUser.name, widget.events.organiserEmail);
 
     Get.offAll(() => SiteLayout());
   }

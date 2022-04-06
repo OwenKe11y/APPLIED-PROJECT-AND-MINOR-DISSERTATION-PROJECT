@@ -96,7 +96,7 @@ class _MapScreenState extends State<MapScreen> {
   initialCameraPosition() {
     return CameraPosition(
       target: LatLng(Latitude, Longitude),
-      zoom: 7,
+      zoom: 8,
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/pages/purchase/purchase_page.dart';
+import 'package:even_ticket/pages/settings/settings.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
-
 
 class EventDetailsContent extends StatefulWidget {
   const EventDetailsContent({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                           children: [
                             Row(
                               children: [
-                               Icon(Icons.euro_symbol),
+                                Icon(Icons.euro_symbol),
                                 SizedBox(
                                   width: 5,
                                 ),
@@ -276,9 +276,41 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                               onPrimary: Colors.black,
                                               fixedSize: Size(screenWidth * 1,
                                                   screenHeight * 0.065)),
-                                          onPressed: currentUser.face == ''
+                                          onPressed: currentUser.face == "none"
                                               ? () => {
-                                                    // Alert for uploading user profile picture
+                                                    showDialog<void>(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'Before you do this!'),
+                                                          content:
+                                                              SingleChildScrollView(
+                                                                  child:
+                                                                      ListBody(
+                                                            children: <Widget>[
+                                                              Text(
+                                                                  'Please navigate to the settings page and upload photo ID before purchasing a ticket'),
+                                                            ],
+                                                          )),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: const Text(
+                                                                  'OK'),
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ),
+                                                    print(
+                                                        "Alert for uploading user profile picture")
                                                   }
                                               : () => {
                                                     Get.offAll(
@@ -320,15 +352,22 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: EdgeInsets.all(16),
-                      child: CustomText(
-                          text: "Start Date " + event.date.day.toString() + "/" + event.date.month.toString()+ "/" +event.date.year.toString(),
-                          size: 30,
-                          color: darkGrey,
-                          fontWeight: FontWeight.w300,
-                          textAlign: TextAlign.center),
-                    ),
-                    Divider(thickness: 10,),
+                    padding: EdgeInsets.all(16),
+                    child: CustomText(
+                        text: "Start Date " +
+                            event.date.day.toString() +
+                            "/" +
+                            event.date.month.toString() +
+                            "/" +
+                            event.date.year.toString(),
+                        size: 30,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w300,
+                        textAlign: TextAlign.center),
+                  ),
+                  Divider(
+                    thickness: 10,
+                  ),
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: RichText(
