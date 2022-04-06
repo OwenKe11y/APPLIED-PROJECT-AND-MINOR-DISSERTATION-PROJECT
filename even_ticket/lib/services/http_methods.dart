@@ -44,7 +44,7 @@ Future<String> loginUser(String email, String password) async {
 
 Future<String> getUser(String email) async {
   final response = await http.post(
-    Uri.parse('https://eventicketapi.herokuapp.com/api/users/retrieve'),
+    Uri.parse('http://eventicketapi.herokuapp.com/api/users/retrieve'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -240,7 +240,7 @@ Future<void> getEvents() async {
       // Convert blob to image and add to the list
       List<dynamic> galleryImages = [];
       for (var blob in event['galleryImages']) {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < blob.length; i++) {
           Uint8List bytes = base64Decode(blob[i]);
           galleryImages.add(bytes);
         }

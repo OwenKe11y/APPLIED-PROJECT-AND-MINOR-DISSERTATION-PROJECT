@@ -8,6 +8,7 @@ import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/widgets/categoryList.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -158,12 +159,13 @@ class _EventGenCardState extends State<EventGenCard> {
       });
     }
   }
+
   int _currentValue = 1;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -390,7 +392,7 @@ class _EventGenCardState extends State<EventGenCard> {
                             height: 15,
                           ),
 
-                           Row(
+                          Row(
                             children: const [
                               CustomText(
                                 text: "Number of Tickets ",
@@ -402,27 +404,26 @@ class _EventGenCardState extends State<EventGenCard> {
                             ],
                           ),
 
-                           SizedBox(
+                          SizedBox(
                             height: 15,
                           ),
 
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: NumberPicker(
-                                    textStyle: TextStyle(fontSize: 20),
-                                    selectedTextStyle: TextStyle(
-                                        fontSize: 40, color: mainColour),
-                                    value: _currentValue,
-                                    axis: Axis.horizontal,
-                                    minValue: 1,
-                                    maxValue: 100,
-                                    
-                                    onChanged: (value) =>
-                                        setState(() => _currentValue = value),
-                                  ),
+                              textStyle: TextStyle(fontSize: 20),
+                              selectedTextStyle:
+                                  TextStyle(fontSize: 40, color: mainColour),
+                              value: _currentValue,
+                              axis: Axis.horizontal,
+                              minValue: 1,
+                              maxValue: 100,
+                              onChanged: (value) =>
+                                  setState(() => _currentValue = value),
+                            ),
                           ),
 
-                           SizedBox(
+                          SizedBox(
                             height: 15,
                           ),
 
@@ -645,6 +646,7 @@ class _EventGenCardState extends State<EventGenCard> {
                               minimumSize: Size(double.infinity, 50),
                             ),
                             onPressed: () => {
+                              print(getCataList()),
                               createEvent(
                                   titleController.text,
                                   descriptionController.text,
@@ -655,7 +657,7 @@ class _EventGenCardState extends State<EventGenCard> {
                                   punchline2Controller.text,
                                   selectedDate,
                                   imageFile,
-                                  AppState().cataList,
+                                  getCataList(),
                                   imageFileList,
                                   currentUser.email,
                                   _currentValue),
