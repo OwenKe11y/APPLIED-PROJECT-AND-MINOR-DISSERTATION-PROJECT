@@ -2,7 +2,7 @@ module.exports = app => {
   const tickets = require("../controllers/tickets.controller");
   var router = require("express").Router();
   // Create a new Ticket
-  router.post("/", tickets.create);
+  router.post("/create", tickets.create);
   // Retrieve all Ticket
   router.get("/", tickets.findAll);
   // Retrieve a single Ticket with id

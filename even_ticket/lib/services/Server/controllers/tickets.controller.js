@@ -15,11 +15,8 @@ exports.create = (req, res) => {
     // Create a Ticket
     const ticket = {
     event_name: req.body.event_name,
-    location: req.body.location,
-    image: req.body.image,
-    date: req.body.date,
     owner: req.body.owner,
-    face: req.body.face
+    organiserEmail: req.body.organiserEmail,
     };
 
     // Save Ticket in the database

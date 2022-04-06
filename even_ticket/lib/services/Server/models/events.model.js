@@ -10,7 +10,9 @@ module.exports = (sequelize, Sequelize) => {
       date: Sequelize.STRING,
       categoryIds: Sequelize.ARRAY(Sequelize.INTEGER),
       galleryImages: Sequelize.ARRAY(Sequelize.TEXT),
-      displayImage: Sequelize.TEXT
+      displayImage: Sequelize.TEXT,
+      organiserEmail: Sequelize.TEXT,
+      amount: Sequelize.INTEGER
     }, {
       timestamps: false
     });

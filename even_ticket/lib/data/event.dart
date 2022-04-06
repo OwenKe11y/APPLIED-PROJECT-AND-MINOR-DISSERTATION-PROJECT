@@ -11,6 +11,8 @@ class Events {
   final DateTime date;
   final Uint8List displayImage;
   final List catagoryIds, galleryImages;
+  final String organiserEmail;
+  final int amount;
 
   Events(
       {required this.title,
@@ -23,7 +25,9 @@ class Events {
       required this.date,
       required this.displayImage,
       required this.catagoryIds,
-      required this.galleryImages});
+      required this.galleryImages,
+      required this.organiserEmail,
+      required this.amount});
 }
 
 var events = [];

@@ -23,7 +23,9 @@ exports.create = (req, res) => {
     date: req.body.date,
     categoryIds: req.body.categoryIds,
     galleryImages: [req.body.galleryImages],
-    displayImage: req.body.displayImage
+    displayImage: req.body.displayImage,
+    organiserEmail: req.body.organiserEmail,
+    amount: req.body.amount
     };
 
     // Save Event in the database

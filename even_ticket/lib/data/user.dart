@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class User {
   final String name;
   final String email;
@@ -21,7 +23,7 @@ class User {
       password: json['password'],
       favourites: json['favourites'],
       isOrganiser: json['isOrganiser'],
-      face: '',
+      face: json['face'],
     );
   }
 }

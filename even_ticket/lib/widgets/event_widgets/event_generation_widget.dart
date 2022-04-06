@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
@@ -617,7 +618,9 @@ class _EventGenCardState extends State<EventGenCard> {
                                   selectedDate,
                                   imageFile,
                                   AppState().cataList,
-                                  imageFileList),
+                                  imageFileList,
+                                  currentUser.email,
+                                  20),
                               localNavController.goBack(),
                               localNavController.navigateTo(homePageRoute),
                               menuController.changeActiveItemTo(homePageRoute)

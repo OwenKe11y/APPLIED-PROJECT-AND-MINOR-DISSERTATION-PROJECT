@@ -2,12 +2,9 @@ const bcrypt = require("bcrypt")
 
 module.exports = (sequelize, Sequelize) => {
     const Tickets = sequelize.define("tickets", {
-      event_name: Sequelize.STRING,     
-      location: Sequelize.STRING,  
-      image:  Sequelize.STRING,
-      date:   Sequelize.DATEONLY,
+      event_name: Sequelize.STRING,       
       owner: Sequelize.STRING,
-      face: Sequelize.TEXT
+      organiserEmail: Sequelize.STRING
     }, {
       timestamps: false
     });

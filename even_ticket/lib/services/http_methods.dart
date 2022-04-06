@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:blobs/blobs.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -60,6 +61,7 @@ Future<String> getUser(String email) async {
 
   if (response.statusCode == 200) {
     final parsedUser = jsonDecode(response.body);
+
     // Create Event from json
     var tempUser = User(
         email: parsedUser[0]['email'],
@@ -113,6 +115,37 @@ Future<String> createUser(String name, String email, String password,
   }
 }
 
+// Update users face
+Future<String> updateUserFace(String email, File? image) async {
+  // Convert displayImage from File to base64
+  String imageBase64 =
+      base64Encode(await image?.readAsBytesSync() as List<int>).toString();
+
+  final response = await http.put(
+    Uri.parse('http://eventicketapi.herokuapp.com/api/users'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({'email': email, 'face': imageBase64}),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return 'OK';
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create User.');
+  }
+}
+
 Future<void> createEvent(
     String title,
     String description,
@@ -124,7 +157,9 @@ Future<void> createEvent(
     DateTime date,
     File displayImage,
     List categoryIds,
-    List<File> galleryImages) async {
+    List<File> galleryImages,
+    String organiserEmail,
+    int amount) async {
   // Convert displayImage from File to base64
   String displayImageBase64 = base64Encode(await displayImage.readAsBytes());
 
@@ -160,11 +195,16 @@ Future<void> createEvent(
       'date': date.toString(),
       'displayImage': displayImageBase64,
       'categoryIds': categoryIds,
-      'galleryImages': galleryImagesBase64
+      'galleryImages': galleryImagesBase64,
+      'organiserEmail': organiserEmail,
+      'amount': amount
     }),
   );
 
   if (response.statusCode == 200) {
+    for (var i = 0; i < amount; i++) {
+      createTickets(title, organiserEmail, amount);
+    }
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return print("Event created");
@@ -223,7 +263,9 @@ Future<void> getEvents() async {
           date: DateTime.parse(event['date']),
           displayImage: imageBytes,
           catagoryIds: event['categoryIds'],
-          galleryImages: galleryImages);
+          galleryImages: galleryImages,
+          organiserEmail: event['organiserEmail'],
+          amount: event['amount']);
 
       // Add to events
       events.add(tempEvent);
@@ -232,6 +274,36 @@ Future<void> getEvents() async {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     throw Exception('Failed to get events');
+  }
+}
+
+Future<String> createTickets(String eventName, String owner, int amount) async {
+  final response = await http.post(
+    Uri.parse('http://eventicketapi.herokuapp.com/api/tickets/create'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({
+      'event_name': eventName,
+      'owner': owner,
+      'organiserEmail': currentUser.email
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return 'OK';
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create User.');
   }
 }
 
