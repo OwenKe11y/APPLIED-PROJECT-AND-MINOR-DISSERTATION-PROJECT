@@ -47,15 +47,15 @@ const stripe = Stripe('sk_test_51KRLjFLq7ImpQvpEnokWPnmMaIXW4f67cr4N4iHoh3YG6vOb
 
 
 
-stripe.charges.create({
-  amount: 5000,
-  currency: "eur",
-  source: "tok_visa", // obtained with Stripe.js
-  description: "My First Test Charge (created for API docs)"
+// stripe.charges.create({
+//   amount: 5000,
+//   currency: "eur",
+//   source: "tok_visa", // obtained with Stripe.js
+//   description: "My First Test Charge (created for API docs)"
   
-},  function(err, charge) {
-  console.log(err)
-  console.log("this is an error")
-  console.log(charge)
-});
+// },  function(err, charge) {
+//   console.log(err)
+//   console.log("this is an error")
+//   console.log(charge)
+// });
 
