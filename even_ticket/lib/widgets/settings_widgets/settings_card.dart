@@ -19,6 +19,7 @@ class SettingsCard extends StatefulWidget {
   State<SettingsCard> createState() => _SettingsCardState();
 }
 
+
 class _SettingsCardState extends State<SettingsCard> {
   File? imageFile = UserProfilePic.imageFile;
   final usernameController = TextEditingController();
@@ -28,7 +29,10 @@ class _SettingsCardState extends State<SettingsCard> {
             backgroundColor: lightGrey,
             maxRadius: 100,
             child: ClipOval(
-              child: Image(
+              
+              child: 
+              
+              Image(
                   image: MemoryImage(base64Decode(currentUser.face)),
                   width: 150,
                   height: 150,

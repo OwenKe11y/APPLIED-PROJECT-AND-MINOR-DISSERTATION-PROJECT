@@ -4,8 +4,6 @@ import 'dart:convert';
 
 import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:blobs/blobs.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

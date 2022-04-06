@@ -1,3 +1,4 @@
+import 'package:even_ticket/data/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class MyEventPageView extends StatefulWidget {
 }
 
 class _MyEventPageViewState extends State<MyEventPageView> {
+  int counter = 0;
   @override
   void initState() {
     super.initState();
@@ -42,10 +44,12 @@ class _MyEventPageViewState extends State<MyEventPageView> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     Events event;
+  
 
     if (events.isEmpty) {
       return Center(
@@ -62,17 +66,18 @@ class _MyEventPageViewState extends State<MyEventPageView> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-             
+                
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                  child: Consumer<AppState>(
+                  child: 
+                  
+                  Consumer<AppState>(
                     builder: (context, appstate, _) => Column(
                       children: [
-                        for (event in events.where((element) => element
-                            .catagoryIds
-                            .contains(appstate.selectedCatagoryID)))
-                          EventWidget(events: event)
+                        for (event in events.where((element) => element.organiserEmail == currentUser.email))
+                        EventWidget(events: event),
+                        
                       ],
                     ),
                   ),

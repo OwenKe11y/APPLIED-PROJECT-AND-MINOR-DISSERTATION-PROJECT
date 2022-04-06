@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import '../../app_state.dart';
 import '../../data/catagory.dart';
@@ -157,11 +158,12 @@ class _EventGenCardState extends State<EventGenCard> {
       });
     }
   }
-
+  int _currentValue = 1;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -388,6 +390,42 @@ class _EventGenCardState extends State<EventGenCard> {
                             height: 15,
                           ),
 
+                           Row(
+                            children: const [
+                              CustomText(
+                                text: "Number of Tickets ",
+                                size: 16,
+                                color: Color.fromARGB(255, 117, 112, 112),
+                                fontWeight: FontWeight.w100,
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+
+                           SizedBox(
+                            height: 15,
+                          ),
+
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: NumberPicker(
+                                    textStyle: TextStyle(fontSize: 20),
+                                    selectedTextStyle: TextStyle(
+                                        fontSize: 40, color: mainColour),
+                                    value: _currentValue,
+                                    axis: Axis.horizontal,
+                                    minValue: 1,
+                                    maxValue: 100,
+                                    
+                                    onChanged: (value) =>
+                                        setState(() => _currentValue = value),
+                                  ),
+                          ),
+
+                           SizedBox(
+                            height: 15,
+                          ),
+
                           // Password Text Field
                           TextField(
                             decoration: InputDecoration(
@@ -425,7 +463,7 @@ class _EventGenCardState extends State<EventGenCard> {
                             children: const [
                               CustomText(
                                 text: "Event Date",
-                                size: 14,
+                                size: 16,
                                 color: Color.fromARGB(255, 117, 112, 112),
                                 fontWeight: FontWeight.w100,
                                 textAlign: TextAlign.center,
@@ -473,7 +511,7 @@ class _EventGenCardState extends State<EventGenCard> {
                             children: const [
                               CustomText(
                                 text: "Event Time",
-                                size: 14,
+                                size: 16,
                                 color: Color.fromARGB(255, 117, 112, 112),
                                 fontWeight: FontWeight.w100,
                                 textAlign: TextAlign.center,
@@ -517,7 +555,7 @@ class _EventGenCardState extends State<EventGenCard> {
                             children: const [
                               CustomText(
                                 text: "Event Tags",
-                                size: 14,
+                                size: 16,
                                 color: Color.fromARGB(255, 117, 112, 112),
                                 fontWeight: FontWeight.w100,
                                 textAlign: TextAlign.center,
@@ -620,7 +658,7 @@ class _EventGenCardState extends State<EventGenCard> {
                                   AppState().cataList,
                                   imageFileList,
                                   currentUser.email,
-                                  20),
+                                  _currentValue),
                               localNavController.goBack(),
                               localNavController.navigateTo(homePageRoute),
                               menuController.changeActiveItemTo(homePageRoute)

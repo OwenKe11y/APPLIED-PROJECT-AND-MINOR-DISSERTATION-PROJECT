@@ -4,7 +4,6 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/data/user.dart';
-import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
@@ -14,8 +13,6 @@ import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/controllers.dart';
-import '../../routing/routes.dart';
 
 class EventDetailsContent extends StatefulWidget {
   const EventDetailsContent({Key? key}) : super(key: key);

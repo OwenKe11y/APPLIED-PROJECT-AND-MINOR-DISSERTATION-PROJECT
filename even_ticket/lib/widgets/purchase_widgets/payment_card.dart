@@ -33,11 +33,12 @@ class PaymentCard extends StatefulWidget {
 class _PaymentCardState extends State<PaymentCard> {
   final _paymentItems = <PaymentItem>[];
   int _currentValue = 1;
-  double _ticketPrice = 10.00;
+ 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final double _ticketPrice = double.parse(widget.events.price) * _currentValue;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -54,7 +55,9 @@ class _PaymentCardState extends State<PaymentCard> {
           SizedBox(
             height: screenHeight * 0.14,
             width: screenWidth,
-            child: Card(
+            child: widget.events.amount < 1
+            ? CustomText(text: "SOLD OUT", size: 20, color: mainColour, fontWeight: FontWeight.bold, textAlign: TextAlign.center)
+            : Card(
               elevation: 10,
               color: light,
               child: Padding(
@@ -75,12 +78,12 @@ class _PaymentCardState extends State<PaymentCard> {
                                 textAlign: TextAlign.center),
                             CustomText(
                                 text: "€" +
-                                    (_ticketPrice).toString() +
+                                    (widget.events.price).toString() +
                                     " x " +
                                     (_currentValue).toString() +
                                     " = " +
                                     "€" +
-                                    (_ticketPrice * _currentValue).toString(),
+                                    _ticketPrice.toString(),
                                 size: 16,
                                 color: lightGrey,
                                 fontWeight: FontWeight.bold,
@@ -107,7 +110,7 @@ class _PaymentCardState extends State<PaymentCard> {
                                       fontSize: 40, color: mainColour),
                                   value: _currentValue,
                                   minValue: 1,
-                                  maxValue: 20,
+                                  maxValue: widget.events.amount,
                                   onChanged: (value) =>
                                       setState(() => _currentValue = value),
                                 ),
@@ -145,13 +148,17 @@ class _PaymentCardState extends State<PaymentCard> {
                             height: 30,
                           ),
                           // Login Button - Global navigation to the main page
+                          
+                          
                           ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
                               primary: mainColour,
                               onPrimary: Colors.black,
                               minimumSize: Size(double.infinity, 50),
                             ),
-                            onPressed: () => Get.offAll(() => PaymentScreen()),
+                            onPressed: widget.events.amount < 1
+                            ? null
+                            : () => Get.offAll(() => PaymentScreen(events: widget.events)),
                             icon: FaIcon(FontAwesomeIcons.creditCard,
                                 color: light),
                             label: CustomText(
@@ -207,8 +214,9 @@ class _PaymentCardState extends State<PaymentCard> {
                               onPrimary: Colors.black,
                               minimumSize: Size(double.infinity, 50),
                             ),
-                            onPressed: () =>
-                                loginNavController.navigateTo(registerRoute),
+                            onPressed: widget.events.amount < 1
+                            ? null
+                            : () => loginNavController.navigateTo(registerRoute),
                             icon:
                                 FaIcon(FontAwesomeIcons.bitcoin, color: light),
                             label: CustomText(
@@ -220,7 +228,12 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                           ),
 
-                          GooglePayButton(
+
+                          widget.events.amount < 1
+                          ? Container(
+                            child: Text("SOLD OUT"),
+                          )
+                          : GooglePayButton(
                             paymentConfigurationAsset: 'gpay.json',
                             paymentItems: _paymentItems,
                             width: 500,

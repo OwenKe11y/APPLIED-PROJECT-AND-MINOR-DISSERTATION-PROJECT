@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:even_ticket/constants/style.dart';
@@ -11,29 +12,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/controllers.dart';
-//File? imageFile = currentUser.face;
-// Widget _imageSection() {
-//     return (imageFile == null)
-//         ? CircleAvatar(
-//             backgroundColor: lightGrey,
-//             maxRadius: 100,
-//             child: Icon(
-//               Icons.person_outline,
-//               color: darkGrey,
-//             ),
-//           )
-//         : CircleAvatar(
-//             backgroundColor: light,
-//             maxRadius: 90,
-//             child: ClipOval(
-//               child: Image.file(
-//                 imageFile!,
-//                 fit: BoxFit.cover,
-//                 width: 150.0,
-//                 height: 150.0,
-//               ),
-//             ));
-//   }
+
+Widget _imageSection() {
+
+      return CircleAvatar(
+          backgroundColor: lightGrey,
+          maxRadius: 20,
+          child: ClipOval(
+            child: Image(
+                image: MemoryImage(base64Decode(currentUser.face)),
+                width: 55,
+                height: 55,
+                fit: BoxFit.cover),
+          ));
+     
+}
+
 // Component that renders the Top navbar
 AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
       centerTitle: false,
@@ -65,67 +59,70 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
       elevation: 0,
 
       // Render the title of the webpage
-      title:
-       
-      Transform(
-        transform:  Matrix4.translationValues(-10.0, 0.0, 0.0),
-
+      title: Transform(
+        transform: Matrix4.translationValues(-10.0, 0.0, 0.0),
         child: Row(
-          
           children: [
             Obx(() => Row(children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: ResponsiveWidget.isSmallScreen(context) ? 0 : 6,
-                        left: ResponsiveWidget.isSmallScreen(context) ? 2 : 6,
-                      ),
-                      child: CustomText(
-                          text: menuController.activeItem.value,
-                          size: 25,
-                          color: lightGrey,
-                          fontWeight: FontWeight.bold, textAlign: TextAlign.center,),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: ResponsiveWidget.isSmallScreen(context) ? 0 : 6,
+                      left: ResponsiveWidget.isSmallScreen(context) ? 2 : 6,
                     ),
-                  ])),
-                       
+                    child: CustomText(
+                      text: menuController.activeItem.value,
+                      size: 25,
+                      color: lightGrey,
+                      fontWeight: FontWeight.bold,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ])),
           ],
         ),
       ),
       actions: [
-         // Settings Icon
-           
-            IconButton(
-              splashRadius: 20,
-              icon: Icon(
-                Icons.settings,
-                color: light,
-              ),
-              onPressed: () {
-                localNavController.navigateTo(settingsPageRoute);
-                menuController.changeActiveItemTo(settingsPageRoute);
-              },
-            ),
-         Padding(
-           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-           child: Container(
-                
-                width: 1,
-                height: 2,
-                color: lightGrey,
-              ),
-         ),
-         Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Container(
-           
-                decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(40)),
-                child: Container(
-                  padding: EdgeInsets.all(1),
-                  margin: EdgeInsets.all(2),
-                  child: Container()//_imageSection()
-                ),
-              ),
-            ),
+        // Settings Icon
+
+        IconButton(
+          splashRadius: 20,
+          icon: Icon(
+            Icons.settings,
+            color: light,
+          ),
+          onPressed: () {
+            localNavController.navigateTo(settingsPageRoute);
+            menuController.changeActiveItemTo(settingsPageRoute);
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+          child: Container(
+            width: 1,
+            height: 2,
+            color: lightGrey,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(40)),
+            child: Container(
+                padding: EdgeInsets.all(1),
+                margin: EdgeInsets.all(2),
+                child: currentUser.face == 'none'
+                ? CircleAvatar(
+                    backgroundColor: lightGrey,
+                    maxRadius: 20,
+                    child: Icon(
+                      Icons.person_outline,
+                      color: darkGrey,
+                    ),
+                  )
+                : _imageSection()),
+          ),
+        ),
       ],
       iconTheme: IconThemeData(color: mainColour),
       backgroundColor: Colors.transparent,

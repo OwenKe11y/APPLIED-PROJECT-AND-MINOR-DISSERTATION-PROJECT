@@ -10,9 +10,14 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/event_widgets/event_widget.dart';
 // payment_screen.dart
 
 class PaymentScreen extends StatefulWidget {
+    final Events events;
+
+  const PaymentScreen({Key? key, required this.events}) : super(key: key);
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -23,6 +28,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     //final event = Provider.of<Events>(context);
     return Scaffold(
       appBar: AppBar(
@@ -43,14 +50,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
+           SizedBox(
+            height: screenHeight * 0.39,
+            width: screenWidth,
+            child: Provider<Events>.value(
+              value: widget.events,
+              child: Stack(
+                children: [EventWidget(events: widget.events)],
               ),
             ),
+          ),
             Padding(
               padding: EdgeInsets.all(16),
               child: Row(
