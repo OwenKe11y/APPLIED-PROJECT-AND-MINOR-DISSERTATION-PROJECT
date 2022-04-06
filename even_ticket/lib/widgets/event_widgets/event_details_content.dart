@@ -6,6 +6,7 @@ import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/pages/purchase/purchase_page.dart';
 import 'package:even_ticket/pages/settings/settings.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/home_widgets/maps_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     final event = Provider.of<Events>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    var cnt = 0;
     //currentUser;
 
     // Calendar class containing the event details
@@ -193,6 +195,13 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                     bubblesSize: 60,
                                     onTap: onLikeButtonTapped,
                                     likeBuilder: (isLiked) {
+                                      if (isLiked == true && cnt == 0) {
+                                        updateFavourites(isLiked, event.title);
+                                        cnt++;
+                                      } else if (isLiked == false && cnt == 1) {
+                                        updateFavourites(isLiked, event.title);
+                                        cnt--;
+                                      }
                                       return Icon(
                                         isLiked
                                             ? Icons.favorite
@@ -487,5 +496,11 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     return !isLiked;
+  }
+
+  void updateFavourites(bool isLiked, String event_name) {
+    isLiked
+        ? updateUserFavouritesAdd(currentUser.email, event_name)
+        : updateUserFavouritesRemove(currentUser.email, event_name);
   }
 }
