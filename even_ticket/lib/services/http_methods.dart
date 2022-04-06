@@ -96,7 +96,7 @@ Future<String> createUser(String name, String email, String password,
       'name': name,
       'email': email,
       'password': password,
-      'favourites': [" ", " "],
+      'favourites': [],
       'isOrganiser': isOrganiser,
       'face': face
     }),
@@ -141,6 +141,59 @@ Future<String> updateUserFace(String email, File? image) async {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     throw Exception('Failed to create User.');
+  }
+}
+
+Future<String> updateUserFavouritesAdd(String email, String event_name) async {
+  final response = await http.put(
+    Uri.parse('http://eventicketapi.herokuapp.com/api/users/favourites/add'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({'email': email, 'event_name': event_name}),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return 'OK';
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to update User favourites');
+  }
+}
+
+Future<String> updateUserFavouritesRemove(
+    String email, String event_name) async {
+  final response = await http.put(
+    Uri.parse('http://eventicketapi.herokuapp.com/api/users/favourites/remove'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({'email': email, 'event_name': event_name}),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return 'OK';
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to update User favourites');
   }
 }
 

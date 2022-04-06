@@ -1,6 +1,7 @@
 const db = require("../models");
 const Users = db.users;
 const bcrypt = require('bcrypt')
+var Sequelize = require("sequelize");
 
 // Create and Store a new User
 exports.create = (req, res) => {
@@ -103,17 +104,48 @@ exports.update = (req, res) => {
   Users.update(req.body, {
     where: { email: email }
   })
-    .then(num => {
-      console.log(num)
-      if (num == 1) {
-        res.send({
-          message: "User was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update User with email: ${email}. Maybe User was not found or req.body is empty!`
-        });
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating User with email: " + email + "\n" + err
+      });
+    });
+};
+
+// Update a Users name by Email
+exports.updateFavouritesAdd = (req, res) => {
+  const email = req.body.email;
+  Users.update(
+    {favourites: Sequelize.fn('array_append', Sequelize.col('favourites'), req.body.event_name)},
+    {where: { email: email }}
+  )
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating User with email: " + email + "\n" + err
+      });
+    });
+};
+
+// Update a Users name by Email
+exports.updateFavouritesRemove = (req, res) => {
+  const email = req.body.email;
+  Users.update(
+    {favourites: Sequelize.fn('array_remove', Sequelize.col('favourites'), req.body.event_name)},
+    {where: { email: email }}
+  )
+    .then(data => {
+      if (data == 1) {
+        res.send("OK");
       }
+      else {
+        res.send(data);
+      }
+      
     })
     .catch(err => {
       res.status(500).send({

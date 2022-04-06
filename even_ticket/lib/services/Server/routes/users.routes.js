@@ -9,6 +9,10 @@ module.exports = app => {
   router.post("/retrieve", users.findOne);
   // Update a User with email
   router.put("/", users.update);
+  // Update Users favourites
+  router.put("/favourites/add", users.updateFavouritesAdd);
+  // Update Users favourites
+  router.put("/favourites/remove", users.updateFavouritesRemove);
   // Delete a User with email
   router.delete("/", users.delete);
 
