@@ -8,6 +8,7 @@ import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/routing/routes.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:even_ticket/widgets/scanner_widgets/scanner_organisers_page.dart';
 import 'package:flutter/foundation.dart';
@@ -38,7 +39,6 @@ class _ScannerCameraViewState extends State<CameraView> {
   ImagePicker? _imagePicker;
   double zoomLevel = 0.0, minZoomLevel = 0.0, maxZoomLevel = 0.0;
   String? _selectedLocation;
-  
 
   @override
   void initState() {
@@ -62,7 +62,6 @@ class _ScannerCameraViewState extends State<CameraView> {
       },
       child: SafeArea(
           child: Column(children: [
-        
         Card(
           margin: EdgeInsets.symmetric(vertical: 25, horizontal: 10),
           elevation: 4,
@@ -71,11 +70,11 @@ class _ScannerCameraViewState extends State<CameraView> {
               borderRadius: BorderRadius.all(Radius.circular(24))),
           child: Column(
             children: [
-              
               _image != null
                   ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-                    child: SizedBox(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 25, horizontal: 15),
+                      child: SizedBox(
                         height: 400,
                         width: 400,
                         child: Stack(
@@ -85,7 +84,7 @@ class _ScannerCameraViewState extends State<CameraView> {
                           ],
                         ),
                       ),
-                  )
+                    )
                   : Icon(
                       Icons.image,
                       size: 400,
@@ -93,16 +92,15 @@ class _ScannerCameraViewState extends State<CameraView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: mainColour,
-                    onPrimary: light,
-                    minimumSize: Size(double.infinity, 50),
-                  ),
-                  child: Text('Take a picture'),
-                  onPressed: _selectedLocation == null
-                  ? null
-                  : () => {_getImage(ImageSource.camera)}
-                ),
+                    style: ElevatedButton.styleFrom(
+                      primary: mainColour,
+                      onPrimary: light,
+                      minimumSize: Size(double.infinity, 50),
+                    ),
+                    child: Text('Take a picture'),
+                    onPressed: _selectedLocation == null
+                        ? null
+                        : () => {_getImage(ImageSource.camera)}),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
@@ -113,10 +111,50 @@ class _ScannerCameraViewState extends State<CameraView> {
                       minimumSize: Size(double.infinity, 50),
                     ),
                     child: Text('Confirm'),
-                    onPressed: ButtonState.buttonActive
+                    onPressed: ButtonState.buttonActive && _image != null
                         ? () => {
+                              writeScannerFace(_image).then((value) => {
+                                    if (value == 'OK')
+                                      {
+                                        getTicketsFaces(currentUser.email,
+                                                _selectedLocation!)
+                                            .then((value) => {
+
+                                                  showDialog<void>(
+                                                    context: context,
+                                                    barrierDismissible:
+                                                        false, // user must tap button!
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title:
+                                                            const Text('Alert'),
+                                                        content:
+                                                            SingleChildScrollView(
+                                                          child: ListBody(
+                                                            children: <Widget>[
+                                                              Text(value),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: <Widget>[
+                                                          TextButton(
+                                                            child: const Text(
+                                                                'OK'),
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  )
+                                                })
+                                      }
+                                  }),
                               ButtonState.buttonActive = false,
-                              localNavController.navigateTo(homePageRoute)
                             }
                         : null),
               ),
@@ -128,49 +166,52 @@ class _ScannerCameraViewState extends State<CameraView> {
           color: mainColour,
           margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: ChangeNotifierProvider<AppState>(
-                create: (_) => AppState(),
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: screenHeight* 0.01, horizontal: screenWidth * 0.1),
-                        child: Consumer<AppState>(
-                          builder: (context, appstate, _) => Column(
-                            children: [
-                              DropdownButton<String>(
-                                isExpanded: true,
-                                style: TextStyle(
-                                  color: light
-                                ),
-                                dropdownColor: mainColour,
-                                 hint: CustomText(text: "Select an event to scan for", size: 16, color: light, fontWeight: FontWeight.w600, textAlign: TextAlign.center),
-                                value: _selectedLocation,
-                                items: <String>[
-                                  for (event in events.where((element) =>
-                                      element.organiserEmail ==
-                                      currentUser.email))
-                                    event.title
-                                ].map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedLocation = newValue;
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ),
+            create: (_) => AppState(),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: screenHeight * 0.01,
+                        horizontal: screenWidth * 0.1),
+                    child: Consumer<AppState>(
+                      builder: (context, appstate, _) => Column(
+                        children: [
+                          DropdownButton<String>(
+                            isExpanded: true,
+                            style: TextStyle(color: light),
+                            dropdownColor: mainColour,
+                            hint: CustomText(
+                                text: "Select an event to scan for",
+                                size: 16,
+                                color: light,
+                                fontWeight: FontWeight.w600,
+                                textAlign: TextAlign.center),
+                            value: _selectedLocation,
+                            items: <String>[
+                              for (event in events.where((element) =>
+                                  element.organiserEmail == currentUser.email))
+                                event.title
+                            ].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _selectedLocation = newValue;
+                              });
+                            },
+                          )
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
+            ),
+          ),
         ),
       ])),
     );
