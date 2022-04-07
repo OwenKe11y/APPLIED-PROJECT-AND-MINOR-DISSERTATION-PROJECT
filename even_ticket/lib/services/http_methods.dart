@@ -389,28 +389,66 @@ Future<String> updateTicketOwner(
   }
 }
 
-// Get all events and send back each event
-Future<String> getTicketsFaces() async {
-  final response = await http.get(
-      Uri.parse('http://eventicketapi.herokuapp.com/api/tickets/faces'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-        "Access-Control-Allow-Credentials":
-            "true", // Required for cookies, authorization headers with HTTPS
-        "Access-Control-Allow-Headers":
-            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-        "Access-Control-Allow-Methods": "GET, OPTIONS"
-      });
+Future<String> writeScannerFace(File? image) async {
+  var face;
+  if (image != null) {
+    face = base64Encode(await image.readAsBytes()).toString();
+  }
+
+  final response = await http.post(
+    Uri.parse('http://192.168.1.5:3000/api/users/verify'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({'face': face}),
+  );
 
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    return response.body;
+    return "OK";
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     throw Exception('Failed to get events');
+  }
+}
+
+// Get all events and send back each event
+Future<String> getTicketsFaces(String organiserEmail, String event_name) async {
+  final response = await http.post(
+    Uri.parse('http://192.168.1.5:3000/api/tickets/faces/all'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode(
+        {'organiserEmail': organiserEmail, 'event_name': event_name}),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    if (response.body == "No match") {
+      return "Fail";
+    } else {
+      return response.body;
+    }
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to verify faces ' + response.body);
   }
 }
 

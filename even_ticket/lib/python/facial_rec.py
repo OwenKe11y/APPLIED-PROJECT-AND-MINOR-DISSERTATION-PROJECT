@@ -12,9 +12,9 @@ def get_encoded_faces():
     for filename in os.listdir("../../python/faces"):          
         if filename.endswith(".jpg") or filename.endswith(".png"):
             face = fr.load_image_file("../../python/faces/" + filename)
-            os.remove("../../python/faces/" + filename)
             encoding = fr.face_encodings(face)[0]
             encoded[filename.split(".")[0]] = encoding
+            os.remove("../../python/faces/" + filename)
     # Returns array of the image name and encoded face
     return encoded
 
@@ -59,9 +59,10 @@ def classify_face(im):
         face_names.append(name)
 
         if face_names[0] == "Unknown":
-            print("No match, face is unknown")
+            print("No match")
         else:
-            print("Matched face of " + face_names[0])
+            print(face_names[0])
+        os.remove("../../python/face.jpg")
        
 # Classify the image of path python, test   
-classify_face("../../python/test.jpg")
+classify_face("../../python/face.jpg")

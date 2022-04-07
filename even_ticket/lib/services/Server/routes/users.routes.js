@@ -7,6 +7,8 @@ module.exports = app => {
   router.get("/", users.findAll);
   // Retrieve a single User with email
   router.post("/retrieve", users.findOne);
+  // Retrieve a single User with email
+  router.post("/verify", users.verify);
   // Update a User with email
   router.put("/", users.update);
   // Update Users favourites

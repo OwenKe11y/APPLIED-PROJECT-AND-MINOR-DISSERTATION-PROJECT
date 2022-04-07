@@ -1,6 +1,9 @@
 const db = require("../models");
 const fs = require('fs');
+const { users } = require("../models");
 const Tickets = db.tickets;
+const Users = db.users;
+var sequelize = require("sequelize");
 
 // Create and Store a new Ticket
 exports.create = (req, res) => {
@@ -69,13 +72,36 @@ exports.findOne = (req, res) => {
 
 // Verify face with ticket on db
 exports.findAllFaces = (req, res) => {
-  Tickets.findAll({ attributes: ['owner', 'face']})
+  // Find all users names on tickets for selected
+  Tickets.findAll({
+    where: {
+      owner: {
+        [sequelize.Op.not]: req.body.organiserEmail
+      },
+      event_name: req.body.event_name
+    },
+    attributes: {
+      exclude: ['id', 'event_name', 'organiserEmail']
+    }
+  })
     .then(data => {
-      data.forEach(face => {
+      // For each name, find the user and grab the face and name
+      data.forEach(ticket => {
+        Users.findAll({
+          where: {
+            name: ticket.owner
+          },
+          attributes: {
+            exclude: ['id', 'email', 'password', 'favourites']
+          }
+        }).then(user => {
+        user.forEach(user => {
         // Write each blob to jpg file
-        const base64 = face.face;
+        const base64 = user.face;
         const buffer = Buffer.from(base64, "base64");
-        fs.writeFileSync('../../python/faces/' + face.owner + ".jpg", buffer);
+        fs.writeFileSync('../../python/faces/' + user.name + ".jpg", buffer);
+        });
+        })         
       });
 
       // Run python recognition script

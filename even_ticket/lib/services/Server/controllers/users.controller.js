@@ -1,6 +1,7 @@
 const db = require("../models");
 const Users = db.users;
 const bcrypt = require('bcrypt')
+const fs = require('fs');
 var Sequelize = require("sequelize");
 
 // Create and Store a new User
@@ -96,6 +97,20 @@ exports.findOne = (req, res) => {
         message: "Error retrieving User with email: " + email
       });
     });
+};
+
+// Find a single User by email
+exports.verify = (req, res) => {
+  // Write each blob to jpg file
+  try {
+    const base64 = req.body.face;
+    const buffer = Buffer.from(base64, "base64");
+    fs.writeFileSync("../../python/face.jpg", buffer);
+    res.send("OK");
+  } catch (error) {
+    res.send(error);
+  }
+  
 };
 
 // Update a Users name by Email
