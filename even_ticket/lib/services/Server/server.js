@@ -38,7 +38,7 @@ require("./routes/events.routes")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 
-app.listen(3000, "192.168.1.5", () => {
+app.listen(3000, "192.168.0.129", () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
