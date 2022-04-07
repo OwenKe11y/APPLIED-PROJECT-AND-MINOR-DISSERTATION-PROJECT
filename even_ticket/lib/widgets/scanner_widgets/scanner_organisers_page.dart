@@ -9,6 +9,8 @@ class ButtonState {
 }
 
 class FaceDetectorView extends StatefulWidget {
+  const FaceDetectorView({Key? key}) : super(key: key);
+
   @override
   _FaceDetectorViewState createState() => _FaceDetectorViewState();
 }

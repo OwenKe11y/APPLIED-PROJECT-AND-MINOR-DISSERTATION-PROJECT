@@ -4,6 +4,7 @@ import 'package:even_ticket/app_state.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/catagory.dart';
 import 'package:even_ticket/data/event.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
 import 'package:even_ticket/widgets/event_widgets/event_widget.dart';
@@ -90,6 +91,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
 
     if (mounted) {
       await getEvents();
+      await getUser(currentUser.email);
       setState(() {});
     }
   }
@@ -98,6 +100,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
     if (mounted) {
       if (events.isEmpty) {
         await getEvents();
+        await getUser(currentUser.email);
       }
       setState(() {});
     }

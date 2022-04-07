@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/routing/routes.dart';
-import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/scanner_widgets/scanner_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,46 +17,19 @@ class SettingsCard extends StatefulWidget {
   State<SettingsCard> createState() => _SettingsCardState();
 }
 
-
 class _SettingsCardState extends State<SettingsCard> {
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (mounted) {
-      setState(() {
-        _refresh();
-      });
-    }
-  }
-  Future<void> _refresh() async {
-    
-    if (mounted) {
-     
-     
-        await getUser(currentUser.email);
-      
-      setState(() {});
-    }
-  }
   File? imageFile = UserProfilePic.imageFile;
   final usernameController = TextEditingController();
   Widget _imageSection() {
-    return (currentUser.face == 'none')
+    return (imageFile == null)
         ? CircleAvatar(
             backgroundColor: lightGrey,
             maxRadius: 100,
-            child: ClipOval(
-              
-              child: 
-              
-              Image(
-                  image: MemoryImage(base64Decode(currentUser.face)),
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover),
-            ))
+            child: Icon(
+              Icons.person_outline,
+              color: darkGrey,
+            ),
+          )
         : CircleAvatar(
             backgroundColor: light,
             maxRadius: 90,
@@ -71,8 +42,7 @@ class _SettingsCardState extends State<SettingsCard> {
               ),
             ));
   }
-
-  Widget _title() {
+    Widget _title() {
     return (usernameController.text.isEmpty)
         ? CustomText(
             text: currentUser.name,
@@ -87,17 +57,17 @@ class _SettingsCardState extends State<SettingsCard> {
             fontWeight: FontWeight.bold,
             textAlign: TextAlign.center);
   }
-
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Container(
-            child: currentUser.face == 'none'
+       
+            child: currentUser.face == null
                 ? CircleAvatar(
                     backgroundColor: lightGrey,
                     maxRadius: 100,
@@ -108,7 +78,8 @@ class _SettingsCardState extends State<SettingsCard> {
                   )
                 : _imageSection()),
       ),
-      Card(
+
+        Card(
         elevation: 10,
         color: light,
         child: Padding(
@@ -116,11 +87,14 @@ class _SettingsCardState extends State<SettingsCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(child: _title()),
+              ClipRRect(
+                child: _title()
+              ),
             ],
           ),
         ),
-      ),
+      ), 
+        
       SizedBox(
         height: screenHeight * 0.04,
       ),
@@ -137,20 +111,22 @@ class _SettingsCardState extends State<SettingsCard> {
                   children: [
                     // Divider
                     // Event title Field
-                    TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      maxLength: 15,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a title';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                      ),
-                      controller: usernameController,
-                    ),
+                          TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLength: 15,
+                        
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a title';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              labelText: "Username",
+                              
+                            ),
+                            controller: usernameController,
+                          ),
                     SizedBox(
                       height: 50,
                     ),
@@ -206,7 +182,7 @@ class _SettingsCardState extends State<SettingsCard> {
                         minimumSize: Size(double.infinity, 50),
                       ),
                       onPressed: () {
-                        updateUserFace(currentUser.email, imageFile);
+                        //ENDAS CODES GOES HERE
                         localNavController.navigateTo(homePageRoute);
                       },
                       child: Text("UPLOAD"),
