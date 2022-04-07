@@ -12,8 +12,8 @@ import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/pages/home/home.dart';
 import 'package:even_ticket/pages/settings/settings.dart';
 import 'package:even_ticket/pages/tickets/tickets.dart';
-import 'package:even_ticket/widgets/scanner_widgets/face_dectector_view.dart';
 import 'package:even_ticket/pages/settings/scanner_settings_page.dart';
+import 'package:even_ticket/widgets/scanner_widgets/scanner_organisers_page.dart';
 import 'package:flutter/material.dart';
 import '../../pages/home/event_details.dart';
 

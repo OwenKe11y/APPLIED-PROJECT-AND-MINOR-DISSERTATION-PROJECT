@@ -1,26 +1,19 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:camera/camera.dart';
-import 'package:even_ticket/constants/controllers.dart';
-import 'package:even_ticket/constants/style.dart';
-import 'package:even_ticket/routing/routes.dart';
-import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
+import 'package:even_ticket/widgets/scanner_widgets/scanner_organiser_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import '../../widgets/scanner_widgets/scanner_card.dart';
+import 'painters/face_detector_painter.dart';
 
 class ButtonState {
   static bool buttonActive = false;
 }
 
-class UserFaceDetectorView extends StatefulWidget {
-  const UserFaceDetectorView({Key? key}) : super(key: key);
-
+class FaceDetectorView extends StatefulWidget {
   @override
   _FaceDetectorViewState createState() => _FaceDetectorViewState();
 }
 
-class _FaceDetectorViewState extends State<UserFaceDetectorView> {
+class _FaceDetectorViewState extends State<FaceDetectorView> {
   FaceDetector faceDetector = GoogleMlKit.vision.faceDetector();
   bool isBusy = false;
   CustomPaint? customPaint;
@@ -33,23 +26,11 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        localNavController.navigateTo(settingsPageRoute);
-        return true;
+    return CameraView(
+      onImage: (inputImage) {
+        processImage(inputImage);
       },
-      child: Column(
-        children: [
-          SafeArea(
-            child: ScannerCard(
-              onImage: (inputImage) {
-                processImage(inputImage);
-              },
-              initialDirection: CameraLensDirection.back,
-            ),
-          ),
-        ],
-      ),
+      initialDirection: CameraLensDirection.back,
     );
   }
 
@@ -58,7 +39,6 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
     isBusy = true;
     final faces = await faceDetector.processImage(inputImage);
     print('Found ${faces.length} faces');
-
     if (faces.length == 1) {
       ButtonState.buttonActive = true;
     }
@@ -69,6 +49,7 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
       _showMyDialog(false);
       ButtonState.buttonActive = false;
     }
+
     isBusy = false;
     if (mounted) {
       setState(() {});
