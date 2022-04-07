@@ -1,4 +1,6 @@
 import 'package:even_ticket/data/user.dart';
+import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/widgets/scanner_widgets/my_event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,21 +18,21 @@ class MyEventPageView extends StatefulWidget {
 
 class _MyEventPageViewState extends State<MyEventPageView> {
   int counter = 0;
-  @override
+ @override
   void initState() {
     super.initState();
 
     if (mounted) {
       setState(() {
-      
+        initEvents();
       });
     }
   }
-  Future<void> _refresh() async {
+Future<void> _refresh() async {
     events = [];
 
     if (mounted) {
-      
+      await getEvents();
       setState(() {});
     }
   }
@@ -38,7 +40,7 @@ class _MyEventPageViewState extends State<MyEventPageView> {
   Future<void> initEvents() async {
     if (mounted) {
       if (events.isEmpty) {
-      
+        await getEvents();
       }
       setState(() {});
     }
@@ -75,8 +77,10 @@ class _MyEventPageViewState extends State<MyEventPageView> {
                   Consumer<AppState>(
                     builder: (context, appstate, _) => Column(
                       children: [
+                        
                         for (event in events.where((element) => element.organiserEmail == currentUser.email))
-                        EventWidget(events: event),
+                        MyEventWidget(events: event),
+                        
                         
                       ],
                     ),

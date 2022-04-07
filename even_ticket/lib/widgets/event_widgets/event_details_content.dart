@@ -490,7 +490,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                     child: SizedBox(
                       height: screenHeight * .3,
                       width: screenWidth * 1,
-                      child: MapScreen(),
+                      child: MapScreen(event: event,),
                     ),
                   )
                 ],

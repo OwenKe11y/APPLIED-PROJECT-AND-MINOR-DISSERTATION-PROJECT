@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/routing/routes.dart';
+import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/scanner_widgets/scanner_card.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,13 +25,15 @@ class _SettingsCardState extends State<SettingsCard> {
   Widget _imageSection() {
     return (imageFile == null)
         ? CircleAvatar(
-            backgroundColor: lightGrey,
-            maxRadius: 100,
-            child: Icon(
-              Icons.person_outline,
-              color: darkGrey,
-            ),
-          )
+          backgroundColor: light,
+          maxRadius: 100,
+          child: ClipOval(
+            child: Image(
+                image: MemoryImage(base64Decode(currentUser.face)),
+                width: 190,
+                height: 190,
+                fit: BoxFit.cover),
+          ))
         : CircleAvatar(
             backgroundColor: light,
             maxRadius: 90,
@@ -67,7 +71,7 @@ class _SettingsCardState extends State<SettingsCard> {
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Container(
        
-            child: currentUser.face == null
+            child: currentUser.face == 'none'
                 ? CircleAvatar(
                     backgroundColor: lightGrey,
                     maxRadius: 100,
@@ -109,27 +113,7 @@ class _SettingsCardState extends State<SettingsCard> {
               ClipRRect(
                 child: Column(
                   children: [
-                    // Divider
-                    // Event title Field
-                          TextFormField(
-                            keyboardType: TextInputType.multiline,
-                            maxLength: 15,
-                        
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter a title';
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              labelText: "Username",
-                              
-                            ),
-                            controller: usernameController,
-                          ),
-                    SizedBox(
-                      height: 50,
-                    ),
+                   
                     Row(
                       children: const [
                         CustomText(
@@ -153,6 +137,7 @@ class _SettingsCardState extends State<SettingsCard> {
                       onPressed: () {
                         localNavController.navigateTo(userScannerPageRoute);
                       },
+                     
                       child: Text("PICK FROM CAMERA"),
                     ),
                   ],
@@ -182,7 +167,8 @@ class _SettingsCardState extends State<SettingsCard> {
                         minimumSize: Size(double.infinity, 50),
                       ),
                       onPressed: () {
-                        //ENDAS CODES GOES HERE
+                          updateUserFace(currentUser.email, imageFile);
+                         menuController.changeActiveItemTo(homePageRoute);
                         localNavController.navigateTo(homePageRoute);
                       },
                       child: Text("UPLOAD"),

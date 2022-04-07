@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/data/event.dart';
 import 'package:even_ticket/services/http_methods.dart';
@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 
 class MapScreen extends StatefulWidget {
-  // final Event event;
-  // const MapScreen({Key? key, required this.event}) : super(key: key);
+  final Events event;
+  const MapScreen({Key? key, required this.event}) : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
 }
@@ -21,9 +21,43 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   //final event = Provider.of<Events>(context);
   //late Events event;
+  double? lat = 0;
+  double? long = 0;
+
   @override
   void initState() {
     super.initState();
+    getLong(0.0).then((response){
+      setState((){
+        long = response;
+      });
+    });
+    getLat(0.0).then((response){
+      setState((){
+        lat = response;
+      });
+    });
+  }
+
+  
+
+   getLong(double longitude) async {
+    if (mounted) {  
+        List<geo.Location> locations =
+        await geo.locationFromAddress(widget.event.location);
+        longitude = locations.elementAt(0).longitude;
+        print(longitude);
+        return longitude;
+    }
+  }
+   getLat(double latitude) async {
+    if (mounted) {  
+        List<geo.Location> locations =
+        await geo.locationFromAddress(widget.event.location);
+        latitude = locations.elementAt(0).latitude;
+        print(latitude);
+        return latitude;
+    }
   }
 
   late GoogleMapController _googleMapController;
@@ -53,20 +87,7 @@ class _MapScreenState extends State<MapScreen> {
   //   }
   // }
 
-  getEventLocation(Events event) async {
-    List<geo.Location> locations =
-        await geo.locationFromAddress(event.location);
-
-    mapMarker = Marker(
-      markerId: MarkerId(event.location),
-      infoWindow: InfoWindow(title: event.location),
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      position: LatLng(
-          locations.elementAt(0).latitude, locations.elementAt(0).longitude),
-    );
-    print(mapMarker);
-    return mapMarker;
-  }
+ 
 
   @override
   void dispose() {
@@ -74,19 +95,8 @@ class _MapScreenState extends State<MapScreen> {
     super.dispose();
   }
 
-  double Longitude = 0;
-  double Latitude = 0;
 
-  locationtest(Events event) async {
-    List<geo.Location> locations =
-        await geo.locationFromAddress(event.location);
 
-    var Long = locations.elementAt(0).longitude;
-    var Lat = locations.elementAt(0).latitude;
-
-    Longitude = Long.toDouble();
-    Latitude = Lat.toDouble();
-  }
 
   // static const _initialCameraPosition = CameraPosition(
   //   target: LatLng(53.3608176244587, -6.251144528771498),
@@ -95,26 +105,25 @@ class _MapScreenState extends State<MapScreen> {
 
   initialCameraPosition() {
     return CameraPosition(
-      target: LatLng(Latitude, Longitude),
+      target: LatLng(lat!, long!),
       zoom: 8,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final event = Provider.of<Events>(context);
-    locationtest(event);
-    print(Latitude);
-    print(Longitude);
-
     Marker _EventMarker = Marker(
       markerId: MarkerId('EventMarker'),
-      infoWindow: InfoWindow(title: event.title),
+      infoWindow: InfoWindow(title: widget.event.title),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      position: LatLng(Latitude, Longitude),
+      position: LatLng(lat!, long!),
     );
     //mapMarker = getEventLocation(event);
-    return Scaffold(
+    return lat == null || lat == 0 && long == null || long == 0
+    ?  Center(
+          child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(mainColour)))
+    :  Scaffold(
       body: GoogleMap(
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
