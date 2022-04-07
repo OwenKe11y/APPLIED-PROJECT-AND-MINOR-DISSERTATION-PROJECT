@@ -91,7 +91,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
 
     if (mounted) {
       await getEvents();
-      await getUser(currentUser.email);
       setState(() {});
     }
   }
@@ -100,7 +99,6 @@ class _HomeViewPageState extends State<HomeViewPage> {
     if (mounted) {
       if (events.isEmpty) {
         await getEvents();
-        await getUser(currentUser.email);
       }
       setState(() {});
     }

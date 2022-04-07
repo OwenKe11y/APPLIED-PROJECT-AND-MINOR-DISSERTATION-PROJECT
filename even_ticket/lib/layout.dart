@@ -26,7 +26,6 @@ class SiteLayout extends StatelessWidget {
     return Scaffold(
         key: scaffoldKey,
         extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: false,
         appBar: topNavBar(context, scaffoldKey),
         drawer: Drawer(
           child: SideMenu(),

@@ -169,107 +169,103 @@ class _EventGenCardState extends State<EventGenCard> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: screenHeight * 0.43,
-          width: screenWidth,
-          child: Card(
-              margin: EdgeInsets.symmetric(vertical: 25),
-              elevation: 4,
-              color: light,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(24))),
-              child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          child: _imageSection()),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, left: 8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 2,
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      _title(),
-                                      SizedBox(
-                                        height: 10,
+        Card(
+            margin: EdgeInsets.symmetric(vertical: 5),
+            elevation: 4,
+            color: light,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(24))),
+            child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        child: _imageSection()),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    _title(),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    FittedBox(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.location_on,
+                                            color: darkGrey,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          CustomText(
+                                            color: darkGrey,
+                                            text: locationController.text,
+                                            size: 16,
+                                            fontWeight: FontWeight.w300,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ],
                                       ),
-                                      FittedBox(
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_on,
-                                              color: darkGrey,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            CustomText(
-                                              color: darkGrey,
-                                              text: locationController.text,
-                                              size: 16,
-                                              fontWeight: FontWeight.w300,
-                                              textAlign: TextAlign.left,
-                                            ),
-                                          ],
-                                        ),
+                                    ),
+                                    FittedBox(
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.attach_money_sharp,
+                                              color: darkGrey),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          CustomText(
+                                            color: darkGrey,
+                                            text: priceController.text,
+                                            size: 16,
+                                            fontWeight: FontWeight.w300,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ],
                                       ),
-                                      FittedBox(
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.attach_money_sharp,
-                                                color: darkGrey),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            CustomText(
-                                              color: darkGrey,
-                                              text: priceController.text,
-                                              size: 16,
-                                              fontWeight: FontWeight.w300,
-                                              textAlign: TextAlign.left,
-                                            ),
-                                          ],
-                                        ),
+                                    ),
+                                    FittedBox(
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                              Icons
+                                                  .access_time_filled_outlined,
+                                              color: darkGrey),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          CustomText(
+                                            color: darkGrey,
+                                            text:
+                                                "${selectedTime.hour}:${selectedTime.minute}",
+                                            size: 16,
+                                            fontWeight: FontWeight.w300,
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ],
                                       ),
-                                      FittedBox(
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                                Icons
-                                                    .access_time_filled_outlined,
-                                                color: darkGrey),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            CustomText(
-                                              color: darkGrey,
-                                              text:
-                                                  "${selectedTime.hour}:${selectedTime.minute}",
-                                              size: 16,
-                                              fontWeight: FontWeight.w300,
-                                              textAlign: TextAlign.left,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ])),
-                          ],
-                        ),
-                      )
-                    ],
-                  ))),
-        ),
-        SizedBox(
-          height: screenHeight * 0.45,
-          width: screenWidth,
+                                    )
+                                  ])),
+                        ],
+                      ),
+                    )
+                  ],
+                ))),
+        Expanded(
+          flex: 1,
           child: SingleChildScrollView(
+            
             child: Card(
               elevation: 10,
               color: light,
@@ -338,6 +334,7 @@ class _EventGenCardState extends State<EventGenCard> {
 
                           // Event title Field
                           TextFormField(
+                            
                             keyboardType: TextInputType.multiline,
                             maxLength: 15,
                             validator: (value) {
@@ -484,9 +481,7 @@ class _EventGenCardState extends State<EventGenCard> {
                                   color: darkGrey,
                                   fontWeight: FontWeight.bold,
                                   textAlign: TextAlign.center),
-                              SizedBox(
-                                width: screenWidth * 0.40,
-                              ),
+                            Spacer(),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: mainColour,
@@ -532,9 +527,7 @@ class _EventGenCardState extends State<EventGenCard> {
                                   color: darkGrey,
                                   fontWeight: FontWeight.bold,
                                   textAlign: TextAlign.center),
-                              SizedBox(
-                                width: screenWidth * 0.5,
-                              ),
+                             Spacer(),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: mainColour,
