@@ -2,6 +2,7 @@
 const homePageRoute = "Home";
 const ticketsPageRoute = "My Tickets";
 const myDetailsPageRoute = "My Events";
+const myFavouritesPageRoute = "Liked Events";
 const eventGenerationPageRoute = "Create Event";
 const settingsPageRoute = "Settings";
 const scannerPageRoute = "Scanner";
@@ -15,11 +16,13 @@ const detailsRoute = "Details";
 List userItems = [
   homePageRoute,
   ticketsPageRoute,
+  myFavouritesPageRoute
 ];
 
 List organiserItems = [
   homePageRoute,
   myDetailsPageRoute,
+  myFavouritesPageRoute,
   eventGenerationPageRoute,
   scannerPageRoute,
 ];

@@ -21,10 +21,31 @@ class SettingsCard extends StatefulWidget {
 
 
 class _SettingsCardState extends State<SettingsCard> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        _refresh();
+      });
+    }
+  }
+  Future<void> _refresh() async {
+    
+    if (mounted) {
+     
+     
+        await getUser(currentUser.email);
+      
+      setState(() {});
+    }
+  }
   File? imageFile = UserProfilePic.imageFile;
   final usernameController = TextEditingController();
   Widget _imageSection() {
-    return (imageFile == null)
+    return (currentUser.face == 'none')
         ? CircleAvatar(
             backgroundColor: lightGrey,
             maxRadius: 100,

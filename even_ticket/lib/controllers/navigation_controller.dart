@@ -20,7 +20,7 @@ class LocalNavController extends GetxController{
 
 
   // Allows user to go back
-  goBack() => navigationKey.currentState!.pop();
+  goBack() => {navigationKey.currentState!.pop()};
 }
 
 // Class that handles Navigation for the welcome and login pages

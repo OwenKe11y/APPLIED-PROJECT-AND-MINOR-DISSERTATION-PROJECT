@@ -22,6 +22,7 @@ class EventDetailsContent extends StatefulWidget {
   State<EventDetailsContent> createState() => _EventDetailsContentState();
 }
 
+
 class _EventDetailsContentState extends State<EventDetailsContent> {
   @override
   Widget build(BuildContext context) {
@@ -194,7 +195,10 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                         dotSecondaryColor: lightGrey),
                                     bubblesSize: 60,
                                     onTap: onLikeButtonTapped,
+                                    isLiked: currentUser.favourites.contains(event.title),
                                     likeBuilder: (isLiked) {
+                                      print(isLiked);
+                                      print(cnt);
                                       if (isLiked == true && cnt == 0) {
                                         updateFavourites(isLiked, event.title);
                                         cnt++;
@@ -202,13 +206,23 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                                         updateFavourites(isLiked, event.title);
                                         cnt--;
                                       }
-                                      return Icon(
+                                      
+                                      return currentUser.favourites.contains(event.title)
+                                      ? Icon(
+                                        isLiked
+                                            ? Icons.favorite
+                                            : Icons.favorite_outline,
+                                        color: light,
+                                        size: 40,
+                                      )
+                                      : Icon(
                                         isLiked
                                             ? Icons.favorite
                                             : Icons.favorite_outline,
                                         color: light,
                                         size: 40,
                                       );
+                                      
                                     },
                                   ),
                                 ],
@@ -494,7 +508,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
 // Find the ScaffoldMessenger in the widget tree
 // and use it to show a SnackBar.
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
+    
     return !isLiked;
   }
 

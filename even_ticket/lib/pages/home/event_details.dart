@@ -3,6 +3,7 @@
 import 'package:even_ticket/constants/controllers.dart';
 import 'package:even_ticket/constants/style.dart';
 import 'package:even_ticket/layout.dart';
+import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:even_ticket/widgets/event_widgets/event_details_background.dart';
 import 'package:even_ticket/widgets/event_widgets/event_details_content.dart';
@@ -33,6 +34,7 @@ class EventDetail extends StatelessWidget {
             iconSize: 40,
             splashRadius: 25,
             onPressed: () {
+              menuController.changeActiveItemTo(homePageRoute);
               Get.offAll(() => SiteLayout());
             },
           )
