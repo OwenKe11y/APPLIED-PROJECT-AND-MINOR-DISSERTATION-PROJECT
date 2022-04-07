@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:even_ticket/data/ticket.dart';
 import 'package:even_ticket/data/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -382,6 +383,38 @@ Future<String> createTickets(String eventName, String owner, int amount) async {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     throw Exception('Failed to create User.');
+  }
+}
+
+Future<String> getTickets(String email) async {
+  final response = await http.post(
+    Uri.parse('http://192.168.1.5:3000/api/tickets/retrieve'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Credentials":
+          "true", // Required for cookies, authorization headers with HTTPS
+      "Access-Control-Allow-Headers":
+          "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+      "Access-Control-Allow-Methods": "POST, OPTIONS"
+    },
+    body: jsonEncode({'email': email}),
+  );
+
+  if (response.statusCode == 200) {
+    final parsedTicket = jsonDecode(response.body);
+
+    // Create Event from json
+    var tempTicket = Ticket(
+        id: parsedTicket['id'],
+        event_name: parsedTicket['event_name'],
+        owner: parsedTicket['owner'],
+        organiserEmail: parsedTicket['organiserEmail']);
+
+    ownedTickets.add(tempTicket);
+    return "OK";
+  } else {
+    return "FAIL";
   }
 }
 

@@ -52,8 +52,8 @@ exports.findAll = (req, res) => {
 
 // Find a single Ticker by owner
 exports.findOne = (req, res) => {
-  const id = req.params.id;
-  Tickets.findAll({ where: {id: id}})
+  const email = req.body.email;
+  Tickets.findAll({ where: {owner: email}})
     .then(data => {
       if (data[0] != null) {
         res.send(data);

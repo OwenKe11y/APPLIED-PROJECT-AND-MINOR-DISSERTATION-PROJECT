@@ -6,7 +6,7 @@ module.exports = app => {
   // Retrieve all Ticket
   router.get("/", tickets.findAll);
   // Retrieve a single Ticket with id
-  router.get("/:id", tickets.findOne);
+  router.post("/retrieve", tickets.findOne);
   // Retrieve all ticket faces
   router.post("/faces/all", tickets.findAllFaces);
   // Update a Ticket with email
