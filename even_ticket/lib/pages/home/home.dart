@@ -8,6 +8,7 @@ import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/home_widgets/catagory_widget.dart';
 import 'package:even_ticket/widgets/event_widgets/event_widget.dart';
+import 'package:even_ticket/widgets/scanner_widgets/scanner_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
     if (mounted) {
       setState(() {
         initEvents();
+        UserProfilePic.imageFile = null;
       });
     }
   }

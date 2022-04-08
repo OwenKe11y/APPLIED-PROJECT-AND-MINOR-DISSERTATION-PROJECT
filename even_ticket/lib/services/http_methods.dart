@@ -388,7 +388,7 @@ Future<String> createTickets(String eventName, String owner, int amount) async {
 
 Future<String> getTickets(String email) async {
   final response = await http.post(
-    Uri.parse('http://192.168.1.5:3000/api/tickets/retrieve'),
+    Uri.parse('http://eventicketapi.herokuapp.com/api/tickets/retrieve'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -403,15 +403,18 @@ Future<String> getTickets(String email) async {
 
   if (response.statusCode == 200) {
     final parsedTicket = jsonDecode(response.body);
+    debugPrint(response.body);
 
+  for (var ticket in parsedTicket) {
     // Create Event from json
     var tempTicket = Ticket(
-        id: parsedTicket['id'],
-        event_name: parsedTicket['event_name'],
-        owner: parsedTicket['owner'],
-        organiserEmail: parsedTicket['organiserEmail']);
+        id: ticket['id'],
+        event_name: ticket['event_name'],
+        owner: ticket['owner'],
+        organiserEmail: ticket['organiserEmail']);
 
     ownedTickets.add(tempTicket);
+  }
     return "OK";
   } else {
     return "FAIL";

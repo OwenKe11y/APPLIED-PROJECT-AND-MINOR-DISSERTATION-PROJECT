@@ -8,20 +8,55 @@ import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../services/http_methods.dart';
 import '../../utils/application_navigator.dart';
 
-class LoginCard extends StatelessWidget {
-  static final nameController = TextEditingController();
+class LoginCard extends StatefulWidget {
+  const LoginCard({Key? key}) : super(key: key);
+
+  @override
+  State<LoginCard> createState() => _LoginCardState();
+}
+
+class _LoginCardState extends State<LoginCard> {
   static final emailController = TextEditingController();
   static final pass1Controller = TextEditingController();
-  static final pass2Controller = TextEditingController();
+  bool _isLoading = false;
 
-  const LoginCard({
-    Key? key,
-  }) : super(key: key);
+  // This function will be triggered when the button is pressed
+  void _startLoading() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await loginUser(emailController.text, pass1Controller.text)
+        .then((value) => {
+              if (value == 'PASS')
+                {
+                  getUser(emailController.text).then((value) => {
+                        if (value == 'OK')
+                          {
+                            Get.offAll(() => SiteLayout(),
+                                arguments: menuController
+                                    .changeActiveItemTo(homePageRoute))
+                          }
+                        else
+                          {
+                            {throw Exception("Failed Login Dart")}
+                          }
+                      }),
+                }
+              else
+                {throw Exception("Failed Login Dart")}
+            });
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +66,7 @@ class LoginCard extends StatelessWidget {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: Column(
           children: [
             ClipRRect(
@@ -86,87 +121,28 @@ class LoginCard extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-
-                  // Divider
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // "Remember me" check box and text
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(value: true, onChanged: (value) {}),
-                      CustomText(
-                        text: "Remember me",
+                  ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: mainColour,
+                        onPrimary: Colors.black,
+                        minimumSize: Size(double.infinity, 50),
+                      ),
+                      icon: _isLoading
+                          ? CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(light))
+                          : FaIcon(
+                              FontAwesomeIcons.doorOpen,
+                              color: light,
+                            ),
+                      label: CustomText(
+                        text: _isLoading ? ' Loading' : ' Login',
                         size: 16,
-                        color: darkGrey,
+                        color: light,
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-
-                  // Divider
-                  SizedBox(
-                    height: 15,
-                  ),
-                  // Forget Password Text
-                  // Admin Credentials text, right now this is just to fill up space
-                  RichText(
-                      textDirection: TextDirection.ltr,
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Forget password?",
-                            style: TextStyle(color: mainColour)),
-                      ])),
-
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: mainColour,
-                      onPrimary: Colors.black,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    onPressed: () =>
-                        loginUser(emailController.text, pass1Controller.text)
-                            .then((value) => {
-                                  if (value == 'PASS')
-                                    {
-                                      getUser(emailController.text)
-                                          .then((value) => {
-                                                if (value == 'OK')
-                                                  {
-                                                   
-                                                    Get.offAll(
-                                                        () => SiteLayout(),
-                                                        arguments: menuController
-                                                            .changeActiveItemTo(
-                                                                homePageRoute))
-                                                  }
-                                                else
-                                                  {
-                                                    {
-                                                      throw Exception(
-                                                          "Failed Login Dart")
-                                                    }
-                                                  }
-                                              }),
-                                    }
-                                  else
-                                    {throw Exception("Failed Login Dart")}
-                                }),
-                    child: CustomText(
-                      text: 'Log in',
-                      size: 16,
-                      color: light,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                      ),
+                      onPressed: () => 
+                      _isLoading ? null : _startLoading()),
 
                   // Divider
                   SizedBox(

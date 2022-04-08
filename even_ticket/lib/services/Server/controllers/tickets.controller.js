@@ -59,13 +59,13 @@ exports.findOne = (req, res) => {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Ticket with id: ${id}.`
+          message: `Cannot find Ticket with id: ${email}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Ticket with id: " + id
+        message: "Error retrieving Ticket with id: " + email
       });
     });
 };

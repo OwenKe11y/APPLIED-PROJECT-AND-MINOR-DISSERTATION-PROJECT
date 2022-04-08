@@ -13,23 +13,23 @@ import 'package:get/get.dart';
 
 import '../../constants/controllers.dart';
 
-Widget _imageSection() {
+Widget _imageSection(String faceProfilePic) {
 
       return CircleAvatar(
           backgroundColor: lightGrey,
           maxRadius: 20,
           child: ClipOval(
             child: Image(
-                image: MemoryImage(base64Decode(currentUser.face)),
-                width: 55,
-                height: 55,
-                fit: BoxFit.cover),
+                  image: MemoryImage(base64Decode(faceProfilePic)),
+                  width: 190,
+                  height: 190,
+                  fit: BoxFit.cover),
           ));
      
 }
 
 // Component that renders the Top navbar
-AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
+AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key, String face) => AppBar(
       centerTitle: false,
 
       // Render image logo if it is not small screen, if it is render a burger menu that can open the drawer
@@ -120,7 +120,7 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                       color: darkGrey,
                     ),
                   )
-                : _imageSection()),
+                : _imageSection(face)),
           ),
         ),
       ],

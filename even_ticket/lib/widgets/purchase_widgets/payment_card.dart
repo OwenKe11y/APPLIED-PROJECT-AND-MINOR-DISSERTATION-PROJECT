@@ -216,7 +216,7 @@ class _PaymentCardState extends State<PaymentCard> {
                             ),
                             onPressed: widget.events.amount < 1
                             ? null
-                            : () => loginNavController.navigateTo(registerRoute),
+                            : () => print("Doesn't work"),
                             icon:
                                 FaIcon(FontAwesomeIcons.bitcoin, color: light),
                             label: CustomText(

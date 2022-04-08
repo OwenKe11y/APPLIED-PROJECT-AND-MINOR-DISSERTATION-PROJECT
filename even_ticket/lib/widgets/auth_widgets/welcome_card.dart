@@ -25,6 +25,51 @@ class WelcomeCard extends StatefulWidget {
 }
 
 class _WelcomeCardState extends State<WelcomeCard> {
+  bool _isLoading = false;
+
+  // This function will be triggered when the button is pressed
+  void _startLoading() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final user = await GoogleSignInApi.login();
+
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Sign in Failed'),
+        ),
+      );
+    } else {
+      debugPrint(user.email);
+      debugPrint(user.displayName);
+      getUser(user.email).then((value) => {
+            if (value != "OK")
+              {
+                createUser(user.displayName.toString(), user.email, "google",
+                        false, "none")
+                    .then((value) => {
+                          getUser(user.email).then((value) => {
+                                Get.offAll(() => SiteLayout(),
+                                    arguments: menuController
+                                        .changeActiveItemTo(homePageRoute))
+                              })
+                        }),
+              }
+            else
+              {
+                Get.offAll(() => SiteLayout(),
+                    arguments: menuController.changeActiveItemTo(homePageRoute))
+              }
+          });
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -128,24 +173,31 @@ class _WelcomeCardState extends State<WelcomeCard> {
                         height: 15,
                       ),
                       ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          primary: lightGrey,
-                          onPrimary: Colors.black,
-                          minimumSize: Size(double.infinity, 50),
-                        ),
-                        icon: FaIcon(
-                          FontAwesomeIcons.google,
-                          color: active,
-                        ),
-                        label: CustomText(
-                          text: ' Sign Up using Google',
-                          size: 16,
-                          color: light,
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () => signIn(),
-                      ),
+                          style: ElevatedButton.styleFrom(
+                            primary: lightGrey,
+                            onPrimary: Colors.black,
+                            minimumSize: Size(double.infinity, 50),
+                          ),
+                          icon: _isLoading
+                              ? CircularProgressIndicator(
+
+                                  valueColor:
+                                      AlwaysStoppedAnimation<Color>(active))
+                                  
+                              : FaIcon(
+                                  FontAwesomeIcons.google,
+                                  color: active,
+                                ),
+                          label: CustomText(
+                            text: _isLoading
+                                ? ' Loading'
+                                : ' Sign Up using Google',
+                            size: 16,
+                            color: light,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center,
+                          ),
+                          onPressed: () => _isLoading ? null : _startLoading()),
                       SizedBox(
                         height: 15,
                       ),
@@ -158,39 +210,5 @@ class _WelcomeCardState extends State<WelcomeCard> {
         ),
       ],
     );
-  }
-
-  Future signIn() async {
-    final user = await GoogleSignInApi.login();
-
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Sign in Failed'),
-        ),
-      );
-    } else {
-      debugPrint(user.email);
-      debugPrint(user.displayName);
-      getUser(user.email).then((value) => {
-            if (value != "OK")
-              {
-                createUser(user.displayName.toString(), user.email, "google",
-                        false, "none")
-                    .then((value) => {
-                          getUser(user.email).then((value) => {
-                                Get.offAll(() => SiteLayout(),
-                                    arguments: menuController
-                                        .changeActiveItemTo(homePageRoute))
-                              })
-                        }),
-              }
-            else
-              {
-                Get.offAll(() => SiteLayout(),
-                    arguments: menuController.changeActiveItemTo(homePageRoute))
-              }
-          });
-    }
   }
 }

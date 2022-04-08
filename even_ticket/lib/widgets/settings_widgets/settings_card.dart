@@ -20,20 +20,32 @@ class SettingsCard extends StatefulWidget {
 }
 
 class _SettingsCardState extends State<SettingsCard> {
-  File? imageFile = UserProfilePic.imageFile;
+  File? imageFile;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        imageFile = UserProfilePic.imageFile;
+      });
+    }
+  }
+
   final usernameController = TextEditingController();
   Widget _imageSection() {
     return (imageFile == null)
         ? CircleAvatar(
-          backgroundColor: light,
-          maxRadius: 100,
-          child: ClipOval(
-            child: Image(
-                image: MemoryImage(base64Decode(currentUser.face)),
-                width: 190,
-                height: 190,
-                fit: BoxFit.cover),
-          ))
+            backgroundColor: light,
+            maxRadius: 100,
+            child: ClipOval(
+              child: Image(
+                  image: MemoryImage(base64Decode(currentUser.face)),
+                  width: 190,
+                  height: 190,
+                  fit: BoxFit.cover),
+            ))
         : CircleAvatar(
             backgroundColor: light,
             maxRadius: 90,
@@ -46,7 +58,8 @@ class _SettingsCardState extends State<SettingsCard> {
               ),
             ));
   }
-    Widget _title() {
+
+  Widget _title() {
     return (usernameController.text.isEmpty)
         ? CustomText(
             text: currentUser.name,
@@ -61,29 +74,41 @@ class _SettingsCardState extends State<SettingsCard> {
             fontWeight: FontWeight.bold,
             textAlign: TextAlign.center);
   }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Container(
-       
             child: currentUser.face == 'none'
-                ? CircleAvatar(
-                    backgroundColor: lightGrey,
-                    maxRadius: 100,
-                    child: Icon(
-                      Icons.person_outline,
-                      color: darkGrey,
-                    ),
-                  )
+                ? imageFile == null
+                    ? CircleAvatar(
+                        backgroundColor: lightGrey,
+                        maxRadius: 90,
+                        child: Icon(
+                          Icons.person_outline,
+                          color: darkGrey,
+                          size: 60,
+                        ),
+                      )
+                    : CircleAvatar(
+                        backgroundColor: light,
+                        maxRadius: 90,
+                        child: ClipOval(
+                          child: Image.file(
+                            imageFile!,
+                            fit: BoxFit.cover,
+                            width: 150.0,
+                            height: 150.0,
+                          ),
+                        ))
                 : _imageSection()),
       ),
-
-        Card(
+      Card(
         elevation: 10,
         color: light,
         child: Padding(
@@ -91,14 +116,11 @@ class _SettingsCardState extends State<SettingsCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipRRect(
-                child: _title()
-              ),
+              ClipRRect(child: _title()),
             ],
           ),
         ),
-      ), 
-        
+      ),
       SizedBox(
         height: screenHeight * 0.04,
       ),
@@ -113,7 +135,6 @@ class _SettingsCardState extends State<SettingsCard> {
               ClipRRect(
                 child: Column(
                   children: [
-                   
                     Row(
                       children: const [
                         CustomText(
@@ -137,7 +158,6 @@ class _SettingsCardState extends State<SettingsCard> {
                       onPressed: () {
                         localNavController.navigateTo(userScannerPageRoute);
                       },
-                     
                       child: Text("PICK FROM CAMERA"),
                     ),
                   ],
@@ -167,8 +187,8 @@ class _SettingsCardState extends State<SettingsCard> {
                         minimumSize: Size(double.infinity, 50),
                       ),
                       onPressed: () {
-                          updateUserFace(currentUser.email, imageFile);
-                         menuController.changeActiveItemTo(homePageRoute);
+                        updateUserFace(currentUser.email, imageFile);
+                        menuController.changeActiveItemTo(homePageRoute);
                         localNavController.navigateTo(homePageRoute);
                       },
                       child: Text("UPLOAD"),

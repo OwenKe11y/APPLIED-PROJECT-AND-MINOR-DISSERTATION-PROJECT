@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
 
           // Handles the size of the LoginCard background
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.07),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.2),
             child: LoginCard(),
           )
         ]),
