@@ -20,9 +20,7 @@ The efforts of the team members listed have been collected and documented in thi
 ***
 
 # Project Overview
-# Deployment Requirements
-# Installation 
-# User Guide
+This project is a ticket distributing platform for smaller scale events being hosted and advertised by organisers. The purpose of the project is to allow smaller scale events, such as marathons, gigs and nightclubs to be advertised and showcased on one multi-platform application. The sale of tickets for such events are locked to the account of the user who purchased them and are authenticated using facial recognition patterns at the event using the users uploaded profile picture. This was all done to combat the rise of ticket scalping and redistribution. The application is multi-platform and is currently available on android devices and a web browser. The application features two experiences. 
 
 
 
