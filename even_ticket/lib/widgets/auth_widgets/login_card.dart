@@ -6,6 +6,7 @@ import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/routing/routes.dart';
 import 'package:even_ticket/services/http_methods.dart';
+import 'package:even_ticket/utils/responsiveness.dart';
 import 'package:even_ticket/widgets/custom_assets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -62,129 +63,134 @@ class _LoginCardState extends State<LoginCard> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Card(
-      elevation: 10,
-      color: light,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Column(
-          children: [
-            ClipRRect(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Divider
-                  SizedBox(
-                    height: screenHeight * 0.04,
-                  ),
+    return Padding(
+      padding: ResponsiveWidget.isSmallScreen(context)
+      ?EdgeInsets.symmetric(horizontal: screenWidth * 0.01, vertical: screenHeight * 0.01)
+      :EdgeInsets.symmetric(horizontal: screenWidth * 0.2, vertical: screenHeight * 0.03),
+      child: Card(
+        elevation: 10,
+        color: light,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+          child: Column(
+            children: [
+              ClipRRect(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Divider
+                    SizedBox(
+                      height: screenHeight * 0.04,
+                    ),
 
-                  // Subtitle of Container
-                  Row(
-                    children: [
-                      CustomText(
-                        text: "Log in using the form below",
-                        size: 20,
-                        color: darkGrey,
-                        fontWeight: FontWeight.w700,
-                        textAlign: TextAlign.center,
+                    // Subtitle of Container
+                    Row(
+                      children: [
+                        CustomText(
+                          text: "Log in using the form below",
+                          size: 20,
+                          color: darkGrey,
+                          fontWeight: FontWeight.w700,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+
+                    // Divider
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    // Email Text Field
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        hintText: "example@email.com",
                       ),
-                    ],
-                  ),
-
-                  // Divider
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // Email Text Field
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      hintText: "example@email.com",
+                      controller: emailController,
                     ),
-                    controller: emailController,
-                  ),
 
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // Password Text Field
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Password",
+                    SizedBox(
+                      height: 15,
                     ),
-                    controller: pass1Controller,
-                  ),
 
-                  SizedBox(
-                    height: 15,
-                  ),
-                  ElevatedButton.icon(
+                    // Password Text Field
+                    TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                      ),
+                      controller: pass1Controller,
+                    ),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          primary: mainColour,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50),
+                        ),
+                        icon: _isLoading
+                            ? CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(light))
+                            : FaIcon(
+                                FontAwesomeIcons.doorOpen,
+                                color: light,
+                              ),
+                        label: CustomText(
+                          text: _isLoading ? ' Loading' : ' Login',
+                          size: 16,
+                          color: light,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () => 
+                        _isLoading ? null : _startLoading()),
+
+                    // Divider
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    // Admin Credentials text, right now this is just to fill up space
+                    RichText(
+                        textDirection: TextDirection.ltr,
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: "Don't have an account? ",
+                              style: TextStyle(color: mainColour)),
+                        ])),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    // Login Button - Global navigation to the main page
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: mainColour,
                         onPrimary: Colors.black,
                         minimumSize: Size(double.infinity, 50),
                       ),
-                      icon: _isLoading
-                          ? CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(light))
-                          : FaIcon(
-                              FontAwesomeIcons.doorOpen,
-                              color: light,
-                            ),
-                      label: CustomText(
-                        text: _isLoading ? ' Loading' : ' Login',
+                      onPressed: () => {
+                        loginNavController.goBack(),
+                        loginNavController.navigateTo(registerRoute),
+                      },
+                      child: CustomText(
+                        text: 'Register',
                         size: 16,
                         color: light,
                         fontWeight: FontWeight.bold,
                         textAlign: TextAlign.center,
                       ),
-                      onPressed: () => 
-                      _isLoading ? null : _startLoading()),
-
-                  // Divider
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // Admin Credentials text, right now this is just to fill up space
-                  RichText(
-                      textDirection: TextDirection.ltr,
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Don't have an account? ",
-                            style: TextStyle(color: mainColour)),
-                      ])),
-
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  // Login Button - Global navigation to the main page
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: mainColour,
-                      onPrimary: Colors.black,
-                      minimumSize: Size(double.infinity, 50),
                     ),
-                    onPressed: () => {
-                      loginNavController.goBack(),
-                      loginNavController.navigateTo(registerRoute),
-                    },
-                    child: CustomText(
-                      text: 'Register',
-                      size: 16,
-                      color: light,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:even_ticket/constants/style.dart';
+import 'package:even_ticket/data/user.dart';
 import 'package:even_ticket/layout.dart';
 import 'package:even_ticket/utils/application_navigator.dart';
 import 'package:even_ticket/widgets/side_menu/side_menu.dart';
@@ -12,6 +13,7 @@ class LargeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height * 0.5;
     // Seperate the entire page into two Rows:
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,22 +22,19 @@ class LargeScreen extends StatelessWidget {
         Expanded(child: SideMenu()),
         // The Page with the content
         Expanded(
-            flex: 5,
-            // This container renders page background colour, !!DO NOT FORGET THIS!!
-            child: ClipPath(
-              clipper: BottomShapeClipper(),
-              child: 
-                Container(
-                   height: MediaQuery.of(context).size.height * 0.3,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.green.shade900, Colors.green, Colors.green.shade200])),
-                 
-                  child: localNavigator(),
-                ),
-            ))
+          flex: 5,
+          // This container renders page background colour, !!DO NOT FORGET THIS!!
+          child: Stack(
+            children: [
+              ClipPath(
+                  clipper: BottomShapeClipper(),
+                  child: currentUser.isOrganiser
+                      ? setColour(Colors.purple.shade700, screenHeight)
+                      : setColour(Colors.green.shade700, screenHeight)),
+              WillPop()
+            ],
+          ),
+        ),
       ],
     );
   }

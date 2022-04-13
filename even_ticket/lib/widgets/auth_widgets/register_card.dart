@@ -61,7 +61,7 @@ class _RegisterCardState extends State<RegisterCard> {
       elevation: 10,
       color: light,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 1),
         child: Form(
           key: _formKey,
           child: Column(
@@ -71,23 +71,6 @@ class _RegisterCardState extends State<RegisterCard> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Divider
-                    SizedBox(
-                      height: 30,
-                    ),
-
-                    // Subtitle of Container
-                    Row(
-                      children: [
-                        CustomText(
-                          text: "Sign up using the form below",
-                          size: 20,
-                          color: darkGrey,
-                          fontWeight: FontWeight.w700,
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
 
                     // Divider
                     SizedBox(
@@ -96,8 +79,8 @@ class _RegisterCardState extends State<RegisterCard> {
                     // Name Text Field
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Name",
-                        hintText: "Full Name",
+                        labelText: "Username",
+                        hintText: "Username",
                       ),
                       controller: nameController,
                       validator: (value) {

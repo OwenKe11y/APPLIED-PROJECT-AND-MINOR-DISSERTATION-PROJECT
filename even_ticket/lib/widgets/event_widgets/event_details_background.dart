@@ -20,7 +20,7 @@ class EventDetailsBackground extends StatelessWidget {
           image: MemoryImage(event.displayImage),
           fit: BoxFit.cover,
           alignment: Alignment.topCenter,
-          height: screenWidth * 0.9,
+          height: screenHeight * 0.35,
           width: screenWidth * 2,
           color: Color(0x99000000),
           colorBlendMode: BlendMode.darken),

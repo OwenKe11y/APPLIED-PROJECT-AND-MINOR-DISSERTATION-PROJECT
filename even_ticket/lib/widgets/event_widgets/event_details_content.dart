@@ -88,7 +88,7 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                     alignment: FractionalOffset.centerLeft,
                     child: Container(
                         alignment: Alignment.topRight,
-                        height: screenHeight * 0.09,
+                        height: screenHeight * 0.10,
                         width: screenWidth * 0.6,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -368,109 +368,69 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
             ),
           ),
         ),
-        Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+        Container(
+          height: screenHeight * 0.49,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: CustomText(
+                      text: "Start Date " +
+                          event.date.day.toString() +
+                          "/" +
+                          event.date.month.toString() +
+                          "/" +
+                          event.date.year.toString(),
+                      size: 30,
+                      color: darkGrey,
+                      fontWeight: FontWeight.w300,
+                      textAlign: TextAlign.center),
+                ),
+                Divider(
+                  thickness: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16),
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: event.punchLine1 + " ",
+                          style: TextStyle(
+                              color: mainColour,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: event.punchline2,
+                          style: TextStyle(
+                              color: darkGrey,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold))
+                    ]),
+                  ),
+                ),
+                if (event.description.isNotEmpty)
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: CustomText(
-                        text: "Start Date " +
-                            event.date.day.toString() +
-                            "/" +
-                            event.date.month.toString() +
-                            "/" +
-                            event.date.year.toString(),
-                        size: 30,
+                        text: event.description,
+                        size: 20,
                         color: darkGrey,
                         fontWeight: FontWeight.w300,
                         textAlign: TextAlign.center),
                   ),
-                  Divider(
-                    thickness: 10,
-                  ),
+                SizedBox(
+                  height: 30,
+                ),
+                if (event.galleryImages.isNotEmpty)
                   Padding(
-                    padding: EdgeInsets.all(16),
-                    child: RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: event.punchLine1 + " ",
-                            style: TextStyle(
-                                color: mainColour,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: event.punchline2,
-                            style: TextStyle(
-                                color: darkGrey,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold))
-                      ]),
-                    ),
-                  ),
-                  if (event.description.isNotEmpty)
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: CustomText(
-                          text: event.description,
-                          size: 20,
-                          color: darkGrey,
-                          fontWeight: FontWeight.w300,
-                          textAlign: TextAlign.center),
-                    ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  if (event.galleryImages.isNotEmpty)
-                    Padding(
-                      padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomText(
-                              text: "GALLERY",
-                              size: 16,
-                              color: darkGrey,
-                              fontWeight: FontWeight.bold,
-                              textAlign: TextAlign.start),
-                          Divider(
-                            endIndent: 20,
-                            thickness: 1,
-                            color: mainColour,
-                          ),
-                        ],
-                      ),
-                    ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        for (final galleryImage in event.galleryImages)
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: 16, right: 16, bottom: 32),
-                            child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              child: Image(
-                                  image: MemoryImage(galleryImage),
-                                  width: 180,
-                                  height: 180,
-                                  fit: BoxFit.cover),
-                            ),
-                          )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0, top: 16),
+                    padding: EdgeInsets.only(left: 16.0, top: 16, bottom: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                            text: "MAP",
+                            text: "GALLERY",
                             size: 16,
                             color: darkGrey,
                             fontWeight: FontWeight.bold,
@@ -483,19 +443,60 @@ class _EventDetailsContentState extends State<EventDetailsContent> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.02,
-                        vertical: screenHeight * 0.02),
-                    child: SizedBox(
-                      height: screenHeight * .3,
-                      width: screenWidth * 1,
-                      child: MapScreen(event: event,),
-                    ),
-                  )
-                ],
-              ),
-            )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (final galleryImage in event.galleryImages)
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: 16, right: 16, bottom: 32),
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20)),
+                            child: Image(
+                                image: MemoryImage(galleryImage),
+                                width: 180,
+                                height: 180,
+                                fit: BoxFit.cover),
+                          ),
+                        )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.0, top: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                          text: "MAP",
+                          size: 16,
+                          color: darkGrey,
+                          fontWeight: FontWeight.bold,
+                          textAlign: TextAlign.start),
+                      Divider(
+                        endIndent: 20,
+                        thickness: 1,
+                        color: mainColour,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.02,
+                      vertical: screenHeight * 0.02),
+                  child: SizedBox(
+                    height: screenHeight * .3,
+                    width: screenWidth * 1,
+                    child: MapScreen(event: event,),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
