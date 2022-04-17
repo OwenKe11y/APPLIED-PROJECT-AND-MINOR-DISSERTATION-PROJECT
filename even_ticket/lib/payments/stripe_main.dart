@@ -33,28 +33,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final screenHeight = MediaQuery.of(context).size.height;
     //final event = Provider.of<Events>(context);
     return Provider<Events>.value(
-              value: widget.events,
-              child: WillPopScope(
-        onWillPop:  () async {
+      value: widget.events,
+      child: WillPopScope(
+        onWillPop: () async {
           final result = await showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: Text("Notice"),
-            content:
-                Text("Cancel Payment and return to Payment Options?"),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () => {
-                    mainColour = Colors.green.shade700,
-                    Get.offAll(() => PurchasePage(events: widget.events,))
-                    },
-                  child: Text("Yes")),
-              TextButton(
-                  onPressed: () => {Navigator.pop(context)}, child: Text("No")),
-            ],
-          ),
-        );
-        return result;
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: Text("Notice"),
+              content: Text("Cancel Payment and return to Payment Options?"),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () => {
+                          mainColour = Colors.green.shade700,
+                          Get.offAll(() => PurchasePage(
+                                events: widget.events,
+                              ))
+                        },
+                    child: Text("Yes")),
+                TextButton(
+                    onPressed: () => {Navigator.pop(context)},
+                    child: Text("No")),
+              ],
+            ),
+          );
+          return result;
         },
         child: Scaffold(
           appBar: AppBar(
@@ -216,44 +218,3 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Get.offAll(() => SiteLayout());
   }
 }
-// // payment_screen.dart
-// class PaymentScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: Column(
-//         children: [
-//           CardField(
-//             onCardChanged: (card) {
-//               //print(card);
-//             },
-//           ),
-//           TextButton(
-//             onPressed: () async {
-//               final billingDetails = const BillingDetails(
-//                   email: 'JOHN@stripe.com',
-//                   phone: '+6969696969',
-//                   name: 'John Groves',
-//                   address: Address(
-//                       city: 'Houston',
-//                       country: 'EU',
-//                       line1: '1459  Circle Drive',
-//                       line2: 'YO',
-//                       postalCode: '77063',
-//                       state: 'Texas'));
-//               // create payment method
-//               final paymentMethod = await Stripe.instance
-//                   .createPaymentMethod(
-//                       PaymentMethodParams.card(billingDetails: billingDetails))
-//                   .then((value) => {print(value.billingDetails)});
-//             },
-//             child: Text('pay'),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-
-// mocked data for tests
-//}

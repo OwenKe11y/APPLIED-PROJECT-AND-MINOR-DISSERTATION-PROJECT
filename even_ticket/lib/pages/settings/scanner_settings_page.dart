@@ -21,9 +21,9 @@ class UserFaceDetectorView extends StatefulWidget {
 }
 
 class _FaceDetectorViewState extends State<UserFaceDetectorView> {
+  // Google ML-Kit face detector vision library
   FaceDetector faceDetector = GoogleMlKit.vision.faceDetector();
   bool isBusy = false;
-  CustomPaint? customPaint;
 
   @override
   void dispose() {
@@ -53,6 +53,7 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
     );
   }
 
+  //ML-Kit processing the user image from camera and gallery
   Future<void> processImage(InputImage inputImage) async {
     if (isBusy) return;
     isBusy = true;
@@ -65,7 +66,7 @@ class _FaceDetectorViewState extends State<UserFaceDetectorView> {
     if (faces.length > 1) {
       _showMyDialog(true);
       ButtonState.buttonActive = false;
-    } else if (faces.length == 0) {
+    } else if (faces.isEmpty) {
       _showMyDialog(false);
       ButtonState.buttonActive = false;
     }

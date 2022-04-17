@@ -19,11 +19,7 @@ def get_encoded_faces():
     # Returns array of the image name and encoded face
     return encoded
 
-# Encodes the scanned face
-#def unknown_image_encoded(img):
-    face = fr.load_image_file("faces/" + img)
-    encoding = fr.face_encodings(face)[0]
-    return encoding
+
 
 # Takes in the file path of the scanned image
 def classify_face(im):

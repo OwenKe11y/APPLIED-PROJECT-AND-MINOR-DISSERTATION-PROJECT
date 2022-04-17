@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:even_ticket/widgets/scanner_widgets/scanner_organiser_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'painters/face_detector_painter.dart';
 
 class ButtonState {
   static bool buttonActive = false;

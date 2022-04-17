@@ -405,16 +405,16 @@ Future<String> getTickets(String email) async {
     final parsedTicket = jsonDecode(response.body);
     debugPrint(response.body);
 
-  for (var ticket in parsedTicket) {
-    // Create Event from json
-    var tempTicket = Ticket(
-        id: ticket['id'],
-        event_name: ticket['event_name'],
-        owner: ticket['owner'],
-        organiserEmail: ticket['organiserEmail']);
+    for (var ticket in parsedTicket) {
+      // Create Event from json
+      var tempTicket = Ticket(
+          id: ticket['id'],
+          event_name: ticket['event_name'],
+          owner: ticket['owner'],
+          organiserEmail: ticket['organiserEmail']);
 
-    ownedTickets.add(tempTicket);
-  }
+      ownedTickets.add(tempTicket);
+    }
     return "OK";
   } else {
     return "FAIL";
@@ -459,7 +459,7 @@ Future<String> writeScannerFace(File? image) async {
   }
 
   final response = await http.post(
-    Uri.parse('http://192.168.0.129:3000/api/users/verify'),
+    Uri.parse('http://192.168.1.7:3000/api/users/verify'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -486,7 +486,7 @@ Future<String> writeScannerFace(File? image) async {
 // Get all events and send back each event
 Future<String> getTicketsFaces(String organiserEmail, String event_name) async {
   final response = await http.post(
-    Uri.parse('http://192.168.0.129:3000/api/tickets/faces/all'),
+    Uri.parse('http://192.168.1.7:3000/api/tickets/faces/all'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       "Access-Control-Allow-Origin": "*", // Required for CORS support to work
