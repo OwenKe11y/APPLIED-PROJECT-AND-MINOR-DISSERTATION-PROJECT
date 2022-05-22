@@ -86,6 +86,32 @@ Since development has ceased for now, the script can only be ran locally. This w
 
 ### Setup script for local use
 <ol>
+<li>Install Python 3.9 from their website:
+
+```
+https://www.python.org/downloads/
+```
+
+</li>
+<li>Download and install dlib from the following link
+
+```
+https://raw.githubusercontent.com/shashankx86/dlib_compiled/main/dlib-19.22.99-cp39-cp39-win_amd64.whl
+```
+Install the file
+```
+pip install dlib-19.22.99-cp39-cp39-win_amd64.whl
+```
+
+</li>
+<li>Go to APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/python and run the following command:
+
+```
+pip install -r requirements.txt
+```
+
+</li>
+
 <li>Install Nodejs from their website:
 
 ```
@@ -101,7 +127,7 @@ https://nodejs.org/en/
   ```
 </li>
   
-<li> Now get the Node modules using this command in the following directory
+<li> Now get the Node modules using this command in the following directory:
 
 ```
 npm install
@@ -111,7 +137,7 @@ APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT\even_ticket\lib\services
 ```
 
 <li> Now that Node is set up we have to change the IP of some methods to your machines local IP.
-You can get your local IP by typing the following command in command prompt
+You can get your local IP by typing the following command in command prompt:
 
   ```
   ipconfig
@@ -122,7 +148,7 @@ The image above shows the output of that command, copy your IPv4 Address for the
 
 </li> 
 
-<li> Change the IP of the 3 following locations to the local IP you saved from the previous step.
+<li> Change the IP of the 3 following locations to the local IP you saved from the previous step:
 
   ```
   APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/Server/server.js Line 44
@@ -154,7 +180,7 @@ e.g
 
 </li>
 
-<li> Lastly run the following command in APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/Server
+<li> Lastly run the following command in APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/Server:
 
   ```
   nodemon server.js
