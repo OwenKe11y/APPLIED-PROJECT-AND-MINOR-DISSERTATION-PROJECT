@@ -78,5 +78,91 @@ This video explains how to set up the development environment to build and run t
 
 # Regarding the Facial Recognition
 
+As it stands with the current version of the app, the facial recognition script isn't connected up to run when the Organiser scans a user. This is because of limitations we encountered with Heroku. Originally we were supposed to run the script on Heroku with the Node API but the script required too much of the servers memory to complete as shown by the error below.
 
+![ScreenShot](/Images/Views/HerokuError.png)
+
+Since development has ceased for now, the script can only be ran locally. This workaround is what was used in the screencast demo and if you want to run it locally you have to follow these steps.
+
+### Setup script for local use
+<ol>
+<li>Install Nodejs from their website:
+
+```
+https://nodejs.org/en/
+```
+
+</li>
+
+<li> Install Nodemon using the terminal
+
+  ```
+  npm install -g nodemon
+  ```
+</li>
+  
+<li> Now get the Node modules using this command in the following directory
+
+```
+npm install
+```
+```
+APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT\even_ticket\lib\services
+```
+
+<li> Now that Node is set up we have to change the IP of some methods to your machines local IP.
+You can get your local IP by typing the following command in command prompt
+
+  ```
+  ipconfig
+  ```
+  ![ScreenShot](/Images/Views/IPConfig.png)
+
+The image above shows the output of that command, copy your IPv4 Address for the next step. e.g (192.168.0.X)
+
+</li> 
+
+<li> Change the IP of the 3 following locations to the local IP you saved from the previous step.
+
+  ```
+  APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/Server/server.js Line 44
+  ```
+  ![ScreenShot](/Images/Views/serverjsIp.png)
+
+  ```
+  APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/http_methods Line 462
+  ```
+![ScreenShot](/Images/Views/httpVerify.png)
+
+
+  ```
+  APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/http_methods Line 489
+  ```
+![ScreenShot](/Images/Views/httpFaces.png)
+
+Replace the IP at these locations with your local IP.
+e.g
+
+  ```
+  Uri.parse('http://192.168.1.7:3000/api/users/verify')
+  ```
+  goes to 
+  ```
+  Uri.parse('http://your.ip.here:3000/api/users/verify')
+  ```
+
+
+</li>
+
+<li> Lastly run the following command in APPLIED-PROJECT-AND-MINOR-DISSERTATION-PROJECT/even_ticket/lib/services/Server
+
+  ```
+  nodemon server.js
+  ```
+</li>
+
+These steps will run another version of Node locally that lets the app connect to the facial recognition script. The matching feature should now work as intended given everything else has been set up and installed as shown in the installation guide above.
+</ol>
+
+***
 
